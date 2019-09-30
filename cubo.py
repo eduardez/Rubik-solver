@@ -1,9 +1,33 @@
 #!/usr/bin/python3
 # -*- coding: utf-8 -*-
+import utils
+
 class Cubo():
-    cara = None
-    def __init__(self, cara):
-        self.cara
+      """Objeto cubo a partir de un objeto JSON (add doc)"""
+      def __init__(self, json_data):
+            self.json_data = json_data
+        
+      def __repr__(self):
+            return utils.getJSONConFormato(self.json_data)
+      
+      def __str__(self):
+            tam = len(self.json_data['BACK'])
+            caras = '\nCubo de {0}x{0}x{0}'
+            caras = caras.format(tam) + '\n      [BACK]\n[LEFT][DOWN][RIGHT][UP]\n      [FRONT]\n\n'
+            #Como la representacion sera vertical y maximo hay 3 
+            #caras, pues el tamaño del cubo por el numero de caras
+            espacios = '   ' * tam
+            foo = self.json_data
+            cubo_str = ''
+            for i in range(0, tam):
+                  cubo_str += (espacios + str(foo['BACK'][i]) + '\n')
+            for i in range(0, tam):
+                   cubo_str += (str(foo['LEFT'][i]) + str(foo['DOWN'][i]) + str(foo['RIGHT'][i]) + str(foo['UP'][i]) + '\n')
+            for i in range(0, tam):
+                   cubo_str += (espacios + str(foo['FRONT'][i]) + '\n')
+            return caras + str(cubo_str)
+        
+        
 #Posición-Número
 '''
 Back = 3
