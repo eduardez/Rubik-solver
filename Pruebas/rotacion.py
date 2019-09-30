@@ -1,3 +1,5 @@
+#!/usr/bin/python3
+# -*- coding: utf-8 -*-
 '''Intalaremos con pip install numpy la librería para poder rotar las matrices'''
 import numpy as np
 matriz = np.array([[3, 2, 2],[3, 2, 2],[3, 2, 2]], int)

@@ -1,3 +1,5 @@
+#!/usr/bin/python3
+# -*- coding: utf-8 -*-
 class Cubo():
     cara = None
     def __init__(self, cara):
