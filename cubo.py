@@ -6,7 +6,9 @@ class Cubo():
       """Objeto cubo a partir de un objeto JSON (add doc)"""
       def __init__(self, json_data):
             self.json_data = json_data
-        
+            self.state_array = []
+            #Yo diria de hacer un array con numpy que utilice estructuras minimas para ahorrar memoria, en
+            #plan un array que sea 11122255552225551115523 para evitar tener que usar el json todo el rato
       def __repr__(self):
             return utils.getJSONConFormato(self.json_data)
       
