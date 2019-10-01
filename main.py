@@ -1,20 +1,24 @@
 #!/usr/bin/python3
 # -*- coding: utf-8 -*-
 
-import utils
+import utils, copy
 import GUI.VIEW_rubiks as Gui
-from cubo import Cubo as Objeto_Cubo
+from Cubo import Cubo as Objeto_Cubo
 
 def main():
-    # utils.jsonFolderCreate()
-    # json_file = utils.jsonRead('cube.json')
+    utils.jsonFolderCreate()
+    json_file = utils.jsonRead('cube.json')
     
-    # foo_cubo = Objeto_Cubo(json_file)
-    # print(repr(foo_cubo))
+    orig_cubo = Objeto_Cubo(json_file)
+    new_cubo = copy.deepcopy(orig_cubo)
+    new_cubo.desplazamientoB(2)
     
-    # print(str(foo_cubo))
+    print(str(orig_cubo))
+    print(str(new_cubo))
+
+   # print(str(foo_cubo))
         
-    # utils.jsonWrite('prueba',json_file)
+    utils.jsonWrite('prueba',json_file)
     
     #Gui.start()    
     pass
