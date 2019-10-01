@@ -1,12 +1,11 @@
 #!/usr/bin/python3
 # -*- coding: utf-8 -*-
-import utils
+import utils, copy
 import numpy as np
 
 class Cubo():
       """Objeto cubo a partir de un objeto JSON (add doc)"""
       def __init__(self, json_data):
-            self.json_data = json_data
             self.back = np.array(json_data['BACK'], np.uint8)
             self.left = np.array(json_data['LEFT'], np.uint8)
             self.down = np.array(json_data['DOWN'], np.uint8)
@@ -24,30 +23,55 @@ class Cubo():
       #             }
       #       print(giros.get(tipoGiro, ""))
                  
-            
 
+      #Método Mover B
+      
+      def desplazamientoB(self, fila):
+            '''Moveremos la cara del cubo 90º, generando un cubo nuevo tras la modificación'''
+            #extremo izq
+            if fila == 0: 
+                  pass
+            #extremo dcho
+            elif fila == len(self.back) -1 :
+                  arr1 = copy.copy(self.left[fila])
+                  arr2 = copy.copy(self.down[fila])
+                  arr3 = copy.copy(self.right[fila])
+                  arr4 = copy.copy(self.up[fila])
+                  
+                  self.left[fila] = arr4
+                  self.down[fila] = arr1
+                  self.right[fila] = arr2
+                  self.up[fila] = arr3
+                  
+                  self.front = np.rot90(self.front, 3)
+
+            #centros
+            else: 
+                  pass
+            
+            
       def __repr__(self):
             return utils.getJSONConFormato(self.json_data)
       
       def __str__(self):
-            tam = len(self.json_data['BACK'])
+            tam = len(self.back)
             caras = '\nCubo de {0}x{0}x{0}'
             caras = caras.format(tam) + '\n      [BACK]\n[LEFT][DOWN][RIGHT][UP]\n      [FRONT]\n\n'
             #Como la representacion sera vertical y maximo hay 3 
             #caras, pues el tamaño del cubo por el numero de caras
             espacios = '   ' * tam
-            foo = self.json_data
+            #foo = self.json_data
             cubo_str = ''
             for i in range(0, tam):
-                  cubo_str += (espacios + str(foo['BACK'][i]) + '\n')
+                  cubo_str += (espacios + str(self.back[i]) + '\n')
             for i in range(0, tam):
-                   cubo_str += (str(foo['LEFT'][i]) + str(foo['DOWN'][i]) + str(foo['RIGHT'][i]) + str(foo['UP'][i]) + '\n')
+                   cubo_str += (str(self.left[i]) + str(self.down[i]) + str(self.right[i]) + str(self.up[i]) + '\n')
             for i in range(0, tam):
-                   cubo_str += (espacios + str(foo['FRONT'][i]) + '\n')
+                   cubo_str += (espacios + str(self.front[i]) + '\n')
             return caras + str(cubo_str)
         
       def getCuboSize(self):
-            return len(self.json_data['BACK'])
+            return len(self.back)
         
 #Posición-Número
 '''
@@ -110,8 +134,6 @@ Hay que tener en cuenta que la rotación si es en L0 o en LN donde N es la ultim
 #Método Mover d
 '''Moveremos la cara del cubo -90º, generando un cubo nuevo tras la modificación'''
 
-#Método Mover B
-'''Moveremos la cara del cubo 90º, generando un cubo nuevo tras la modificación'''
 
 #Método Mover b
 '''Moveremos la cara del cubo -90º, generando un cubo nuevo tras la modificación'''
