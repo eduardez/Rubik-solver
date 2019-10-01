@@ -14,12 +14,12 @@ class CuboMatriz:
 
 class CuboNumPy:
     def __init__(self):
-        self.back = np.array([[3, 3, 3],[3, 3, 3],[3, 3, 3]], np.char)
-        self.left = np.array([[4, 4, 4],[4, 4, 4],[4, 4, 4]], np.char)
-        self.down = np.array([[1, 1, 1],[1, 1, 1],[1, 1, 1]], np.char)
-        self.right = np.array([[5, 5, 5],[5, 5, 5],[5, 5, 5]], np.char)
-        self.up = np.array([[0, 0, 0],[0, 0, 0],[0, 0, 0]], np.char)
-        self.front = np.array([[2, 2, 2],[2, 2, 2],[2, 2, 2]], np.char)
+        self.back = np.array([[3, 3, 3],[3, 3, 3],[3, 3, 3]], np.uint8)
+        self.left = np.array([[4, 4, 4],[4, 4, 4],[4, 4, 4]], np.uint8)
+        self.down = np.array([[1, 1, 1],[1, 1, 1],[1, 1, 1]], np.uint8)
+        self.right = np.array([[5, 5, 5],[5, 5, 5],[5, 5, 5]], np.uint8)
+        self.up = np.array([[0, 0, 0],[0, 0, 0],[0, 0, 0]], np.uint8)
+        self.front = np.array([[2, 2, 2],[2, 2, 2],[2, 2, 2]], np.uint8)
 
 if __name__ == "__main__":
     vector = []

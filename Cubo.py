@@ -1,14 +1,30 @@
 #!/usr/bin/python3
 # -*- coding: utf-8 -*-
 import utils
+import numpy as np
 
 class Cubo():
       """Objeto cubo a partir de un objeto JSON (add doc)"""
       def __init__(self, json_data):
             self.json_data = json_data
-            self.state_array = []
-            #Yo diria de hacer un array con numpy que utilice estructuras minimas para ahorrar memoria, en
-            #plan un array que sea 11122255552225551115523 para evitar tener que usar el json todo el rato
+            self.back = np.array(json_data['BACK'], np.uint8)
+            self.left = np.array(json_data['LEFT'], np.uint8)
+            self.down = np.array(json_data['DOWN'], np.uint8)
+            self.right = np.array(json_data['RIGHT'], np.uint8)
+            self.up = np.array(json_data['UP'], np.uint8)
+            self.front = np.array(json_data['FRONT'], np.uint8)
+            self.estado = None
+            
+      
+      # def girar(self, tipoGiro):
+      #       giros = {
+      #             1: "giro",
+      #             2: "giro",
+      #             3: "giro"
+      #             }
+      #       print(giros.get(tipoGiro, ""))
+                 
+            
       def __repr__(self):
             return utils.getJSONConFormato(self.json_data)
       
@@ -29,6 +45,8 @@ class Cubo():
                    cubo_str += (espacios + str(foo['FRONT'][i]) + '\n')
             return caras + str(cubo_str)
         
+      def getCuboSize(self):
+            return len(self.json_data['BACK'])
         
 #Posición-Número
 '''
@@ -68,6 +86,7 @@ Front = 2
 
 #Método Mover L
 '''Moveremos la cara del cubo 90º, generando un cubo nuevo tras la modificación'''
+
 '''    
             [[1, 3, 3],
              [1, 3, 3],
@@ -95,3 +114,11 @@ Hay que tener en cuenta que la rotación si es en L0 o en LN donde N es la ultim
 
 #Método Mover b
 '''Moveremos la cara del cubo -90º, generando un cubo nuevo tras la modificación'''
+
+#Método Girar 90º
+def girarHorario(cara):
+      return np.rot90(cara, 1)
+      
+#Método Girar 270º ó -90º
+def girarAntiHorario(cara):
+      return np.rot90(cara, 3)
