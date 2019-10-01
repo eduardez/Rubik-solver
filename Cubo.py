@@ -49,6 +49,29 @@ class Cubo():
             else: 
                   pass
             
+            #Método mover b
+            def desplazamientob(self, fila):
+                  #'''Moveremos la cara del cubo 90º, generando un cubo nuevo tras la modificación'''
+                  #extremo izq
+                  if fila == 0: 
+                        pass
+                  #extremo dcho
+                  elif fila == len(self.back) -1 :
+                        arr1 = copy.copy(self.left[fila])
+                        arr2 = copy.copy(self.down[fila])
+                        arr3 = copy.copy(self.right[fila])
+                        arr4 = copy.copy(self.up[fila])
+                        
+                        self.left[fila] = arr2
+                        self.down[fila] = arr1
+                        self.right[fila] = arr4
+                        self.up[fila] = arr3
+                        
+                        self.front = np.rot90(self.front, 1)
+
+                  #centros
+                  else: 
+                        pass
             
       def __repr__(self):
             return utils.getJSONConFormato(self.json_data)
@@ -72,71 +95,165 @@ class Cubo():
         
       def getCuboSize(self):
             return len(self.back)
-        
-#Posición-Número
-'''
-Back = 3
-Left = 4
-Down = 1
-Right = 5
-Up = 0
-Front = 2
-'''
 
-#Codificación de cubo 3x3
-'''
-      [BACK]
-[LEFT][DOWN][RIGHT][UP]
-      [FRON]
 
-            [[3, 3, 3],
-             [3, 3, 3],
-             [3, 3, 3]]
-[[4, 4, 4], [[1, 1, 1], [[5, 5, 5], [[0, 0, 0],
- [4, 4, 4],  [1, 1, 1],  [5, 5, 5],  [0, 0, 0],
- [4, 4, 4]]  [1, 1, 1]]  [5, 5, 5]]  [0, 0, 0]]
-            [[2, 2, 2],    
-             [2, 2, 2],
-             [2, 2, 2]
-'''
-
-#Método Generar Identificador
-'''Tras generarse un cubo se le ha de asignar el identificador correspondiente'''
-
-#Método Importar Cubo JSON
-'''Realizaremos la lectura de un archivo JSON y se creará el cubo inicial'''
-
-#Método Mostrar Cubo
-'''Tomaremos un cubo existente y lo mostraemos por pantalla'''
-
-#Método Mover L
-'''Moveremos la cara del cubo 90º, generando un cubo nuevo tras la modificación'''
-
-'''    
-            [[1, 3, 3],
-             [1, 3, 3],
-             [1, 3, 3]]
-[[4, 4, 4], [[2, 1, 1], [[5, 5, 5], [[0, 0, 0],
- [4, 4, 4],  [2, 1, 1],  [5, 5, 5],  [0, 0, 0],
- [4, 4, 4]]  [2, 1, 1]]  [5, 5, 5]]  [0, 0, 0]]
-            [[3, 2, 2],    
-             [3, 2, 2],
-             [3, 2, 2]
-Hay que tener en cuenta que la rotación si es en L0 o en LN donde N es la ultima fila haría que se rotase la matriz 
-'''
 
 #Método Mover l
-'''Moveremos la cara del cubo -90º, generando un cubo nuevo tras la modificación'''
+      def desplazamientoL(self, fila):
+            #Moveremos la cara del cubo -90º, generando un cubo nuevo tras la modificación'''
+            if fila==0:
+                  pass
+            #extremo drcho
+            elif fila == len(self.back) -1:
+                  arr1 = copy.copy(self.up[fila])
+                  arr2 = copy.copy(self.front[fila])
+                  arr3 = copy.copy(self.down[fila])
+                  arr4 = copy.copy (self.back[fila])
+
+                  self.up[fila] = arr4
+                  self.front[fila] = arr1
+                  self.down[fila] = arr2
+                  self.down[fila] = arr3
+
+                  self.left = np.rot90(self.left,3)
+
+            #centros
+            else:
+                  pass
+
+#Método mover l
+      def desplazamientol(self, fila):
+            #Moveremos la cara del cubo -90º, generando un cubo nuevo tras la modificación'''
+            if fila==0:
+                  pass
+            #extremo drcho
+            elif fila == len(self.back) -1:
+                  arr1 = copy.copy(self.up[fila])
+                  arr2 = copy.copy(self.front[fila])
+                  arr3 = copy.copy(self.down[fila])
+                  arr4 = copy.copy (self.back[fila])
+
+                  self.up[fila] = arr2
+                  self.front[fila] = arr3
+                  self.down[fila] = arr4
+                  self.back[fila] = arr1
+
+                  self.left = np.rot90(self.left,1)
+
+            #centros
+            else:
+                  pass
 
 #Método Mover D
-'''Moveremos la cara del cubo 90º, generando un cubo nuevo tras la modificación'''
+#Moveremos la cara del cubo 90º, generando un cubo nuevo tras la modificación'''
+
+      def desplazamientoD(self, fila):
+                  #Moveremos la cara del cubo -90º, generando un cubo nuevo tras la modificación'''
+                  if fila==0:
+                        pass
+                  #extremo drcho
+                  elif fila == len(self.back) -1:
+                        arr1 = copy.copy(self.left[fila])
+                        arr2 = copy.copy(self.back[fila])
+                        arr3 = copy.copy(self.right[fila])
+                        arr4 = copy.copy (self.front[fila])
+
+                        self.left[fila] = arr4
+                        self.back[fila] = arr1
+                        self.right[fila] = arr2
+                        self.front[fila] = arr3
+
+                        self.down = np.rot90(self.left,3)
+
+                  #centros
+                  else:
+                        pass
 
 #Método Mover d
-'''Moveremos la cara del cubo -90º, generando un cubo nuevo tras la modificación'''
+#Moveremos la cara del cubo -90º, generando un cubo nuevo tras la modificación'''
+
+      def desplazamientod(self, fila):
+                  #Moveremos la cara del cubo -90º, generando un cubo nuevo tras la modificación'''
+                  if fila==0:
+                        pass
+                  #extremo drcho
+                  elif fila == len(self.back) -1:
+                        arr1 = copy.copy(self.left[fila])
+                        arr2 = copy.copy(self.back[fila])
+                        arr3 = copy.copy(self.right[fila])
+                        arr4 = copy.copy (self.front[fila])
+
+                        self.left[fila] = arr2
+                        self.back[fila] = arr3
+                        self.right[fila] = arr4
+                        self.front[fila] = arr1
+
+                        self.down = np.rot90(self.left,1)
+
+                  #centros
+                  else:
+                        pass
 
 
-#Método Mover b
-'''Moveremos la cara del cubo -90º, generando un cubo nuevo tras la modificación'''
+        
+# #Posición-Número
+# '''
+# Back = 3
+# Left = 4
+# Down = 1
+# Right = 5
+# Up = 0
+# Front = 2
+# '''
+
+# #Codificación de cubo 3x3
+# '''
+#       [BACK]
+# [LEFT][DOWN][RIGHT][UP]
+#       [FRON]
+
+#             [[3, 3, 3],
+#              [3, 3, 3],
+#              [3, 3, 3]]
+# [[4, 4, 4], [[1, 1, 1], [[5, 5, 5], [[0, 0, 0],
+#  [4, 4, 4],  [1, 1, 1],  [5, 5, 5],  [0, 0, 0],
+#  [4, 4, 4]]  [1, 1, 1]]  [5, 5, 5]]  [0, 0, 0]]
+#             [[2, 2, 2],    
+#              [2, 2, 2],
+#              [2, 2, 2]
+# '''
+
+# #Método Generar Identificador
+# '''Tras generarse un cubo se le ha de asignar el identificador correspondiente'''
+
+# #Método Importar Cubo JSON
+# '''Realizaremos la lectura de un archivo JSON y se creará el cubo inicial'''
+
+# #Método Mostrar Cubo
+# '''Tomaremos un cubo existente y lo mostraemos por pantalla'''
+
+# #Método Mover L
+# '''Moveremos la cara del cubo 90º, generando un cubo nuevo tras la modificación'''
+
+# '''    
+#             [[1, 3, 3],
+#              [1, 3, 3],
+#              [1, 3, 3]]
+# [[4, 4, 4], [[2, 1, 1], [[5, 5, 5], [[0, 0, 0],
+#  [4, 4, 4],  [2, 1, 1],  [5, 5, 5],  [0, 0, 0],
+#  [4, 4, 4]]  [2, 1, 1]]  [5, 5, 5]]  [0, 0, 0]]
+#             [[3, 2, 2],    
+#              [3, 2, 2],
+#              [3, 2, 2]
+# Hay que tener en cuenta que la rotación si es en L0 o en LN donde N es la ultima fila haría que se rotase la matriz 
+# '''
+  
+# #Método Mover d
+# '''Moveremos la cara del cubo -90º, generando un cubo nuevo tras la modificación'''
+
+
+# #Método Mover b
+# '''Moveremos la cara del cubo -90º, generando un cubo nuevo tras la modificación'''
 
 #Método Girar 90º
 def girarHorario(cara):
