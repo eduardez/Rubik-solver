@@ -110,10 +110,11 @@ class Cubo():
                   arr3 = copy.copy(self.down[fila])
                   arr4 = copy.copy (self.back[fila])
 
+            #Hay que cambiar las filas por columnas
                   self.up[fila] = arr4
                   self.front[fila] = arr1
                   self.down[fila] = arr2
-                  self.down[fila] = arr3
+                  self.back[fila] = arr3
 
                   self.left = np.rot90(self.left,3)
 
@@ -133,6 +134,7 @@ class Cubo():
                   arr3 = copy.copy(self.down[fila])
                   arr4 = copy.copy (self.back[fila])
 
+            #Hay que cambiar las filas por columnas
                   self.up[fila] = arr2
                   self.front[fila] = arr3
                   self.down[fila] = arr4
