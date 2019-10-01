@@ -15,7 +15,9 @@ def main():
     # print(str(foo_cubo))
         
     # utils.jsonWrite('prueba',json_file)
-    Gui.start()    
+    
+    #Gui.start()    
+    pass
 
 if __name__ == "__main__":
     print('''
