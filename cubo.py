@@ -9,6 +9,7 @@ class Cubo():
             self.state_array = []
             #Yo diria de hacer un array con numpy que utilice estructuras minimas para ahorrar memoria, en
             #plan un array que sea 11122255552225551115523 para evitar tener que usar el json todo el rato
+    
       def __repr__(self):
             return utils.getJSONConFormato(self.json_data)
       
@@ -29,6 +30,8 @@ class Cubo():
                    cubo_str += (espacios + str(foo['FRONT'][i]) + '\n')
             return caras + str(cubo_str)
         
+      def getCuboSize(self):
+            return len(self.json_data['BACK'])
         
 #Posición-Número
 '''
