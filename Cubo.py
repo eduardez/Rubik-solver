@@ -6,17 +6,22 @@ class Cubo():
       """Objeto cubo a partir de un objeto JSON (add doc)"""
       def __init__(self, json_data):
             self.json_data = json_data
+            self.back = np.array(json_data['BACK'], np.uint8)
+            self.left = np.array(json_data['LEFT'], np.uint8)
+            self.down = np.array(json_data['DOWN'], np.uint8)
+            self.right = np.array(json_data['RIGHT'], np.uint8)
+            self.up = np.array(json_data['UP'], np.uint8)
+            self.front = np.array(json_data['FRONT'], np.uint8)
             self.estado = None
-            self.matrix = None
             
       
-      def girar(self, tipoGiro):
-            giros = {
-                  1: "giro",
-                  2: "giro",
-                  3: "giro"
-                  }
-            print(giros.get(tipoGiro, ""))
+      # def girar(self, tipoGiro):
+      #       giros = {
+      #             1: "giro",
+      #             2: "giro",
+      #             3: "giro"
+      #             }
+      #       print(giros.get(tipoGiro, ""))
                  
             
       def __repr__(self):
@@ -80,6 +85,9 @@ Front = 2
 
 #Método Mover L
 '''Moveremos la cara del cubo 90º, generando un cubo nuevo tras la modificación'''
+      def rotateL(cubo, columna):
+            if columna == cube
+            return cubo
 '''    
             [[1, 3, 3],
              [1, 3, 3],
