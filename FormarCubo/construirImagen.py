@@ -5,7 +5,7 @@
 
 from PIL import Image
 
-dimension = 3 #Dimension del cubo NxNxN
+dimension = 3 #Dimension del cubo NxN
 padding = 20 #Tamaño de 'baldosa' y de separación
 
 def crearFondo(dimension, padding):
@@ -64,6 +64,7 @@ def construirCubo(dimension, padding):
 
     img.save('./formarCubo/CuboFormado.png')
     
+    # Aqui va el main
 if __name__ == "__main__":
     crearFondo(dimension, padding)
     img = Image.open('./formarCubo/background.png')
