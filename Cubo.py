@@ -24,6 +24,7 @@ class Cubo():
       #       print(giros.get(tipoGiro, ""))
                  
             
+
       def __repr__(self):
             return utils.getJSONConFormato(self.json_data)
       

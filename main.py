@@ -3,7 +3,7 @@
 
 import utils
 import GUI.VIEW_rubiks as Gui
-from cubo import Cubo as Objeto_Cubo
+from Cubo import Cubo as Objeto_Cubo
 
 def main():
     # utils.jsonFolderCreate()
@@ -16,7 +16,7 @@ def main():
         
     # utils.jsonWrite('prueba',json_file)
     
-    #Gui.start()    
+    Gui.start()    
     pass
 
 if __name__ == "__main__":
