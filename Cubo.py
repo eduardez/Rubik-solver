@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 # -*- coding: utf-8 -*-
 import utils
+import numpy as np
 
 class Cubo():
       """Objeto cubo a partir de un objeto JSON (add doc)"""
@@ -85,9 +86,7 @@ Front = 2
 
 #Método Mover L
 '''Moveremos la cara del cubo 90º, generando un cubo nuevo tras la modificación'''
-      def rotateL(cubo, columna):
-            if columna == cube
-            return cubo
+
 '''    
             [[1, 3, 3],
              [1, 3, 3],
@@ -115,3 +114,11 @@ Hay que tener en cuenta que la rotación si es en L0 o en LN donde N es la ultim
 
 #Método Mover b
 '''Moveremos la cara del cubo -90º, generando un cubo nuevo tras la modificación'''
+
+#Método Girar 90º
+def girarHorario(cara):
+      return np.rot90(cara, 1)
+      
+#Método Girar 270º ó -90º
+def girarAntiHorario(cara):
+      return np.rot90(cara, 3)
