@@ -17,23 +17,21 @@ class Cubo():
 
       def desplazamientoB(self, fila):
             '''Moveremos la cara del cubo 90º, generando un cubo nuevo tras la modificación'''
+            arr1 = copy.copy(self.left[fila])
+            arr2 = copy.copy(self.down[fila])
+            arr3 = copy.copy(self.right[fila])
+            arr4 = copy.copy(self.up[fila])
+            self.left[fila] = arr4
+            self.down[fila] = arr1
+            self.right[fila] = arr2
+            self.up[fila] = arr3
             #extremo izq
-            if fila == 0: 
-                  pass
-            #extremo dcho
-            elif fila == len(self.back) -1 :
-                  arr1 = copy.copy(self.left[fila])
-                  arr2 = copy.copy(self.down[fila])
-                  arr3 = copy.copy(self.right[fila])
-                  arr4 = copy.copy(self.up[fila])
-                  
-                  self.left[fila] = arr4
-                  self.down[fila] = arr1
-                  self.right[fila] = arr2
-                  self.up[fila] = arr3
-                  
-                  self.front = np.rot90(self.front, 3)
+            
+            if fila == 0:
+                  self.back = np.rot90(self.back, 3)
 
+            elif fila == len(self.back) -1 :   
+                  self.front = np.rot90(self.front, 3)
             #centros
             else: 
                   pass
@@ -41,20 +39,21 @@ class Cubo():
       def desplazamientob(self, fila):
             #'''Moveremos la cara del cubo 90º, generando un cubo nuevo tras la modificación'''
             #extremo izq
+
+            arr1 = copy.copy(self.left[fila])
+            arr2 = copy.copy(self.down[fila])
+            arr3 = copy.copy(self.right[fila])
+            arr4 = copy.copy(self.up[fila])
+                  
+            self.left[fila] = arr2
+            self.down[fila] = arr3
+            self.right[fila] = arr4
+            self.up[fila] = arr1
+                  
             if fila == 0: 
-                  pass
-            #extremo dcho
-            elif fila == len(self.back) -1 :
-                  arr1 = copy.copy(self.left[fila])
-                  arr2 = copy.copy(self.down[fila])
-                  arr3 = copy.copy(self.right[fila])
-                  arr4 = copy.copy(self.up[fila])
-                  
-                  self.left[fila] = arr2
-                  self.down[fila] = arr3
-                  self.right[fila] = arr4
-                  self.up[fila] = arr1
-                  
+                  self.back = np.rot90(self.back,1)
+
+            elif fila == len(self.back) - 1 :
                   self.front = np.rot90(self.front, 1)
 
             #centros
@@ -63,85 +62,91 @@ class Cubo():
       
       def desplazamientoL(self, fila):
             #Moveremos la cara del cubo -90º, generando un cubo nuevo tras la modificación'''
-            if fila==0:
-                  pass
-            #extremo drcho
-            elif fila == len(self.back) -1:
-                  arr1 = copy.copy(self.up[fila])
-                  arr2 = copy.copy(self.front[fila])
-                  arr3 = copy.copy(self.down[fila])
-                  arr4 = copy.copy (self.back[fila])
+            arr1 = self.getColumna(self.up, fila)
+            arr2 = self.getColumna(self.front,fila)
+            arr3 = self.getColumna(self.down,fila)
+            arr4 = self.getColumna(self.back,fila)
             #Hay que cambiar las filas por columnas
-                  self.up[fila] = arr4
-                  self.front[fila] = arr1
-                  self.down[fila] = arr2
-                  self.back[fila] = arr3
-                  self.left = np.rot90(self.left,3)
-            #centros
+            self.setColumna(self.up,fila,arr4)
+            self.front[fila] = arr1
+            self.down[fila] = arr2
+            self.back[fila] = arr3
+            if fila==0:
+                  self.back = np.rot90(self.back,3)
+            #extremo drcho
+            elif fila == len(self.back) -1: 
+                  self.front = np.rot90(self.front,3)
             else:
                   pass
 
       def desplazamientol(self, fila):
-            #Moveremos la cara del cubo -90º, generando un cubo nuevo tras la modificación'''
-            if fila==0:
-                  pass
-            #extremo drcho
-            elif fila == len(self.back) -1:
-                  arr1 = copy.copy(self.up[fila])
-                  arr2 = copy.copy(self.front[fila])
-                  arr3 = copy.copy(self.down[fila])
-                  arr4 = copy.copy (self.back[fila])
+            arr1 = copy.copy(self.up[fila])
+            arr2 = copy.copy(self.front[fila])
+            arr3 = copy.copy(self.down[fila])
+            arr4 = copy.copy (self.back[fila])
             #Hay que cambiar las filas por columnas
-                  self.up[fila] = arr2
-                  self.front[fila] = arr3
-                  self.down[fila] = arr4
-                  self.back[fila] = arr1
+            self.up[fila] = arr2
+            self.front[fila] = arr3
+            self.down[fila] = arr4
+            self.back[fila] = arr1
+
+            if fila == 0:
                   self.left = np.rot90(self.left,1)
-            #centros
+            elif fila == len(self.back) -1:
+                  self.right = np.rot90(self.right,1)
             else:
                   pass
 
       def desplazamientoD(self, fila):
                   #Moveremos la cara del cubo -90º, generando un cubo nuevo tras la modificación'''
-                  if fila==0:
-                        pass
-                  #extremo drcho
-                  elif fila == len(self.back) -1:
-                        arr1 = copy.copy(self.left[fila])
-                        arr2 = copy.copy(self.back[fila])
-                        arr3 = copy.copy(self.right[fila])
-                        arr4 = copy.copy (self.front[fila])
-                        self.left[fila] = arr4
-                        self.back[fila] = arr1
-                        self.right[fila] = arr2
-                        self.front[fila] = arr3
-                        self.down = np.rot90(self.left,3)
-                  #centros
-                  else:
-                        pass
+            arr1 = copy.copy(self.left[fila])
+            arr2 = copy.copy(self.back[fila])
+            arr3 = copy.copy(self.right[fila])
+            arr4 = copy.copy (self.front[fila])
+            self.left[fila] = arr4
+            self.back[fila] = arr1
+            self.right[fila] = arr2
+            self.front[fila] = arr3
+            if fila==0:
+                  self.down = np.rot90(self.down,3)
+            #extremo drcho
+            elif fila == len(self.back) -1:
+                  self.up = np.rot90(self.up,3)
+
+            #centros
+            else:
+                  pass
 
       def desplazamientod(self, fila):
-                  #Moveremos la cara del cubo -90º, generando un cubo nuevo tras la modificación'''
-                  if fila==0:
-                        pass
-                  #extremo drcho
-                  elif fila == len(self.back) -1:
-                        arr1 = copy.copy(self.left[fila])
-                        arr2 = copy.copy(self.back[fila])
-                        arr3 = copy.copy(self.right[fila])
-                        arr4 = copy.copy (self.front[fila])
-                        self.left[fila] = arr2
-                        self.back[fila] = arr3
-                        self.right[fila] = arr4
-                        self.front[fila] = arr1
-                        self.down = np.rot90(self.left,1)
-                  #centros
-                  else:
-                        pass
+            #Moveremos la cara del cubo -90º, generando un cubo nuevo tras la modificación'''
+            arr1 = copy.copy(self.left[fila])
+            arr2 = copy.copy(self.back[fila])
+            arr3 = copy.copy(self.right[fila])
+            arr4 = copy.copy (self.front[fila])
+            self.left[fila] = arr2
+            self.back[fila] = arr3
+            self.right[fila] = arr4
+            self.front[fila] = arr1
+            if fila==0:
+                  self.down = np.rot90(self.down,1)
+
+            #extremo drcho
+            elif fila == len(self.back) -1:
+                  self.up = np.rot90(self.up,1)
+                  
+            #centros
+            else:
+                  pass
       
-      
-      def __repr__(self):
-            return utils.getJSONConFormato(self.json_data)
+      def getColumna(self, cara, fila):
+            column = []
+            for x in range(0, len(cara)):
+                  column.append(cara[x][fila])
+            return column
+            
+      def setColumna(self, cara, fila, columna):
+            for x in range(0, len(cara)):
+                  cara[x][fila] = columna[x]
       
       def __str__(self):
             tam = len(self.back)
