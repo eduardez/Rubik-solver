@@ -6,7 +6,7 @@ import GUI.VIEW_rubiks as Gui
 from Cubo import Cubo as Objeto_Cubo
 
 def main():
-    utils.jsonFolderCreate()
+    #utils.jsonFolderCreate()
     json_file = utils.jsonRead('cube.json')
     
     orig_cubo = Objeto_Cubo(json_file)
@@ -25,9 +25,9 @@ def main():
     print('Desp D\n' + str(new_cubo))
     new_cubo.desplazamientod(2)
     print('Desp d\n' + str(new_cubo))
-   # print(str(foo_cubo))
+    #print(str(foo_cubo))
         
-    utils.jsonWrite('prueba',json_file)
+    #utils.jsonWrite('prueba',json_file)
     
     #Gui.start()    
     pass
