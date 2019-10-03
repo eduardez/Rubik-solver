@@ -17,12 +17,12 @@ def main():
     # print('Desp B\n' + str(new_cubo))
     # new_cubo.desplazamientob(2) #esta bien
     # print('Desp b\n' + str(new_cubo))
-    new_cubo.desplazamientoL(2) #esta bien
-    print('Desp L\n' + str(new_cubo))
-    new_cubo.desplazamientol(2) #esta bien
-    print('Desp l\n' + str(new_cubo))
-    # new_cubo.desplazamientoD(2)
-    # print('Desp D\n' + str(new_cubo))
+    # new_cubo.desplazamientoL(2) #esta bien
+    # print('Desp L\n' + str(new_cubo))
+    # new_cubo.desplazamientol(2) #esta bien
+    # print('Desp l\n' + str(new_cubo))
+    new_cubo.desplazamientoD(2)
+    print('Desp D\n' + str(new_cubo))
     # new_cubo.desplazamientod(2)
     # print('Desp d\n' + str(new_cubo))
     # column = new_cubo.getColumna(new_cubo.left, 1)

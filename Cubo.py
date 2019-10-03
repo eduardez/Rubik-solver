@@ -100,14 +100,18 @@ class Cubo():
 
       def desplazamientoD(self, fila):
                   #Moveremos la cara del cubo -90º, generando un cubo nuevo tras la modificación'''
-            arr1 = copy.copy(self.left[fila])
+            arr1 = self.getColumna(self.left, fila)
             arr2 = copy.copy(self.back[fila])
-            arr3 = copy.copy(self.right[fila])
+            arr3 = self.getColumna(self.right, fila)
             arr4 = copy.copy (self.front[fila])
-            self.left[fila] = arr4
+
+            filaprima = len(self.up) - fila -1
+            self.setColumna(self.left,fila,arr4)
             self.back[fila] = arr1
-            self.right[fila] = arr2
-            self.front[fila] = arr3
+            self.setColumna(self.right,filaprima,arr2)
+            self.front[filaprima] = arr3
+            print('Desp D\n' + str(self))
+
             if fila==0:
                   self.down = np.rot90(self.down,3)
             #extremo drcho
@@ -162,7 +166,7 @@ class Cubo():
             for i in range(0, tam):
                    cubo_str += (str(self.left[i]) + str(self.down[i]) + str(self.right[i]) + str(self.up[i]) + '\n')
             for i in range(0, tam):
-                   cubo_str += (espacios + str(self.getColumna(self.front,i)) + '\n')
+                   cubo_str += (espacios + str(self.front[i]) + '\n')
             return caras + str(cubo_str)
         
       def getCuboSize(self):
