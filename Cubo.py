@@ -124,14 +124,16 @@ class Cubo():
 
       def desplazamientod(self, fila):
             #Moveremos la cara del cubo -90º, generando un cubo nuevo tras la modificación'''
-            arr1 = copy.copy(self.left[fila])
+            arr1 = self.getColumna(self.left, fila)
             arr2 = copy.copy(self.back[fila])
-            arr3 = copy.copy(self.right[fila])
+            arr3 = self.getColumna(self.right, fila)
             arr4 = copy.copy (self.front[fila])
-            self.left[fila] = arr2
+
+            filaprima = len(self.up) - fila -1
+            self.setColumna(self.left,fila,arr2)
             self.back[fila] = arr3
-            self.right[fila] = arr4
-            self.front[fila] = arr1
+            self.setColumna(self.right,filaprima,arr4)
+            self.front[filaprima] = arr1
             if fila==0:
                   self.down = np.rot90(self.down,1)
 

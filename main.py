@@ -13,20 +13,20 @@ def main():
     new_cubo = copy.deepcopy(orig_cubo)
     print(str(orig_cubo))
     
-    # new_cubo.desplazamientoB(2) #Esta bien
-    # print('Desp B\n' + str(new_cubo))
-    # new_cubo.desplazamientob(2) #esta bien
-    # print('Desp b\n' + str(new_cubo))
-    # new_cubo.desplazamientoL(2) #esta bien
-    # print('Desp L\n' + str(new_cubo))
-    # new_cubo.desplazamientol(2) #esta bien
-    # print('Desp l\n' + str(new_cubo))
+    new_cubo.desplazamientoB(2) #Esta bien
+    print('Desp B\n' + str(new_cubo))
+    new_cubo.desplazamientob(2) #esta bien
+    print('Desp b\n' + str(new_cubo))
+    new_cubo.desplazamientoL(2) #esta bien
+    print('Desp L\n' + str(new_cubo))
+    new_cubo.desplazamientol(2) #esta bien
+    print('Desp l\n' + str(new_cubo))
     new_cubo.desplazamientoD(2)
     print('Desp D\n' + str(new_cubo))
-    # new_cubo.desplazamientod(2)
-    # print('Desp d\n' + str(new_cubo))
-    # column = new_cubo.getColumna(new_cubo.left, 1)
-    # new_cubo.setColumna(new_cubo.up, 2, column)
+    new_cubo.desplazamientod(2)
+    print('Desp d\n' + str(new_cubo))
+    column = new_cubo.getColumna(new_cubo.left, 1)
+    new_cubo.setColumna(new_cubo.up, 2, column)
     
     #print(str(new_cubo))
         
