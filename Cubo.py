@@ -70,30 +70,31 @@ class Cubo():
             self.setColumna(self.down,fila, arr2)
             self.setColumna(self.back,fila, arr3)
             if fila==0:
-                  self.back = np.rot90(self.back,3)
+                  self.left = np.rot90(self.left,3)
             #extremo drcho
             elif fila == len(self.back) -1: 
-                  self.front = np.rot90(self.front,3)
+                  self.right = np.rot90(self.right,3)
             else:
                   pass
 
       def desplazamientol(self, fila):
                #Moveremos la cara del cubo -90º, generando un cubo nuevo tras la modificación'''
-            arr1 = self.getColumna(self.up, fila)
+            fila_prima = len(self.up) - fila - 1#Indice de la cara UP ya que el posicionamiento va a la inversa del resto de las caras
+            
+            arr1 = self.getColumna(self.up, fila_prima)
             arr2 = self.getColumna(self.front,fila)
             arr3 = self.getColumna(self.down,fila)
             arr4 = self.getColumna(self.back,fila)
             #Hay que cambiar las filas por columnas
-            fila_up = len(self.up) - fila - 1#Indice de la cara UP ya que el posicionamiento va a la inversa del resto de las caras
-            self.setColumna(self.up,fila_up,arr2)
+            self.setColumna(self.up,fila_prima,arr2)
             self.setColumna(self.front,fila, arr3)
             self.setColumna(self.down,fila, arr4)
             self.setColumna(self.back,fila, arr1)
             if fila==0:
-                  self.back = np.rot90(self.back,3)
+                  self.left = np.rot90(self.left,1)
             #extremo drcho
             elif fila == len(self.back) -1: 
-                  self.front = np.rot90(self.front,3)
+                  self.right = np.rot90(self.right,1)
             else:
                   pass
 
@@ -113,10 +114,10 @@ class Cubo():
             print('Desp D\n' + str(self))
 
             if fila==0:
-                  self.down = np.rot90(self.down,3)
+                  self.down = np.rot90(self.down,1)
             #extremo drcho
             elif fila == len(self.back) -1:
-                  self.up = np.rot90(self.up,3)
+                  self.up = np.rot90(self.up,1)
 
             #centros
             else:
@@ -124,12 +125,13 @@ class Cubo():
 
       def desplazamientod(self, fila):
             #Moveremos la cara del cubo -90º, generando un cubo nuevo tras la modificación'''
+            filaprima = len(self.up) - fila -1
+            
             arr1 = self.getColumna(self.left, fila)
             arr2 = copy.copy(self.back[fila])
-            arr3 = self.getColumna(self.right, fila)
-            arr4 = copy.copy (self.front[fila])
+            arr3 = self.getColumna(self.right, filaprima)
+            arr4 = copy.copy (self.front[filaprima])
 
-            filaprima = len(self.up) - fila -1
             self.setColumna(self.left,fila,arr2)
             self.back[fila] = arr3
             self.setColumna(self.right,filaprima,arr4)
@@ -140,7 +142,6 @@ class Cubo():
             #extremo drcho
             elif fila == len(self.back) -1:
                   self.up = np.rot90(self.up,1)
-                  
             #centros
             else:
                   pass
