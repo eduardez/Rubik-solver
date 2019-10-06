@@ -27,7 +27,7 @@ class Cubo():
             #extremo izq
             
             if fila == 0:
-                  self.back = np.rot90(self.back, 3)
+                  self.back = np.rot90(self.back, 1)
 
             elif fila == len(self.back) -1 :   
                   self.front = np.rot90(self.front, 3)
@@ -58,19 +58,21 @@ class Cubo():
                   pass
       
       def desplazamientoL(self, fila):
+            fila_prima = len(self.up) - fila - 1#Indice de la cara UP ya que el posicionamiento va a la inversa del resto de las caras
             #Moveremos la cara del cubo -90º, generando un cubo nuevo tras la modificación'''
-            arr1 = self.getColumna(self.up, fila)
+            arr1 = self.getColumna(self.up, fila_prima)
             arr2 = self.getColumna(self.front,fila)
             arr3 = self.getColumna(self.down,fila)
             arr4 = self.getColumna(self.back,fila)
             #Hay que cambiar las filas por columnas
-            fila_up = len(self.up) - fila - 1#Indice de la cara UP ya que el posicionamiento va a la inversa del resto de las caras
-            self.setColumna(self.up,fila_up,arr4)
-            self.setColumna(self.front,fila, arr1)
+            
+            
+            self.setColumnaInversa(self.up,fila_prima,arr4)
+            self.setColumnaInversa(self.front,fila, arr1)
             self.setColumna(self.down,fila, arr2)
             self.setColumna(self.back,fila, arr3)
             if fila==0:
-                  self.left = np.rot90(self.left,3)
+                  self.left = np.rot90(self.left,1)
             #extremo drcho
             elif fila == len(self.back) -1: 
                   self.right = np.rot90(self.right,3)
@@ -86,10 +88,10 @@ class Cubo():
             arr3 = self.getColumna(self.down,fila)
             arr4 = self.getColumna(self.back,fila)
             #Hay que cambiar las filas por columnas
-            self.setColumna(self.up,fila_prima,arr2)
+            self.setColumnaInversa(self.up,fila_prima,arr2)
             self.setColumna(self.front,fila, arr3)
             self.setColumna(self.down,fila, arr4)
-            self.setColumna(self.back,fila, arr1)
+            self.setColumnaInversa(self.back,fila, arr1)
             if fila==0:
                   self.left = np.rot90(self.left,1)
             #extremo drcho
@@ -100,18 +102,18 @@ class Cubo():
 
 
       def desplazamientoD(self, fila):
+            fila_prima = len(self.up) - fila - 1#Indice de la cara UP ya que el posicionamiento va a la inversa del resto de las caras
                   #Moveremos la cara del cubo -90º, generando un cubo nuevo tras la modificación'''
-            arr1 = self.getColumna(self.left, fila)
-            arr2 = copy.copy(self.back[fila])
+            arr1 = self.getColumna(self.left, fila_prima)
+            arr2 = copy.copy(self.back[fila_prima])
             arr3 = self.getColumna(self.right, fila)
             arr4 = copy.copy (self.front[fila])
 
-            filaprima = len(self.up) - fila -1
-            self.setColumna(self.left,fila,arr4)
-            self.back[fila] = arr1
-            self.setColumna(self.right,filaprima,arr2)
-            self.front[filaprima] = arr3
-            print('Desp D\n' + str(self))
+            self.setColumna(self.left,fila_prima,arr4)
+            self.back[fila_prima] = arr1[::-1]
+            self.setColumna(self.right,fila,arr2)
+            self.front[fila] = arr3[::-1]
+            
 
             if fila==0:
                   self.down = np.rot90(self.down,1)
@@ -125,23 +127,27 @@ class Cubo():
 
       def desplazamientod(self, fila):
             #Moveremos la cara del cubo -90º, generando un cubo nuevo tras la modificación'''
-            filaprima = len(self.up) - fila -1
+            fila_prima = len(self.up) - fila -1
             
-            arr1 = self.getColumna(self.left, fila)
-            arr2 = copy.copy(self.back[fila])
-            arr3 = self.getColumna(self.right, filaprima)
-            arr4 = copy.copy (self.front[filaprima])
+            arr1 = self.getColumna(self.left, fila_prima)
+            print(arr1)
+            arr2 = copy.copy(self.back[fila_prima])
+            print(arr2)
+            arr3 = self.getColumna(self.right, fila)
+            print(arr3)
+            arr4 = copy.copy(self.front[fila])
+            print(arr4)
 
-            self.setColumna(self.left,fila,arr2)
-            self.back[fila] = arr3
-            self.setColumna(self.right,filaprima,arr4)
-            self.front[filaprima] = arr1
+            self.setColumnaInversa(self.left,fila_prima,arr2)
+            self.back[fila_prima] = arr3
+            self.setColumnaInversa(self.right,fila,arr4)
+            self.front[fila] = arr1
             if fila==0:
                   self.down = np.rot90(self.down,1)
 
             #extremo drcho
             elif fila == len(self.back) -1:
-                  self.up = np.rot90(self.up,1)
+                  self.up = np.rot90(self.up,3)
             #centros
             else:
                   pass
@@ -155,6 +161,9 @@ class Cubo():
       def setColumna(self, cara, fila, columna):
             for x in range(0, len(cara)):
                   cara[x][fila] = columna[x]
+      def setColumnaInversa(self, cara, fila, columna):
+            for x in range(0,len(cara)):
+                  cara[(len(cara)-1)-x][fila] = columna[x]
       
       def __str__(self):
             tam = len(self.back)
