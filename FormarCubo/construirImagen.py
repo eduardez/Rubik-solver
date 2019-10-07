@@ -21,8 +21,8 @@ img_red = Image.open('./formarCubo/red.png')
 
 
 def crearFondo(dimension, padding):
-    ancho = padding * dimension * 5
-    largo = padding * dimension * 4
+    ancho = padding * dimension * 5 +50
+    largo = padding * dimension * 4+50
     img=Image.new('RGBA', (ancho,largo), (0,0,0,0))
     img.save('./formarCubo/background.png')
 
@@ -48,23 +48,35 @@ def construirCubo(dimension, padding, id):
         switch_caracter(caracter, posX, posY)
         posX = posX+padding
         cont = cont+1
+
         if (cont%dimension) == 0:
             posX = posInicial
             posY= posY + padding
                         
-        if cont == (piezascara*2):
-            posX = 0
-            posY = cubesize + (int)(cubesize/2)
-            posInicial = posX
-
-        elif cont == piezascara:
+        if cont == piezascara:
             posX = posInicial
-            posY = posY + (cubesize*2)
-
-        elif (cont%piezascara) == 0:
-            posX = posX + cubesize + padding
-            posY = posY-cubesize
+            posY = cubesize + (int) (cubesize/2)
             posInicial = posX
+
+        elif cont == (piezascara*2):
+            posX = posInicial
+            posY = posY + (int)(cubesize/2)
+
+        elif cont==(piezascara*3):
+            posX = 0
+            posY = cubesize + (int) (cubesize/2)
+            posInicial = posX
+
+        elif cont == (piezascara*4):
+            posX = cubesize*3
+            posY = cubesize + (int) (cubesize/2)
+            posInicial = posX
+        
+        elif cont==(piezascara*5):
+            posX = cubesize*4 + (int) (cubesize/2)
+            posY = cubesize + (int) (cubesize/2)
+            posInicial = posX
+
     img.save('./' + utils.PATHS.get('image_folder') + '/' + utils.getTimestampedName('cuboFormado') + '.png')
     
     

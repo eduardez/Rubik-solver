@@ -24,6 +24,7 @@ class CubeShell(cmd.Cmd):
     def do_mezclar(self, arg):
         '''Mezclar el objeto cubo actual'''
         moverCubo(cubo_actual, 'B', 1)
+        moverCubo(cubo_actual, 'l', 2)
         
         
     def do_probar_giros(self,arg):        
