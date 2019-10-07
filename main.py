@@ -73,7 +73,6 @@ def moverCubo(cubo, movimiento, fila):
 def initResources():
     utils.createFolder(utils.PATHS.get('image_folder'))
     utils.createFolder(utils.PATHS.get('json_folder'))
-    generar_imagenes = False
     cubo_actual.updateEstado()
 
 if __name__ == "__main__":

@@ -186,11 +186,11 @@ class Cubo():
       def getCuboMatrix(self):
             matriz = []
             matriz.append(self.back)
-            matriz.append(self.left)
             matriz.append(self.down)
+            matriz.append(self.front)
+            matriz.append(self.left)
             matriz.append(self.right)
             matriz.append(self.up)
-            matriz.append(self.front)
             return matriz
       
       def cuboToStr(self):
