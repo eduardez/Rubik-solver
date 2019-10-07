@@ -51,14 +51,15 @@ def construirCubo(dimension, padding, id):
         if (cont%dimension) == 0:
             posX = posInicial
             posY= posY + padding
-        if cont == piezascara:
-            posX = posInicial
-            posY = posY + (cubesize*2)
-
-        elif cont == (piezascara*2):
+                        
+        if cont == (piezascara*2):
             posX = 0
             posY = cubesize + (int)(cubesize/2)
             posInicial = posX
+
+        elif cont == piezascara:
+            posX = posInicial
+            posY = posY + (cubesize*2)
 
         elif (cont%piezascara) == 0:
             posX = posX + cubesize + padding

@@ -178,6 +178,7 @@ class Cubo():
            
             stringCubo += str(cubo_str)
             stringCubo += '\nMD5: ' + self.estado.idHash
+            stringCubo += '\nID: ' + self.cuboToStr()
             return stringCubo
         
       def getCuboSize(self):
