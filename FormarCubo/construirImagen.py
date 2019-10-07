@@ -28,12 +28,12 @@ def crearFondo(dimension, padding):
 
 
 def switch_caracter(caracter, posX, posY):
-    if caracter == '0': img.paste(img_blue, (posX,posY))
-    if caracter == '1': img.paste(img_yellow, (posX,posY))
-    if caracter == '2': img.paste(img_green, (posX,posY))
-    if caracter == '3': img.paste(img_orange, (posX,posY))
-    if caracter == '4': img.paste(img_white, (posX,posY))
-    if caracter == '5': img.paste(img_red, (posX,posY))
+    if caracter == '0': img.paste(img_red, (posX,posY))
+    if caracter == '1': img.paste(img_blue, (posX,posY))
+    if caracter == '2': img.paste(img_yellow, (posX,posY))
+    if caracter == '3': img.paste(img_green, (posX,posY))
+    if caracter == '4': img.paste(img_orange, (posX,posY))
+    if caracter == '5': img.paste(img_white, (posX,posY))
 
 
 def construirCubo(dimension, padding, id):
