@@ -12,26 +12,14 @@ def main():
     json_file = utils.jsonRead('cuboSolucionado.json')
     
     orig_cubo = Objeto_Cubo(json_file)
-    print(orig_cubo.estado.idHash)
+    orig_cubo.updateEstado()
+    print(str(orig_cubo))
     
     new_cubo = copy.deepcopy(orig_cubo) 
+    
     new_cubo.desplazamientob(2) #Está todo bien
-    print(new_cubo.estado.idHash)
-
-    # GenerarImagen.createImage(new_cubo.getCuboMatrix())
-    #new_cubo.desplazamientoB(2) #Está todo bien
-    #print('Desp B\n' + str(new_cubo))
-    #print('Desp b\n' + str(new_cubo))
-    #new_cubo.desplazamientoL(2) #Está todo bien
-    #print('Desp L\n' + str(new_cubo))
-    #new_cubo.desplazamientol(2) #Está todo bien
-    #print('Desp l\n' + str(new_cubo))
-    #new_cubo.desplazamientoD(2) #Está todo bien
-    #print('Desp D\n' + str(new_cubo))
-    #new_cubo.desplazamientod(2) #Está todo bien
-    #print('Desp d\n' + str(new_cubo))
-
-
+    new_cubo.updateEstado()
+    print(str(new_cubo))
 
     
 class CubeShell(cmd.Cmd):
@@ -77,6 +65,7 @@ def moverCubo(cubo, movimiento, fila):
         'd' : cubo.desplazamientod(fila)
     }
     movimientos.get(movimiento)
+    cubo.updateEstado()
     
 
 def initResources():

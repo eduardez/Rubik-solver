@@ -13,8 +13,13 @@ class Cubo():
             self.right = np.array(json_data['RIGHT'], np.uint8)
             self.up = np.array(json_data['UP'], np.uint8)
             self.front = np.array(json_data['FRONT'], np.uint8)
-            self.estado = Estado.Estado(self)
+            self.estado = None
 
+
+      def updateEstado(self):
+            self.estado = Estado.Estado(self)
+            
+            
       def desplazamientoB(self, fila):
             '''Moveremos la cara del cubo 90º, generando un cubo nuevo tras la modificación'''
             arr1 = copy.copy(self.left[fila])
@@ -159,8 +164,8 @@ class Cubo():
       
       def __str__(self):
             tam = len(self.back)
-            caras = '\nCubo de {0}x{0}x{0}'
-            caras = caras.format(tam) + '\n      [BACK]\n[LEFT][DOWN][RIGHT][UP]\n      [FRONT]\n\n'
+            stringCubo = '\nCubo de {0}x{0}x{0}'
+            stringCubo = stringCubo.format(tam) + '\n      [BACK]\n[LEFT][DOWN][RIGHT][UP]\n      [FRONT]\n\n'
             #Como la representacion sera vertical y maximo hay 3 
             #caras, pues el tamaño del cubo por el numero de caras
             espacios = '  ' * tam + ' '
@@ -171,7 +176,10 @@ class Cubo():
                    cubo_str += (str(self.left[i]) + str(self.down[i]) + str(self.right[i]) + str(self.up[i]) + '\n')
             for i in range(0, tam):
                    cubo_str += (espacios + str(self.front[i]) + '\n')
-            return caras + str(cubo_str)
+           
+            stringCubo += str(cubo_str)
+            stringCubo += '\nMD5: ' + self.estado.idHash
+            return stringCubo
         
       def getCuboSize(self):
             return len(self.back)
