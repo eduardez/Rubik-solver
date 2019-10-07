@@ -36,6 +36,16 @@ def createFolder(name):
         pass
 
 
+def emptyFolder(name):
+    for arch in os.listdir(name):
+        ruta = os.path.join(name, arch)
+        try:
+            if os.path.isfile(ruta):
+                os.unlink(ruta)
+            #elif os.path.isdir(file_path): shutil.rmtree(file_path)
+        except Exception as e:
+            print(e)
+
 # --------------- Utils de los archivos JSON ------------------
 def jsonRead(path):
     """Abre un archivo JSON y devuelve los datos del archivo.

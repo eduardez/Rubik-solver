@@ -140,7 +140,6 @@ class Cubo():
             self.front[fila] = arr1
             if fila==0:
                   self.down = np.rot90(self.down,1)
-
             #extremo drcho
             elif fila == len(self.back) -1:
                   self.up = np.rot90(self.up,3)
