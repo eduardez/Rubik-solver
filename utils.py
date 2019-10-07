@@ -1,10 +1,13 @@
 #!/usr/bin/python3
 # -*- coding: utf-8 -*-
 
-import os, json, time
+import os, json, datetime
 from pprint import pprint
 
-JSON_FOLDER_PATH = './res/json_files/'
+PATHS = {
+    'json_folder' : './res/json_files/',
+    'image_folder' : './res/img_cubes/'
+}
 
 # --------------- Utils generar cubos ------------------
 def generarCubo(tam):
@@ -13,8 +16,24 @@ def generarCubo(tam):
 
 # --------------- Utils generales ------------------
 def getTimestampedName(name):
-    td = time.strftime(r'[%H-%M-%S]', time.localtime())
-    return name + td
+    td = datetime.datetime.now().strftime("[%H-%M-%S.%f")[:-2]
+    td += ']'
+    return td + name 
+
+
+def createFolder(name):
+    """Crea una carpeta (si no existe) para contener
+    todos los archivos JSON generados.
+
+    Argumentos:
+        Nothing
+    Returns:
+        Nothing   
+    """
+    try:
+        os.makedirs(name)
+    except FileExistsError:
+        pass
 
 
 # --------------- Utils de los archivos JSON ------------------
@@ -44,7 +63,7 @@ def jsonWrite(name, json_data):
     Returns:
         Nothing.   
     """
-    with open(JSON_FOLDER_PATH + getTimestampedName(name) + '.json', 'w') as salida:
+    with open(PATHS.get('json_folder') + getTimestampedName(name) + '.json', 'w') as salida:
         salida.write(getJSONConFormato(json_data))
 
 
@@ -70,17 +89,4 @@ def getJSONConFormato(json):
     return(formatted_json)
 
 
-def jsonFolderCreate():
-    """Crea una carpeta (si no existe) para contener
-    todos los archivos JSON generados.
-
-    Argumentos:
-        Nothing
-    Returns:
-        Nothing   
-    """
-    try:
-        os.makedirs(JSON_FOLDER_PATH)
-    except FileExistsError:
-        pass
 
