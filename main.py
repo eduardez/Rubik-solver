@@ -23,7 +23,7 @@ class CubeShell(cmd.Cmd):
     
     def do_mezclar(self, arg):
         '''Mezclar el objeto cubo actual'''
-        moverCubo(cubo_actual, 'B', 1)
+        moverCubo(cubo_actual, 'L', 2)
         moverCubo(cubo_actual, 'l', 2)
         
         
@@ -41,16 +41,16 @@ class CubeShell(cmd.Cmd):
         
     
     def do_generar_imagenes(self, arg):
-        '''Generar imagenes de cada accion hecha con el cubo 
+        '''[EN DESARROLLO]\nGenerar imagenes de cada accion hecha con el cubo 
         Syntax: (Cubo)> generar_imagenes <true/false>
         '''
         # print('Valor actual: ' + str(generar_imagenes) + '\n')
-        try:
-            opt = eval(arg)
-            if isinstance(opt, bool):
-                generar_imagenes = opt
-        except NameError:
-            print('Error en los argumentos.')
+        # try:
+        #     opt = eval(arg)
+        #     if isinstance(opt, bool):
+        #         generar_imagenes = opt
+        # except NameError:
+        #     print('Error en los argumentos.')
         pass
         
         

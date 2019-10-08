@@ -127,13 +127,9 @@ class Cubo():
             #Moveremos la cara del cubo -90º, generando un cubo nuevo tras la modificación'''
             fila_prima = len(self.up) - fila -1
             arr1 = self.getColumna(self.left, fila_prima)
-            print(arr1)
             arr2 = copy.copy(self.back[fila_prima])
-            print(arr2)
             arr3 = self.getColumna(self.right, fila)
-            print(arr3)
             arr4 = copy.copy(self.front[fila])
-            print(arr4)
             self.setColumnaInversa(self.left,fila_prima,arr2)
             self.back[fila_prima] = arr3
             self.setColumnaInversa(self.right,fila,arr4)
