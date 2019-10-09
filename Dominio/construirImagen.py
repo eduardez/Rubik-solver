@@ -11,20 +11,20 @@ dimension = 3 #Dimension del cubo NxN
 padding = 20 #Tamaño de 'baldosa' y de separación
 
 #Abrir imagenes para formar el cubo
-img = Image.open('./formarCubo/background.png')
-img_yellow = Image.open('./formarCubo/yellow.png')
-img_orange = Image.open('./formarCubo/orange.png')
-img_green = Image.open('./formarCubo/green.png')
-img_white = Image.open('./formarCubo/white.png')
-img_blue = Image.open('./formarCubo/blue.png')
-img_red = Image.open('./formarCubo/red.png')
+img = Image.open('./res/FormarCubo/background.png')
+img_yellow = Image.open('./res/FormarCubo/yellow.png')
+img_orange = Image.open('./res/FormarCubo/orange.png')
+img_green = Image.open('./res/FormarCubo/green.png')
+img_white = Image.open('./res/FormarCubo/white.png')
+img_blue = Image.open('./res/FormarCubo/blue.png')
+img_red = Image.open('./res/FormarCubo/red.png')
 
 
 def crearFondo(dimension, padding):
     ancho = padding * dimension * 5 +50
     largo = padding * dimension * 4+50
     img=Image.new('RGBA', (ancho,largo), (0,0,0,0))
-    img.save('./formarCubo/background.png')
+    img.save('./res/FormarCubo/background.png')
 
 
 def switch_caracter(caracter, posX, posY):

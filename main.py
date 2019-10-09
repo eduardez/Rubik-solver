@@ -36,7 +36,7 @@ class CubeShell(cmd.Cmd):
     def do_borrar_res(self, arg):   
         '''Vaciar las carpetas de recursos (./res)'''    
         utils.emptyFolder(utils.PATHS.get('image_folder'))
-        utils.emptyFolder(utils.PATHS.get('json_folder'))
+        #utils.emptyFolder(utils.PATHS.get('json_folder'))
         
     
     def do_generar_imagenes(self, arg):
