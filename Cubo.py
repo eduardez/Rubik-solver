@@ -1,8 +1,7 @@
 #!/usr/bin/python3
 # -*- coding: utf-8 -*-
 import utils, copy
-import numpy as np
-import Estado
+import numpy as np, hashlib
 
 class Cubo():
       """Objeto cubo a partir de un objeto JSON (add doc)"""
@@ -13,11 +12,12 @@ class Cubo():
             self.right = np.array(json_data['RIGHT'], np.uint8)
             self.up = np.array(json_data['UP'], np.uint8)
             self.front = np.array(json_data['FRONT'], np.uint8)
-            self.estado = None
-
-
+            self.idHash = self.updateEstado() #Id del cubo (Hash)
+        
+        
       def updateEstado(self):
-            self.estado = Estado.Estado(self)
+            h = hashlib.md5(self.cuboToStr().encode('utf-8'))
+            self.idHash = h.hexdigest()
             
             
       def desplazamientoB(self, fila):
@@ -173,7 +173,7 @@ class Cubo():
                    cubo_str += (espacios + str(self.front[i]) + '\n')
            
             stringCubo += str(cubo_str)
-            stringCubo += '\nMD5: ' + self.estado.idHash
+            stringCubo += '\nMD5: ' + self.idHash
             stringCubo += '\nID: ' + self.cuboToStr()
             return stringCubo
         

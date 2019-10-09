@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 # -*- coding: utf-8 -*-
 
-import utils, copy, cmd
+import utils, copy, cmd, sys
 import FormarCubo.construirImagen as GenerarImagen
 import GUI.VIEW_rubiks as Gui
 from Cubo import Cubo as Objeto_Cubo
@@ -9,8 +9,7 @@ from Cubo import Cubo as Objeto_Cubo
 
 
 cubo_actual = Objeto_Cubo(utils.jsonRead('cuboSolucionado.json'))
-generar_imagenes = True
-
+generar_imagenes = False
     
 class CubeShell(cmd.Cmd):
     intro = 'Shell del cubo de Rubik. ? o Help para ayuda\n'
@@ -24,7 +23,7 @@ class CubeShell(cmd.Cmd):
     def do_mezclar(self, arg):
         '''Mezclar el objeto cubo actual'''
         moverCubo(cubo_actual, 'L', 2)
-        moverCubo(cubo_actual, 'l', 2)
+        moverCubo(cubo_actual, 'b', 2)
         
         
     def do_probar_giros(self,arg):        
@@ -53,10 +52,18 @@ class CubeShell(cmd.Cmd):
         #     print('Error en los argumentos.')
         pass
         
+    def do_test(self,arg):
+        
+        hacerTest(cubo_actual, 0)
+        
         
     def do_iniciar_gui(self, arg):
         '''Iniciar entorno grafico (En construccion)'''
         Gui.start()    
+        
+    def do_muerete(self, arg):
+        print('Adieoooooooooooooooooooooooooooooooooos........')
+        sys.exit(0)
 
 
 def moverCubo(cubo, movimiento, fila):
@@ -71,6 +78,14 @@ def moverCubo(cubo, movimiento, fila):
         GenerarImagen.createImage(cubo)
     
 
+def hacerTest(cubo, numId):
+    new_cubo = copy.deepcopy(cubo)
+    numId += 1
+    print(str(numId) + '\n')
+    moverCubo(new_cubo, 'L', 0)
+    hacerTest(new_cubo, numId)
+    
+    
 def initResources():
     utils.createFolder(utils.PATHS.get('image_folder'))
     utils.createFolder(utils.PATHS.get('json_folder'))
