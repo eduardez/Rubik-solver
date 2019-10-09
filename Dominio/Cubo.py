@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 # -*- coding: utf-8 -*-
-import utils, copy
+import Dominio.utils, copy
 import numpy as np, hashlib
 
 class Cubo():

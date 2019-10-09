@@ -1,14 +1,14 @@
 #!/usr/bin/python3
 # -*- coding: utf-8 -*-
 
-import utils, copy, cmd, sys
-import FormarCubo.construirImagen as GenerarImagen
-import GUI.VIEW_rubiks as Gui
-from Cubo import Cubo as Objeto_Cubo
+import Dominio.utils as utils, copy, cmd, sys
+import Dominio.construirImagen as GenerarImagen
+import Presentacion.VIEW_rubiks as Gui
+from Dominio.Cubo import Cubo as Objeto_Cubo
 
 
 
-cubo_actual = Objeto_Cubo(utils.jsonRead('cuboSolucionado.json'))
+cubo_actual = Objeto_Cubo(utils.jsonRead('res/json_files/cuboSolucionado.json'))
 generar_imagenes = False
     
 class CubeShell(cmd.Cmd):

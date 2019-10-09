@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-import GUI.CONTROLLER_rubiks as Controller, sys
+import Presentacion.CONTROLLER_rubiks as Controller, sys
 
 
 class MainFrame(object):

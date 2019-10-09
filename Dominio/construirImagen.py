@@ -4,8 +4,8 @@
 #pip install pillow
 
 from PIL import Image
-from Cubo import Cubo
-import utils
+from Dominio.Cubo import Cubo
+import Dominio.utils
 
 dimension = 3 #Dimension del cubo NxN
 padding = 20 #Tamaño de 'baldosa' y de separación
