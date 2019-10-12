@@ -77,7 +77,7 @@ def construirCubo(dimension, padding, id):
             posY = cubesize + (int) (cubesize/2)
             posInicial = posX
 
-    img.save('./' + utils.PATHS.get('image_folder') + '/' + utils.getTimestampedName('cuboFormado') + '.png')
+    img.save('./' + Dominio.utils.PATHS.get('img_cubes') + '/' + Dominio.utils.getTimestampedName('cuboFormado') + '.png')
     
     
 def createImage(cubo):

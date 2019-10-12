@@ -32,10 +32,10 @@ class Cubo():
             self.up[fila] = arr3
             #extremo izq           
             if fila == 0:
-                  self.back = np.rot90(self.back, 1)
+                  self.back = np.rot90(self.back, 3)
 
             elif fila == len(self.back) -1 :   
-                  self.front = np.rot90(self.front, 3)
+                  self.front = np.rot90(self.front, 1)
             #centros
             else: 
                   pass

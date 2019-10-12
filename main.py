@@ -18,12 +18,35 @@ class CubeShell(cmd.Cmd):
     def do_ver_cubo(self, arg):
         '''Imprimir el objeto cubo actual'''
         print(str(cubo_actual))
+    
+    def do_mezclar_prueba(self, arg):
+        '''Prueba del cubo 10x10 con los movimientos que nos proporcionan en el JSON'''
+        cubo_actual = Objeto_Cubo(utils.jsonRead('res/json_files/cubo10x10.json'))
+        moverCubo(cubo_actual, 'l', 3)
+        print(str(cubo_actual) + '\nl3')
+        moverCubo(cubo_actual, 'D', 1)
+        print(str(cubo_actual)+ '\nD1')
+        moverCubo(cubo_actual, 'l', 1)
+        print(str(cubo_actual)+ '\nl1')
+        moverCubo(cubo_actual, 'd', 0)
+        print(str(cubo_actual)+ '\nd0')
+        moverCubo(cubo_actual, 'B', 0)
+        print(str(cubo_actual)+'\nB0')
+        moverCubo(cubo_actual, 'b', 5)
+        print(str(cubo_actual)+'\nb5')
+        moverCubo(cubo_actual, 'l', 2)
+        print(str(cubo_actual)+'\nl2')
+        moverCubo(cubo_actual, 'd', 1)
+        print(str(cubo_actual)+'\nd1')
 
     
     def do_mezclar(self, arg):
         '''Mezclar el objeto cubo actual'''
-        moverCubo(cubo_actual, 'L', 2)
-        moverCubo(cubo_actual, 'b', 2)
+        moverCubo(cubo_actual, 'l', 1)
+
+
+        
+       # moverCubo(cubo_actual, 'b', 2)
         
         
     def do_probar_giros(self,arg):        
