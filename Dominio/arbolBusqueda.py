@@ -1,17 +1,19 @@
 #!/usr/bin/python3
 # -*- coding: utf-8 -*-
 
+#https://www.quora.com/Whose-time-complexity-is-better-an-array-or-a-linked-list
+#https://pandas.pydata.org/pandas-docs/stable/reference/series.html
+# - - - -- - - - -  -- - - -- --- - -  - -
+#Se ha decidido usar una lista porque aunque es más lento a la hora de buscar un nodo en memoria
+#no hay que volver a colocar todos los elementos a la derecha de donde se modifique
+
+
 #import pandas as pd
 
 class arbolBusqueda:
-    #https://www.quora.com/Whose-time-complexity-is-better-an-array-or-a-linked-list
-    #https://pandas.pydata.org/pandas-docs/stable/reference/series.html
-    
-    
-    def crearFrontera(self):
-        frontera = [] #Se ha decidido usar una lista porque aunque es más lento a la hora de buscar un nodo en memoria
-                                #no hay que volver a colocar todos los elementos a la derecha de donde se modifique
-        pass
+
+    def __init__(self):
+        self.frontera = []
 
     def insertar(self, nodoArbol, frontera):
         pass

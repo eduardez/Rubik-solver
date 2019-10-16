@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 # -*- coding: utf-8 -*-
 
-import Dominio.utils as utils, copy, cmd, sys
+import Dominio.utils as utils, copy, cmd, sys, random
 import Dominio.construirImagen as GenerarImagen
 import Presentacion.VIEW_rubiks as Gui
 from Dominio.Cubo import Cubo as Objeto_Cubo
@@ -42,12 +42,13 @@ class CubeShell(cmd.Cmd):
     
     def do_mezclar(self, arg):
         '''Mezclar el objeto cubo actual'''
-        moverCubo(cubo_actual, 'l', 1)
-
-
-        
-       # moverCubo(cubo_actual, 'b', 2)
-        
+        max = 1
+        caras = ['B','b','L','l','D','d']
+        for x in range(0, max):
+            cara = random.choice(caras)
+            fila = random.randrange(cubo_actual.getCuboSize())
+            print('\nMovimiento: ' + str(cara) + str(fila))
+            moverCubo(cubo_actual, cara, fila)
         
     def do_probar_giros(self,arg):        
         new_cubo = copy.deepcopy(cubo_actual) 
