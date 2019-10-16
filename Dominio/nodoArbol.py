@@ -3,14 +3,14 @@
 
 import random
 import Dominio.Cubo
-class nodoArbol:
 
+class nodoArbol:
     def __init__(self, cubo):
         self.estado = cubo
         self.coste = 1
         self.accion = ''
         self.profundidad = 0
-        self.f = random.randint()
+        self.f = random.random() * 1000
        # self.f = self.getF()
 
 
@@ -31,10 +31,9 @@ class nodoArbol:
 
     def calcularHeuristica(self):
         pass
-
-    def provocarExcepcion(self, cubo):
-        while(1):
-            nodoArbol(self,cubo)
+    
+    def __str__(self):
+        return ('\nID: ' + str(self.estado.idHash) + '\nF: ' + str(self.f) + '\n')
 
  
 

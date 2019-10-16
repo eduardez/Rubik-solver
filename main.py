@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 # -*- coding: utf-8 -*-
 
-import Dominio.utils as utils, copy, cmd, sys, random
+import Dominio.utils as utils, copy, cmd, sys, random, Dominio.nodoArbol as Nodo
 import Dominio.construirImagen as GenerarImagen
 import Presentacion.VIEW_rubiks as Gui
 from Dominio.Cubo import Cubo as Objeto_Cubo
@@ -38,17 +38,10 @@ class CubeShell(cmd.Cmd):
         print(str(cubo_actual)+'\nl2')
         moverCubo(cubo_actual, 'd', 1)
         print(str(cubo_actual)+'\nd1')
-
     
     def do_mezclar(self, arg):
         '''Mezclar el objeto cubo actual'''
-        max = 1
-        caras = ['B','b','L','l','D','d']
-        for x in range(0, max):
-            cara = random.choice(caras)
-            fila = random.randrange(cubo_actual.getCuboSize())
-            print('\nMovimiento: ' + str(cara) + str(fila))
-            moverCubo(cubo_actual, cara, fila)
+        mezclar_aleatorio(1)
         
     def do_probar_giros(self,arg):        
         new_cubo = copy.deepcopy(cubo_actual) 
@@ -77,9 +70,7 @@ class CubeShell(cmd.Cmd):
         pass
         
     def do_test(self,arg):
-        
-        hacerTest(cubo_actual, 0)
-        
+        hacerTest(cubo_actual)
         
     def do_iniciar_gui(self, arg):
         '''Iniciar entorno grafico (En construccion)'''
@@ -88,6 +79,16 @@ class CubeShell(cmd.Cmd):
     def do_muerete(self, arg):
         print('Adieoooooooooooooooooooooooooooooooooos........')
         sys.exit(0)
+
+
+
+def mezclar_aleatorio(num_movimientos):
+    tipoMov = ['B','b','L','l','D','d']
+    for x in range(0, num_movimientos):
+        cara = random.choice(tipoMov)
+        fila = random.randrange(cubo_actual.getCuboSize())
+        #print('\nMovimiento: ' + str(cara) + str(fila))
+        moverCubo(cubo_actual, cara, fila)
 
 
 def moverCubo(cubo, movimiento, fila):
@@ -102,13 +103,15 @@ def moverCubo(cubo, movimiento, fila):
         GenerarImagen.createImage(cubo)
     
 
-def hacerTest(cubo, numId):
-    new_cubo = copy.deepcopy(cubo)
-    numId += 1
-    print(str(numId) + '\n')
-    moverCubo(new_cubo, 'L', 0)
-    hacerTest(new_cubo, numId)
-    
+def hacerTest(cubo):
+    count = 0
+    while 1:
+        new_cubo = copy.deepcopy(cubo)  
+        nodo = Nodo.nodoArbol(new_cubo)
+       # print(str(nodo) + '\n')
+        mezclar_aleatorio(1)
+        count += 1
+        
     
 def initResources():
     utils.createFolder(utils.PATHS.get('image_folder'))
