@@ -1,15 +1,12 @@
 #!/usr/bin/python3
 # -*- coding: utf-8 -*-
 
-import Dominio.utils as utils, copy, cmd, sys, random, Dominio.nodoArbol as Nodo
-import Dominio.construirImagen as GenerarImagen
+import Dominio.utils as utils, cmd, sys
 import Presentacion.VIEW_rubiks as Gui
 from Dominio.Cubo import Cubo as Objeto_Cubo
 
 
-
 cubo_actual = Objeto_Cubo(utils.jsonRead('res/json_files/cuboSolucionado.json'))
-generar_imagenes = False
     
 class CubeShell(cmd.Cmd):
     intro = 'Shell del cubo de Rubik. ? o Help para ayuda\n'
@@ -19,36 +16,32 @@ class CubeShell(cmd.Cmd):
         '''Imprimir el objeto cubo actual'''
         print(str(cubo_actual))
     
+    
     def do_mezclar_prueba(self, arg):
         '''Prueba del cubo 10x10 con los movimientos que nos proporcionan en el JSON'''
         cubo_actual = Objeto_Cubo(utils.jsonRead('res/json_files/cubo10x10.json'))
-        moverCubo(cubo_actual, 'l', 3)
+        utils.moverCubo(cubo_actual, 'l', 3)
         print(str(cubo_actual) + '\nl3')
-        moverCubo(cubo_actual, 'D', 1)
+        utils.moverCubo(cubo_actual, 'D', 1)
         print(str(cubo_actual)+ '\nD1')
-        moverCubo(cubo_actual, 'l', 1)
+        utils.moverCubo(cubo_actual, 'l', 1)
         print(str(cubo_actual)+ '\nl1')
-        moverCubo(cubo_actual, 'd', 0)
+        utils.moverCubo(cubo_actual, 'd', 0)
         print(str(cubo_actual)+ '\nd0')
-        moverCubo(cubo_actual, 'B', 0)
+        utils.moverCubo(cubo_actual, 'B', 0)
         print(str(cubo_actual)+'\nB0')
-        moverCubo(cubo_actual, 'b', 5)
+        utils.moverCubo(cubo_actual, 'b', 5)
         print(str(cubo_actual)+'\nb5')
-        moverCubo(cubo_actual, 'l', 2)
+        utils.moverCubo(cubo_actual, 'l', 2)
         print(str(cubo_actual)+'\nl2')
-        moverCubo(cubo_actual, 'd', 1)
+        utils.moverCubo(cubo_actual, 'd', 1)
         print(str(cubo_actual)+'\nd1')
+    
     
     def do_mezclar(self, arg):
         '''Mezclar el objeto cubo actual'''
-        mezclar_aleatorio(1)
-        
-    def do_probar_giros(self,arg):        
-        new_cubo = copy.deepcopy(cubo_actual) 
-        new_cubo.desplazamientob(2) #Está todo bien
-        new_cubo.updateEstado()
-        print(str(new_cubo))
-    
+        utils.mezclar_aleatorio(1, cubo_actual)
+
     
     def do_borrar_res(self, arg):   
         '''Vaciar las carpetas de recursos (./res)'''    
@@ -70,7 +63,7 @@ class CubeShell(cmd.Cmd):
         pass
         
     def do_test(self,arg):
-        hacerTest(cubo_actual)
+        utils.hacerTest(cubo_actual)
         
     def do_iniciar_gui(self, arg):
         '''Iniciar entorno grafico (En construccion)'''
@@ -82,37 +75,6 @@ class CubeShell(cmd.Cmd):
 
 
 
-def mezclar_aleatorio(num_movimientos):
-    tipoMov = ['B','b','L','l','D','d']
-    for x in range(0, num_movimientos):
-        cara = random.choice(tipoMov)
-        fila = random.randrange(cubo_actual.getCuboSize())
-        #print('\nMovimiento: ' + str(cara) + str(fila))
-        moverCubo(cubo_actual, cara, fila)
-
-
-def moverCubo(cubo, movimiento, fila):
-    if movimiento == 'B' : cubo.desplazamientoB(fila)
-    if movimiento == 'b' : cubo.desplazamientob(fila)
-    if movimiento == 'L' : cubo.desplazamientoL(fila)
-    if movimiento == 'l' : cubo.desplazamientol(fila)
-    if movimiento == 'D' : cubo.desplazamientoD(fila)
-    if movimiento == 'd' : cubo.desplazamientod(fila)
-    cubo.updateEstado()
-    if generar_imagenes:
-        GenerarImagen.createImage(cubo)
-    
-
-def hacerTest(cubo):
-    count = 0
-    while 1:
-        new_cubo = copy.deepcopy(cubo)  
-        nodo = Nodo.nodoArbol(new_cubo)
-       # print(str(nodo) + '\n')
-        mezclar_aleatorio(1)
-        count += 1
-        
-    
 def initResources():
     utils.createFolder(utils.PATHS.get('image_folder'))
     utils.createFolder(utils.PATHS.get('json_folder'))
