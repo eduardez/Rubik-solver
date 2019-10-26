@@ -1,7 +1,9 @@
 #!/usr/bin/python3
 # -*- coding: utf-8 -*-
 
-import os, json, datetime
+import os, json, datetime, random, threading, copy
+import Dominio.nodoArbol as Nodo
+from Dominio.construirImagen import createImage
 from pprint import pprint
 
 PATHS = {
@@ -9,9 +11,67 @@ PATHS = {
     'image_folder' : './res/img_cubes/'
 }
 
-# --------------- Utils generar cubos ------------------
+generar_imagenes = False
+
+
+# --------------- Utils cubos ------------------
 def generarCubo(tam):
     pass
+
+
+def mezclar_aleatorio(num_movimientos, cubo):
+    tipoMov = ['B','b','L','l','D','d']
+    for x in range(0, num_movimientos):
+        cara = random.choice(tipoMov)
+        fila = random.randrange(cubo.getCuboSize())
+        #print('\nMovimiento: ' + str(cara) + str(fila))
+        moverCubo(cubo, cara, fila)
+
+def moverCubo(cubo, movimiento, fila):
+    if movimiento == 'B' : cubo.desplazamientoB(fila)
+    if movimiento == 'b' : cubo.desplazamientob(fila)
+    if movimiento == 'L' : cubo.desplazamientoL(fila)
+    if movimiento == 'l' : cubo.desplazamientol(fila)
+    if movimiento == 'D' : cubo.desplazamientoD(fila)
+    if movimiento == 'd' : cubo.desplazamientod(fila)
+    cubo.updateEstado()
+    if generar_imagenes:
+        createImage(cubo)
+    
+# --------------- Utils petar memoria ------------
+
+def hacerTest(cubo):
+    import psutil, time
+    arbolada = []
+    # maxThreads = 50
+    # for x in range(0, maxThreads):
+    #     thread_petar = threading.Thread(target=petar, args=(arbolada, cubo)).start()
+    thread_petar = threading.Thread(target=petar, args=(arbolada, cubo)).start()
+    
+    #mem = psutil.memory_info().rss
+    while 1:    
+        print(f'''------------------------------
+    Numero de nodos: {len(arbolada)} 
+    + Memoria Virtual > {'null'}
+    + CPU >  Carga: {'s'}, Frec: {psutil.cpu_freq()}, Uso: {psutil.cpu_percent()}
+            ''')
+        time.sleep(2.0)
+        
+def petar(arbolada, cubo):
+    while 1:
+        new_cubo = copy.deepcopy(cubo)  
+        nodo = Nodo.nodoArbol(new_cubo)
+        #print(str(len(arbolada)) + '\n')
+        mezclar_aleatorio(1, new_cubo)
+        arbolada.append(new_cubo)
+        for x in range(0, cubo.getCuboSize()):
+            moverCubo(cubo, 'B', x)
+            moverCubo(cubo, 'b', x)
+            moverCubo(cubo, 'D', x)
+            moverCubo(cubo, 'd', x)
+            moverCubo(cubo, 'L', x)
+            moverCubo(cubo, 'l', x)
+        
 
 
 # --------------- Utils generales ------------------
@@ -45,6 +105,8 @@ def emptyFolder(name):
             #elif os.path.isdir(file_path): shutil.rmtree(file_path)
         except Exception as e:
             print(e)
+
+
 
 # --------------- Utils de los archivos JSON ------------------
 def jsonRead(path):

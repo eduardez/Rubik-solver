@@ -13,6 +13,8 @@ class Cubo():
             self.up = np.array(json_data['UP'], np.uint8)
             self.front = np.array(json_data['FRONT'], np.uint8)
             self.idHash = self.updateEstado() #Id del cubo (Hash)
+           
+            self.boorar = np.zeros(765421)
         
         
       def updateEstado(self):
