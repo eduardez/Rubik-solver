@@ -1,6 +1,10 @@
+import numpy as np, hashlib
+import Dominio.NodoArbol as NodoArbol
+
 class Frontera:
     def __init__(self):
-        self.frontera = []
+        self.frontera = np.array(dtype=NodoArbol)
+        # self.frontera = []
 
     def insert(self, NodoArbol):
         i = 0

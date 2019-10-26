@@ -69,7 +69,7 @@ class CubeShell(cmd.Cmd):
         '''Iniciar entorno grafico (En construccion)'''
         Gui.start()    
         
-    def do_muerete(self, arg):
+    def do_exit(self, arg):
         print('Adieoooooooooooooooooooooooooooooooooos........')
         sys.exit(0)
 
