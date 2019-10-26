@@ -3,7 +3,7 @@
 import Dominio.utils, copy
 import numpy as np, hashlib
 
-class Cubo():
+class Cubo:
       """Objeto cubo a partir de un objeto JSON (add doc)"""
       def __init__(self, json_data):
             self.back = np.array(json_data['BACK'], np.uint8)
