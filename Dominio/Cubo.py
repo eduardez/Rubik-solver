@@ -39,6 +39,7 @@ class Cubo():
             #centros
             else: 
                   pass
+            self.updateEstado()
           
       def desplazamientob(self, fila):
             #'''Moveremos la cara del cubo 90º, generando un cubo nuevo tras la modificación'''
@@ -60,6 +61,7 @@ class Cubo():
             #centros
             else: 
                   pass
+            self.updateEstado()
            
       def desplazamientoL(self, fila):
             fila_prima = len(self.up) - fila - 1#Indice de la cara UP ya que el posicionamiento va a la inversa del resto de las caras
@@ -80,6 +82,7 @@ class Cubo():
                   self.right = np.rot90(self.right,3)
             else:
                   pass
+            self.updateEstado()
 
       def desplazamientol(self, fila):
                #Moveremos la cara del cubo -90º, generando un cubo nuevo tras la modificación'''
@@ -101,6 +104,7 @@ class Cubo():
                   self.right = np.rot90(self.right,1)
             else:
                   pass
+            self.updateEstado()
 
       def desplazamientoD(self, fila):
             fila_prima = len(self.up) - fila - 1#Indice de la cara UP ya que el posicionamiento va a la inversa del resto de las caras
@@ -122,6 +126,7 @@ class Cubo():
             #centros
             else:
                   pass
+            self.updateEstado()
 
       def desplazamientod(self, fila):
             #Moveremos la cara del cubo -90º, generando un cubo nuevo tras la modificación'''
@@ -142,6 +147,7 @@ class Cubo():
             #centros
             else:
                   pass
+            self.updateEstado()
       
       def getColumna(self, cara, fila):
             column = []
