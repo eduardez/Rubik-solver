@@ -16,6 +16,14 @@ class CubeShell(cmd.Cmd):
         '''Imprimir el objeto cubo actual'''
         print(str(cubo_actual))
     
+    def do_prueba_rendimiento(self, args):
+        '''Pruebas de rendimiento con diferentes estructuras de datos.
+        Estructuras: Cola, List (python), Array (numpy)'''
+        arr_nodos = [10, 100, 1000, 10000, 100000, 1000000, 10000000, 100000000]
+        for num_nodos in arr_nodos:
+            print('\n---------------------------------\n' + str(num_nodos) + ' nodos.')
+            utils.pruebaRendimiento(num_nodos,cubo_actual)
+    
     
     def do_mezclar_prueba(self, arg):
         '''Prueba del cubo 10x10 con los movimientos que nos proporcionan en el JSON'''
@@ -70,9 +78,8 @@ class CubeShell(cmd.Cmd):
         Gui.start()    
         
     def do_exit(self, arg):
-        print('Adieoooooooooooooooooooooooooooooooooos........')
+        print('Adioooooooooooooooooooooooooooooooooos........')
         sys.exit(0)
-
 
 
 def initResources():

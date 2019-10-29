@@ -1,8 +1,8 @@
 #!/usr/bin/python3
 # -*- coding: utf-8 -*-
 
-import os, json, datetime, random, threading, copy
-import Dominio.nodoArbol as Nodo
+import os, json, datetime, random, threading, copy, time
+import Dominio.NodoArbol as Nodo
 from Dominio.construirImagen import createImage
 from pprint import pprint
 
@@ -47,7 +47,6 @@ def hacerTest(cubo):
     # for x in range(0, maxThreads):
     #     thread_petar = threading.Thread(target=petar, args=(arbolada, cubo)).start()
     thread_petar = threading.Thread(target=petar, args=(arbolada, cubo)).start()
-    
     #mem = psutil.memory_info().rss
     while 1:    
         print(f'''------------------------------
@@ -71,8 +70,57 @@ def petar(arbolada, cubo):
             moverCubo(cubo, 'd', x)
             moverCubo(cubo, 'L', x)
             moverCubo(cubo, 'l', x)
-        
+   
+   
+def pruebaRendimiento(num_nodos, cubo):
+    tiempos = []
+    t_ini = time.time()
+    pila = []
+    for x in range(num_nodos):
+        new_cubo = copy.deepcopy(cubo)  
+        mezclar_aleatorio(random.randint(0,cubo.getCuboSize()), new_cubo)
+        pila.append(new_cubo)
+    t_total = time.time() - t_ini
+    tiempos.append(('Pila',t_total))
+    #--------------------------- 
+    t_ini = time.time()
+    lista = []
+    for x in range(num_nodos):
+        new_cubo = copy.deepcopy(cubo)  
+        mezclar_aleatorio(random.randint(0,cubo.getCuboSize()), new_cubo)
+        lista.insert(x, new_cubo)
+    t_total = time.time() - t_ini
+    tiempos.append(('Lista',t_total))
+    #--------------------------- 
+    t_ini = time.time()
+    import numpy as np
+    numpyarray = np.asarray([])
+    if not num_nodos >= 1000000:
+        for x in range(num_nodos):
+            new_cubo = copy.deepcopy(cubo)  
+            mezclar_aleatorio(random.randint(0,cubo.getCuboSize()), new_cubo)
+            numpyarray = np.append(numpyarray, new_cubo)
+        t_total = time.time() - t_ini
+    else:
+         t_total = 999999.0
+    tiempos.append(('NumPy Array',t_total))
+    printTestResult(tiempos, num_nodos)
+    printBest(tiempos)
 
+
+def printTestResult(tiempos, num_nodos):
+    for estructura in tiempos:
+        print(f'     +Tipo de estructura: {estructura[0]}, tiempo de insercion: {estructura[1]}s') 
+
+
+def printBest(tiempos):
+    mejor = 999999999999
+    indice = 12
+    for index in range(0, len(tiempos) -1):
+        if tiempos[index][1] < mejor:
+            mejor = tiempos[index][1]
+            indice = index
+    print('\nMejor resultado: ' + tiempos[indice][0] + ', %.5fs' % (tiempos[indice][1]))
 
 # --------------- Utils generales ------------------
 def getTimestampedName(name):

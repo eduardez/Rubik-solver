@@ -12,10 +12,7 @@ class Cubo:
             self.right = np.array(json_data['RIGHT'], np.uint8)
             self.up = np.array(json_data['UP'], np.uint8)
             self.front = np.array(json_data['FRONT'], np.uint8)
-            self.idHash = self.updateEstado() #Id del cubo (Hash)
-           
-            self.boorar = np.zeros(765421)
-        
+            self.idHash = self.updateEstado() #Id del cubo (Hash)        
         
       def updateEstado(self):
             h = hashlib.md5(self.cuboToStr().encode('utf-8'))
@@ -56,10 +53,8 @@ class Cubo:
             self.up[fila] = arr1
             if fila == 0: 
                   self.back = np.rot90(self.back,1)
-
             elif fila == len(self.back) - 1 :
                   self.front = np.rot90(self.front, 1)
-
             #centros
             else: 
                   pass
@@ -89,7 +84,6 @@ class Cubo:
       def desplazamientol(self, fila):
                #Moveremos la cara del cubo -90º, generando un cubo nuevo tras la modificación'''
             fila_prima = len(self.up) - fila - 1#Indice de la cara UP ya que el posicionamiento va a la inversa del resto de las caras
-            
             arr1 = self.getColumna(self.up, fila_prima)
             arr2 = self.getColumna(self.front,fila)
             arr3 = self.getColumna(self.down,fila)
@@ -124,7 +118,6 @@ class Cubo:
             #extremo drcho
             elif fila == len(self.back) -1:
                   self.up = np.rot90(self.up,1)
-
             #centros
             else:
                   pass
@@ -179,7 +172,6 @@ class Cubo:
                    cubo_str += (str(self.left[i]) + str(self.down[i]) + str(self.right[i]) + str(self.up[i]) + '\n')
             for i in range(0, tam):
                    cubo_str += (espacios + str(self.front[i]) + '\n')
-           
             stringCubo += str(cubo_str)
             stringCubo += '\nMD5: ' + self.idHash
             stringCubo += '\nID: ' + self.cuboToStr()
@@ -204,16 +196,5 @@ class Cubo:
                   for i in range(0, self.getCuboSize()):
                         for j in range(0, self.getCuboSize()):
                               string += str(face[i][j])
-                              #me estoy dando cuenta de que este metodo no es demasiado eficiente xD
+                              #me estoy dando cuenta de que este metodo no es demasiado eficiente
             return string
-
-        
-# #Posición-Número
-# '''
-# Back = 3
-# Left = 4
-# Down = 1
-# Right = 5
-# Up = 0
-# Front = 2
-# '''
