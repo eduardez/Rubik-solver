@@ -6,6 +6,7 @@ import Dominio.NodoArbol as NodoArbol
 from Dominio.construirImagen import createImage
 from Dominio.Frontera import Frontera
 from Dominio.Problema import Problema
+from Dominio.EspacioEstados import EspacioEstados
 from pprint import pprint
 
 PATHS = {
@@ -18,14 +19,40 @@ generar_imagenes = False
 def busquedaIncremental(Problema, estrategia, profMax, profInc):
     profActual = profInc
     solucion = []
-    while solucion == [] and profActual<=profMax:
-        solucion = busquedaAcotada(Problema,estrategia,profActual)
+    while solucion  and profActual<=profMax:
+        solucion = busquedaAcotada(Problema,estrategia,profActual, profMax)
         profActual = profActual + profInc
     return solucion 
 
-def busquedaAcotada(Problema, estrategia, profActual):
+def busquedaAcotada(Problema, estrategia, profActual, profMax):
     frontera = Frontera()
     NodoArbolActual = NodoArbol(None, Problema.estadoInicial,0,0,0)
+    frontera.insert(NodoArbolActual)
+    solucion = False
+    '''Si no hay solución y la frontera está vacía se detiene
+    si hay solución y la frontera sigue llena se para la ejecución'''
+    while solucion == [] and not(frontera.isEmpty):
+        NodoArbolActual = frontera.delete
+        if Problema.esObjetivo:
+            solucion = True
+        else:
+            listaSucesores = EspacioEstados.sucesores(NodoArbolActual.cubo)
+            listaNodos = NodoArbol.crearListaNodosArbol(listaSucesores,NodoArbolActual,profMax,estrategia)
+            frontera.insertarLista(listaNodos)
+
+        
+def crearListaNodosArbol(listaSucesores,NodoArbolActual,profMax,estrategia):
+    listaNodosArbol = []
+    for sucesor in listaSucesores:
+        nuevoNodoArbol = NodoArbol(NodoArbolActual, sucesor[1], NodoArbolActual.profundidad + 1, NodoArbolActual.coste + sucesor[2], 0)
+        if estrategia == "anchura":
+            nuevoNodoArbol.f = nuevoNodoArbol.profundidad
+        elif estrategia == "profundidad" or estrategia == "profundidad_iterativa":
+            nuevoNodoArbol.f = -(nuevoNodoArbol.profundidad)
+        elif estrategia == "costo":
+            nuevoNodoArbol.f = nuevoNodoArbol.coste
+    return listaNodosArbol
+
 
 # --------------- Utils cubos ------------------
 def generarCubo(tam):

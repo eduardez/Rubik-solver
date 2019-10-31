@@ -6,13 +6,14 @@ class Frontera:
         self.frontera = np.array(dtype=NodoArbol)
         # self.frontera = []
 
-    def insert(self, NodoArbol):
+    def insertarLista(self, listaNodos):
         i = 0
-        for hoja in self.frontera:
-            if  NodoArbol.f <= hoja.f:
-                self.frontera.insert(NodoArbol, i)
-                break
-            i=i+1
+        for nodo in listaNodos:
+            for hoja in self.frontera:
+                if  NodoArbol.f <= hoja.f:
+                    self.frontera.insert(NodoArbol, i)
+                    break
+                i=i+1
         # if hoja.estado.identificador == NodoArbol.estado.identificador :
         #     self.frontera.pop(i)
 
