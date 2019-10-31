@@ -2,8 +2,10 @@
 # -*- coding: utf-8 -*-
 
 import os, json, datetime, random, threading, copy, time
-import Dominio.NodoArbol as Nodo
+import Dominio.NodoArbol as NodoArbol
 from Dominio.construirImagen import createImage
+from Dominio.Frontera import Frontera
+from Dominio.Problema import Problema
 from pprint import pprint
 
 PATHS = {
@@ -12,7 +14,18 @@ PATHS = {
 }
 
 generar_imagenes = False
+# --------------- Busquedas Incremental ------------------
+def busquedaIncremental(Problema, estrategia, profMax, profInc):
+    profActual = profInc
+    solucion = []
+    while solucion == [] and profActual<=profMax:
+        solucion = busquedaAcotada(Problema,estrategia,profActual)
+        profActual = profActual + profInc
+    return solucion 
 
+def busquedaAcotada(Problema, estrategia, profActual):
+    frontera = Frontera()
+    NodoArbolActual = NodoArbol(None, Problema.estadoInicial,0,0,0)
 
 # --------------- Utils cubos ------------------
 def generarCubo(tam):
@@ -59,7 +72,7 @@ def hacerTest(cubo):
 def petar(arbolada, cubo):
     while 1:
         new_cubo = copy.deepcopy(cubo)  
-        nodo = Nodo.nodoArbol(new_cubo)
+        nodo = NodoArbol.nodoArbol(new_cubo)
         #print(str(len(arbolada)) + '\n')
         mezclar_aleatorio(1, new_cubo)
         arbolada.append(new_cubo)
