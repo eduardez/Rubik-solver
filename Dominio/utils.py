@@ -71,7 +71,6 @@ def petar(arbolada, cubo):
             moverCubo(cubo, 'L', x)
             moverCubo(cubo, 'l', x)
    
-   
 def pruebaRendimiento(num_nodos, cubo):
     tiempos = []
     t_ini = time.time()

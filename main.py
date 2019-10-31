@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 # -*- coding: utf-8 -*-
 
-import Dominio.utils as utils, cmd, sys
+import Dominio.utils as utils, cmd, sys, Dominio.Problema as problema
 import Presentacion.VIEW_rubiks as Gui
 from Dominio.Cubo import Cubo as Objeto_Cubo
 
@@ -20,10 +20,18 @@ class CubeShell(cmd.Cmd):
         '''Pruebas de rendimiento con diferentes estructuras de datos.
         Estructuras: Cola, List (python), Array (numpy)'''
         arr_nodos = [10, 100, 1000, 10000, 100000, 1000000, 10000000, 100000000]
+        seguir = 1
         for num_nodos in arr_nodos:
-            print('\n---------------------------------\n' + str(num_nodos) + ' nodos.')
-            utils.pruebaRendimiento(num_nodos,cubo_actual)
+            if num_nodos > 1000000:
+                 seguir = int(input('Quieres seguir con ' + str(num_nodos) + ' nodos? (0 = no | 1 = si)'))
+            if seguir:
+                print('\n---------------------------------\n' + str(num_nodos) + ' nodos.')
+                utils.pruebaRendimiento(num_nodos,cubo_actual)
+            else:
+                break
     
+    def do_problema(self, arg):
+        prob = problema()
     
     def do_mezclar_prueba(self, arg):
         '''Prueba del cubo 10x10 con los movimientos que nos proporcionan en el JSON'''
