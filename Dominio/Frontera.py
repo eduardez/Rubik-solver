@@ -8,8 +8,9 @@ class Frontera:
 
     def insertarLista(self, listaNodos):
         i = 0
-        for nodoArbol in listaNodos:
-            for hoja in self.frontera:
+        for hoja in self.frontera:
+            for nodoArbol in listaNodos:
+            
                 if  nodoArbol.f <= hoja.f:
                     self.frontera.insert(nodoArbol, i)
                     break

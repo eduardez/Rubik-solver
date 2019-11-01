@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 import os, json, datetime, random, threading, copy, time
-import Dominio.NodoArbol as NodoArbol
+from Dominio.NodoArbol import NodoArbol
 from Dominio.construirImagen import createImage
 from Dominio.Frontera import Frontera
 from Dominio.Problema import Problema
@@ -27,7 +27,7 @@ def busquedaIncremental(Problema, estrategia, profMax, profInc):
 def busquedaAcotada(Problema, estrategia, profActual, profMax):
     frontera = Frontera()
     NodoArbolActual = NodoArbol(None, Problema.estadoInicial,0,0,0)
-    frontera.insert(NodoArbolActual)
+    frontera.insertarLista(NodoArbolActual)
     solucion = False
     '''Si no hay solución y la frontera está vacía se detiene
     si hay solución y la frontera sigue llena se para la ejecución'''

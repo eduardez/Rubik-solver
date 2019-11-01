@@ -1,4 +1,4 @@
-import Dominio.Cubo as Cubo
+from Dominio.Cubo import Cubo
 import Dominio.utils as utils, copy, cmd, sys
 
 class EspacioEstados:

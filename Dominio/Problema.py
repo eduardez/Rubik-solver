@@ -1,5 +1,5 @@
-import Dominio.EspacioEstados as EspacioEstados
-import Dominio.Cubo as Cubo
+from Dominio.EspacioEstados import EspacioEstados
+from Dominio.Cubo import Cubo
 import math, copy
 
 class Problema:
@@ -9,7 +9,7 @@ class Problema:
         self.estadoObjetivo = self.getCuboObjetivo(self.estadoInicial)
 
     def esObjetivo(self, NodoArbolActual):
-        if NodoArbolActual.cubo.idHash == self.estadoObjetivo:
+        if NodoArbolActual.cubo.idHash == self.estadoObjetivo.idHash:
             return True
         else:
             return False
@@ -26,7 +26,7 @@ class Problema:
                 cubo_objetivo.left[i][j] = 4
                 cubo_objetivo.right[i][j] = 5
                 cubo_objetivo.up[i][j] = 0
-        cubo_objetivo.update_estado()
-        return cubo_objetivo.idHash
+        cubo_objetivo.updateEstado()
+        return cubo_objetivo
                 
             
