@@ -1,35 +1,33 @@
 #!/usr/bin/python3
 # -*- coding: utf-8 -*-
-import Dominio.utils as utils, cmd, sys, Dominio.Problema as Problema
+import Dominio.utils as utils, cmd, sys
 import Presentacion.VIEW_rubiks as Gui
 from Dominio.Cubo import Cubo as Objeto_Cubo
-
+from Dominio.Problema import Problema
 
 
 cubo_actual = Objeto_Cubo(utils.jsonRead('res/json_files/cuboSolucionado.json'))
-    
+problema = None
 class CubeShell(cmd.Cmd):
     intro = 'Shell del cubo de Rubik. ? o Help para ayuda\n'
     prompt = '(Cubo)> '
     
     def do_resolver(self, arg):
-
         json = utils.jsonRead('res/json_files/problema.json')
-        
-        listaSolucion = utils.busquedaAcotada(Problema(json), "anchura",6,0)
-        utils.mostrarSolucion(listaSolucion)
-
+        # listaSolucion = utils.busquedaAcotada(Problema(json), "anchura",6,0)
+        # utils.mostrarSolucion(listaSolucion)
         problema = Problema(json)
         listaSolucion = utils.busquedaAcotada(problema, "profundidad",6,0)
         utils.mostrarSolucion(listaSolucion)
-
         problema = Problema(json)
         listaSolucion = utils.busquedaAcotada(problema, "costo",6,0)
         utils.mostrarSolucion(listaSolucion)
 
+
     def do_ver_cubo(self, arg):
         '''Imprimir el objeto cubo actual'''
         print(str(cubo_actual))
+    
     
     def do_prueba_rendimiento(self, args):
         '''Pruebas de rendimiento con diferentes estructuras de datos.
@@ -44,6 +42,7 @@ class CubeShell(cmd.Cmd):
                 utils.pruebaRendimiento(num_nodos,cubo_actual)
             else:
                 break
+        
         
     def do_mezclar_prueba(self, arg):
         '''Prueba del cubo 10x10 con los movimientos que nos proporcionan en el JSON'''
@@ -90,14 +89,15 @@ class CubeShell(cmd.Cmd):
         #     print('Error en los argumentos.')
         pass
         
+        
     def do_test(self,arg):
         utils.hacerTest(cubo_actual)
+        
         
     def do_iniciar_gui(self, arg):
         '''Iniciar entorno grafico (En construccion)'''
         Gui.start()    
 
-   
 
     def do_exit(self, arg):
         print('Adioooooooooooooooooooooooooooooooooos........')

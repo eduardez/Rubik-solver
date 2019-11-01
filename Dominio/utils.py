@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 import os, json, datetime, random, threading, copy, time
-import Dominio.NodoArbol as NodoArbol
+from Dominio.NodoArbol import NodoArbol
 from Dominio.construirImagen import createImage
 from Dominio.Frontera import Frontera
 from Dominio.Problema import Problema

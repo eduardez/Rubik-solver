@@ -1,5 +1,8 @@
-import Dominio.Cubo as Cubo
+#!/usr/bin/python3
+# -*- coding: utf-8 -*-
+
 import Dominio.utils as utils, copy, cmd, sys
+from Dominio.Cubo import Cubo
 
 class EspacioEstados:
     def __init__(self, json):
