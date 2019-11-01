@@ -8,8 +8,8 @@ class Problema:
         self.estadoInicial = Cubo(json)
         self.estadoObjetivo = self.getCuboObjetivo(self.estadoInicial)
 
-    def esObjetivo(self, Estado):
-        if not Estado.listaPendientes:
+    def esObjetivo(self, NodoArbolActual):
+        if NodoArbolActual.cubo.idHash == self.estadoObjetivo:
             return True
         else:
             return False
@@ -27,5 +27,6 @@ class Problema:
                 cubo_objetivo.right[i][j] = 5
                 cubo_objetivo.up[i][j] = 0
         cubo_objetivo.update_estado()
+        return cubo_objetivo.idHash
                 
             

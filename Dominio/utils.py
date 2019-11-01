@@ -19,7 +19,7 @@ generar_imagenes = False
 def busquedaIncremental(Problema, estrategia, profMax, profInc):
     profActual = profInc
     solucion = []
-    while solucion  and profActual<=profMax:
+    while solucion == []  and profActual<=profMax:
         solucion = busquedaAcotada(Problema,estrategia,profActual, profMax)
         profActual = profActual + profInc
     return solucion 
@@ -31,15 +31,16 @@ def busquedaAcotada(Problema, estrategia, profActual, profMax):
     solucion = False
     '''Si no hay solución y la frontera está vacía se detiene
     si hay solución y la frontera sigue llena se para la ejecución'''
-    while solucion == [] and not(frontera.isEmpty):
+    while solucion == False and frontera.isNotEmpty:
         NodoArbolActual = frontera.delete
-        if Problema.esObjetivo:
+        if Problema.esObjetivo(NodoArbolActual):
             solucion = True
         else:
             listaSucesores = EspacioEstados.sucesores(NodoArbolActual.cubo)
             listaNodos = NodoArbol.crearListaNodosArbol(listaSucesores,NodoArbolActual,profMax,estrategia)
             frontera.insertarLista(listaNodos)
-
+        if solucion == True:
+            return crearSolucion(NodoArbolActual)
         
 def crearListaNodosArbol(listaSucesores,NodoArbolActual,profMax,estrategia):
     listaNodosArbol = []
@@ -48,13 +49,32 @@ def crearListaNodosArbol(listaSucesores,NodoArbolActual,profMax,estrategia):
         if estrategia == "anchura":
             nuevoNodoArbol.f = nuevoNodoArbol.profundidad
         elif estrategia == "profundidad" or estrategia == "profundidad_iterativa":
-            nuevoNodoArbol.f = -(nuevoNodoArbol.profundidad)
+            nuevoNodoArbol.f = 1/nuevoNodoArbol.profundidad
         elif estrategia == "costo":
             nuevoNodoArbol.f = nuevoNodoArbol.coste
+
+        if estrategia == "profundidad" and nuevoNodoArbol.profundidad >= profMax:
+            pass
+        else:    
+            listaNodosArbol.append(nuevoNodoArbol)
+
     return listaNodosArbol
 
+def crearSolucion(NodoArbolActual):
+    listaSolucion = []
+    # Lo pongo así porque existe la posibilidad de que el nodo padre sea el primero y único
+    listaSolucion.insert(0, NodoArbolActual)
+    while NodoArbolActual.nodoPadre == None:
+        NodoArbolActual = NodoArbolActual.nodoPadre
+        listaSolucion.insert(0, NodoArbolActual)
+    return listaSolucion
 
-# --------------- Utils cubos ------------------
+def mostrarSolucion(listaSolcion):
+    for i in listaSolcion:
+        print(i.accion)
+
+
+# --------------- Utils cubos -----------------
 def generarCubo(tam):
     pass
 
@@ -80,21 +100,21 @@ def moverCubo(cubo, movimiento, fila):
     
 # --------------- Utils petar memoria ------------
 
-def hacerTest(cubo):
-    import psutil, time
-    arbolada = []
-    # maxThreads = 50
-    # for x in range(0, maxThreads):
-    #     thread_petar = threading.Thread(target=petar, args=(arbolada, cubo)).start()
-    thread_petar = threading.Thread(target=petar, args=(arbolada, cubo)).start()
-    #mem = psutil.memory_info().rss
-    while 1:    
-        print(f'''------------------------------
-    Numero de nodos: {len(arbolada)} 
-    + Memoria Virtual > {'null'}
-    + CPU >  Carga: {'s'}, Frec: {psutil.cpu_freq()}, Uso: {psutil.cpu_percent()}
-            ''')
-        time.sleep(2.0)
+# def hacerTest(cubo):
+#     import psutil, time
+#     arbolada = []
+#     # maxThreads = 50
+#     # for x in range(0, maxThreads):
+#     #     thread_petar = threading.Thread(target=petar, args=(arbolada, cubo)).start()
+#     thread_petar = threading.Thread(target=petar, args=(arbolada, cubo)).start()
+#     #mem = psutil.memory_info().rss
+#     while 1:    
+#         print(f'''------------------------------
+#         Numero de nodos: {len(arbolada)} 
+#         + Memoria Virtual > {'null'}
+#         + CPU >  Carga: {'s'}, Frec: {psutil.cpu_freq()}, Uso: {psutil.cpu_percent()}
+#         ''')
+#         time.sleep(2.0)
         
 def petar(arbolada, cubo):
     while 1:

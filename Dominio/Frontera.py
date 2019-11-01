@@ -3,15 +3,15 @@ import Dominio.NodoArbol as NodoArbol
 
 class Frontera:
     def __init__(self):
-        self.frontera = np.array(dtype=NodoArbol)
-        # self.frontera = []
+        #self.frontera = np.array(dtype=NodoArbol)
+        self.frontera = []
 
     def insertarLista(self, listaNodos):
         i = 0
-        for nodo in listaNodos:
+        for nodoArbol in listaNodos:
             for hoja in self.frontera:
-                if  NodoArbol.f <= hoja.f:
-                    self.frontera.insert(NodoArbol, i)
+                if  nodoArbol.f <= hoja.f:
+                    self.frontera.insert(nodoArbol, i)
                     break
                 i=i+1
         # if hoja.estado.identificador == NodoArbol.estado.identificador :
@@ -28,3 +28,9 @@ class Frontera:
             return True
         else:
             return False
+            
+    def isNotEmpty(self):
+        if self.frontera:
+            return False
+        else:
+            return True

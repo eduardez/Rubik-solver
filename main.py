@@ -1,9 +1,9 @@
 #!/usr/bin/python3
 # -*- coding: utf-8 -*-
-
-import Dominio.utils as utils, cmd, sys, Dominio.Problema as problema
+import Dominio.utils as utils, cmd, sys, Dominio.Problema as Problema
 import Presentacion.VIEW_rubiks as Gui
 from Dominio.Cubo import Cubo as Objeto_Cubo
+
 
 
 cubo_actual = Objeto_Cubo(utils.jsonRead('res/json_files/cuboSolucionado.json'))
@@ -12,6 +12,21 @@ class CubeShell(cmd.Cmd):
     intro = 'Shell del cubo de Rubik. ? o Help para ayuda\n'
     prompt = '(Cubo)> '
     
+    def do_resolver(self, arg):
+
+        json = utils.jsonRead('res/json_files/problema.json')
+        
+        listaSolucion = utils.busquedaAcotada(Problema(json), "anchura",6,0)
+        utils.mostrarSolucion(listaSolucion)
+
+        problema = Problema(json)
+        listaSolucion = utils.busquedaAcotada(problema, "profundidad",6,0)
+        utils.mostrarSolucion(listaSolucion)
+
+        problema = Problema(json)
+        listaSolucion = utils.busquedaAcotada(problema, "costo",6,0)
+        utils.mostrarSolucion(listaSolucion)
+
     def do_ver_cubo(self, arg):
         '''Imprimir el objeto cubo actual'''
         print(str(cubo_actual))
@@ -29,10 +44,7 @@ class CubeShell(cmd.Cmd):
                 utils.pruebaRendimiento(num_nodos,cubo_actual)
             else:
                 break
-    
-    def do_problema(self, arg):
-        prob = problema()
-    
+        
     def do_mezclar_prueba(self, arg):
         '''Prueba del cubo 10x10 con los movimientos que nos proporcionan en el JSON'''
         cubo_actual = Objeto_Cubo(utils.jsonRead('res/json_files/cubo10x10.json'))
@@ -84,7 +96,9 @@ class CubeShell(cmd.Cmd):
     def do_iniciar_gui(self, arg):
         '''Iniciar entorno grafico (En construccion)'''
         Gui.start()    
-        
+
+   
+
     def do_exit(self, arg):
         print('Adioooooooooooooooooooooooooooooooooos........')
         sys.exit(0)
