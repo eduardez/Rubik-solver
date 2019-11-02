@@ -17,8 +17,7 @@ class Cubo:
       def updateEstado(self):
             h = hashlib.md5(self.cuboToStr().encode('utf-8'))
             self.idHash = h.hexdigest()
-            
-            
+      
       def desplazamientoB(self, fila):
             '''Moveremos la cara del cubo 90º, generando un cubo nuevo tras la modificación'''
             arr1 = copy.copy(self.left[fila])
