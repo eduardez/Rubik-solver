@@ -6,7 +6,8 @@ from Dominio.Cubo import Cubo
 
 class EspacioEstados:
     def __init__(self, json):
-        self.cubo = Cubo(json)
+        # self.cubo = Cubo(json)
+        pass
     
     '''Este método genera tripetas (Acción realizada, New_Objeto_Cubo, CosteAcción = 1)
     que son añadidas a la lista de sucesores, total de tripletas generadas es igual a
@@ -14,7 +15,7 @@ class EspacioEstados:
     es decir todas las acciones posibles'''
     def sucesores(self, cubo):
         listaSucesores = []
-        for x in range(0, Cubo.getCuboSize()-1):
+        for x in range(0, cubo.getCuboSize()-1):
             new_cubo = copy.deepcopy(cubo)
             listaSucesores.append(("Desplazamiento B" + str(x), new_cubo.desplazamientoB(x), 1))
 

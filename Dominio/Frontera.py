@@ -22,7 +22,7 @@ class Frontera:
         #     self.frontera.pop(i)
 
     def delete(self):
-        if self.isNotEmpty:
+        if not self.isEmpty():
             print("Devuelve el principal")
             return self.frontera.pop(0)
         else:
@@ -33,9 +33,3 @@ class Frontera:
             return True
         else:
             return False
-            
-    def isNotEmpty(self):
-        if self.frontera:
-            return False
-        else:
-            return True

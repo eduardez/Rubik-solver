@@ -29,16 +29,17 @@ def busquedaAcotada(Problema, estrategia, profActual, profMax):
     frontera = Frontera()
     frontera.insertarNodo(NodoArbol(None, Problema.estadoInicial,0,0,0))
     solucion = False
+    esp_estados = EspacioEstados(None)
     '''Si no hay solución y la frontera está vacía se detiene
     si hay solución y la frontera sigue llena se para la ejecución'''
-    while solucion == False and frontera.isNotEmpty:
-        NodoArbolActual = frontera.delete
+    while (not solucion) and (not frontera.isEmpty()):
+        NodoArbolActual = frontera.delete()
         print(NodoArbolActual)
 
         if Problema.esObjetivo(NodoArbolActual):
             solucion = True
         else:
-            listaSucesores = EspacioEstados.sucesores(NodoArbolActual.cubo)
+            listaSucesores = esp_estados.sucesores(NodoArbolActual.cubo)
             listaNodos = NodoArbol.crearListaNodosArbol(listaSucesores,NodoArbolActual,profMax,estrategia)
             frontera.insertarLista(listaNodos)
         if solucion == True:

@@ -1,5 +1,4 @@
-#!/usr/bin/python3
-# -*- coding: utf-8 -*-
+
 import Dominio.utils as utils, cmd, sys
 import Presentacion.VIEW_rubiks as Gui
 from Dominio.Cubo import Cubo as Objeto_Cubo
@@ -16,6 +15,7 @@ class CubeShell(cmd.Cmd):
         json = utils.jsonRead('res/json_files/problema.json')
         
         problema = Problema(json)
+        print(str(problema))
         listaSolucion = utils.busquedaAcotada(problema, "anchura",6,0)
         utils.mostrarSolucion(listaSolucion)
 

@@ -6,10 +6,11 @@ class Problema:
     def __init__(self, json):
         self.espacioEstados = EspacioEstados(json)
         self.estadoInicial = Cubo(json)
+        self.estadoInicial.updateEstado()
         self.estadoObjetivo = self.getCuboObjetivo(self.estadoInicial)
 
     def esObjetivo(self, NodoArbolActual):
-        if self.estadoObjetivo.idHash:
+        if self.estadoObjetivo == NodoArbolActual.cubo.idHash:
             return True
         else:
             return False
@@ -17,7 +18,7 @@ class Problema:
     def getCuboObjetivo(self, cubo_original):
         mapa_colores = {'BACK':3,'DOWN':1,'FRONT':2,'LEFT':4,'RIGHT':5,'UP':0}
         cubo_objetivo = copy.deepcopy(cubo_original)
-        longitud = cubo_objetivo.getCuboSize() - 1
+        longitud = cubo_objetivo.getCuboSize() 
         for i in range(0, longitud):
             for j in range(0, longitud):
                 cubo_objetivo.back[i][j] = 3
@@ -28,5 +29,10 @@ class Problema:
                 cubo_objetivo.up[i][j] = 0
         cubo_objetivo.updateEstado()
         return cubo_objetivo.idHash
+    
+    
+    def __str__(self):
+        cadena = f'Estado inicial: {str(self.estadoInicial.idHash)}\nEstado objetivo: {str(self.estadoObjetivo)}'
+        return cadena
                 
             
