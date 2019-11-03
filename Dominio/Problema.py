@@ -9,7 +9,7 @@ class Problema:
         self.estadoObjetivo = self.getCuboObjetivo(self.estadoInicial)
 
     def esObjetivo(self, NodoArbolActual):
-        if NodoArbolActual.cubo.idHash == self.estadoObjetivo:
+        if self.estadoObjetivo.idHash:
             return True
         else:
             return False

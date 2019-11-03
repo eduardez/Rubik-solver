@@ -25,14 +25,16 @@ def busquedaIncremental(Problema, estrategia, profMax, profInc):
     return solucion 
 
 def busquedaAcotada(Problema, estrategia, profActual, profMax):
+    listaNodos = []
     frontera = Frontera()
-    NodoArbolActual = NodoArbol(None, Problema.estadoInicial,0,0,0)
-    frontera.insert(NodoArbolActual)
+    frontera.insertarNodo(NodoArbol(None, Problema.estadoInicial,0,0,0))
     solucion = False
     '''Si no hay solución y la frontera está vacía se detiene
     si hay solución y la frontera sigue llena se para la ejecución'''
     while solucion == False and frontera.isNotEmpty:
         NodoArbolActual = frontera.delete
+        print(NodoArbolActual)
+
         if Problema.esObjetivo(NodoArbolActual):
             solucion = True
         else:

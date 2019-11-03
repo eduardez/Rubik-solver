@@ -7,19 +7,21 @@ import Dominio.Cubo
 class NodoArbol:
 
     def __init__(self, nodoPadre, Cubo, profundidad,coste,f):
-        self.cubo = Cubo
-        self.nodoPadre = None
-        self.f = f
         if nodoPadre == None:
-            self.accion = 'Cubo Inicial'
+            self.nodoPadre = None
+            self.cubo = Cubo
             self.profundidad = 0
             self.coste = 0
+            self.accion = 'Cubo Inicial'
+            self.f = f
         else:
             self.nodoPadre=nodoPadre
+            self.cubo = Cubo
             self.profundidad=profundidad
             self.coste = coste
             self.accion = "     "+nodoPadre.cubo.nodoActual + "->" + self.cubo.nodoActual + " | " +" f:"+ str(self.f) + " p: " + str(profundidad) +" |"
-     
+            self.f = f
+            
     def calcularHeuristica(self):
         pass
     
