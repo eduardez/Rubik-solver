@@ -40,10 +40,8 @@ def busquedaAcotada(Problema, estrategia, profActual, profMax):
         else:
             listaSucesores = esp_estados.sucesores(NodoArbolActual)
             listaNodos = crearListaNodosArbol(listaSucesores,NodoArbolActual,profMax,estrategia)
-            if frontera.isEmpty():
-                frontera.insercionInicial(listaNodos)
-            else:
-                frontera.insertarLista(listaNodos)
+            frontera.insertarLista(listaNodos)
+        print(f'Longitud frontera: {len(frontera.frontera)}')
     if solucion:
         return crearSolucion(NodoArbolActual)
         
@@ -69,10 +67,10 @@ def crearListaNodosArbol(listaSucesores,NodoArbolActual,profMax,estrategia):
 def crearSolucion(NodoArbolActual):
     listaSolucion = []
     # Lo pongo así porque existe la posibilidad de que el nodo padre sea el primero y único
-    listaSolucion.insert(0, NodoArbolActual)
-    while NodoArbolActual.nodoPadre == None:
+    listaSolucion.append(NodoArbolActual)
+    while NodoArbolActual.nodoPadre is not None:
         NodoArbolActual = NodoArbolActual.nodoPadre
-        listaSolucion.insert(0, NodoArbolActual)
+        listaSolucion.append(NodoArbolActual)
     return listaSolucion
 
 def mostrarSolucion(listaSolucion):

@@ -15,17 +15,18 @@ class CubeShell(cmd.Cmd):
 
         json = utils.jsonRead('res/json_files/problema.json')
         
-        problema = Problema(json)
-        print(str(problema))
-        listaSolucion = utils.busquedaAcotada(problema, "anchura",6,0)
-        utils.mostrarSolucion(listaSolucion)
+        # problema = Problema(json)
+        # print(str(problema))
+        # listaSolucion = utils.busquedaAcotada(problema, "anchura",6,0)
+        # utils.mostrarSolucion(listaSolucion)
 
         problema = Problema(json)
-        listaSolucion = utils.busquedaAcotada(problema, "profundidad",6,0)
+        listaSolucion = utils.busquedaAcotada(problema, "profundidad",6,8)
         utils.mostrarSolucion(listaSolucion)
-        problema = Problema(json)
-        listaSolucion = utils.busquedaAcotada(problema, "costo",6,0)
-        utils.mostrarSolucion(listaSolucion)
+        
+        # problema = Problema(json)
+        # listaSolucion = utils.busquedaAcotada(problema, "costo",6,0)
+        # utils.mostrarSolucion(listaSolucion)
 
 
     def do_ver_cubo(self, arg):
@@ -71,7 +72,7 @@ class CubeShell(cmd.Cmd):
     
     def do_mezclar(self, arg):
         '''Mezclar el objeto cubo actual'''
-        utils.mezclar_aleatorio(1, cubo_actual)
+        utils.mezclar_aleatorio(2, cubo_actual)
 
     
     def do_borrar_res(self, arg):   

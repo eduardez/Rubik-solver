@@ -12,20 +12,11 @@ class Frontera:
     def insertarLista(self, listaNodos):
         i = 0
         for nodoArbol in listaNodos:
-            for hoja in self.frontera:
-                if  nodoArbol.f <= hoja.f:
-                    self.frontera.insert(i, nodoArbol)
-                i=i+1
+            self.frontera.insert(i, nodoArbol)
+        i=i+1
         # if hoja.estado.identificador == NodoArbol.estado.identificador :
         #     self.frontera.pop(i)
-        
-    def insercionInicial(self, listaNodos):
-        i = 0
-        for nodo in listaNodos:
-            self.frontera.insert(i, nodo)
-            i += 1
-            
-            
+
     def delete(self):
         if not self.isEmpty():
             return self.frontera.pop(0)
