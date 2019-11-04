@@ -14,13 +14,18 @@ class Frontera:
         for nodoArbol in listaNodos:
             for hoja in self.frontera:
                 if  nodoArbol.f <= hoja.f:
-                    print("Añado" + nodoArbol.accion)
                     self.frontera.insert(i, nodoArbol)
-                    break
                 i=i+1
         # if hoja.estado.identificador == NodoArbol.estado.identificador :
         #     self.frontera.pop(i)
-
+        
+    def insercionInicial(self, listaNodos):
+        i = 0
+        for nodo in listaNodos:
+            self.frontera.insert(i, nodo)
+            i += 1
+            
+            
     def delete(self):
         if not self.isEmpty():
             return self.frontera.pop(0)

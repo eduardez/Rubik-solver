@@ -34,13 +34,16 @@ def busquedaAcotada(Problema, estrategia, profActual, profMax):
     si hay solución y la frontera sigue llena se para la ejecución'''
     while (not solucion) and (not frontera.isEmpty()):
         NodoArbolActual = frontera.delete()
-        str(NodoArbolActual)
         if Problema.esObjetivo(NodoArbolActual):
             solucion = True
+            print('ENCOINADFAISDGFAHJSDFG OAVSUDYFGAKSDF')
         else:
             listaSucesores = esp_estados.sucesores(NodoArbolActual)
             listaNodos = crearListaNodosArbol(listaSucesores,NodoArbolActual,profMax,estrategia)
-            frontera.insertarLista(listaNodos)
+            if frontera.isEmpty():
+                frontera.insercionInicial(listaNodos)
+            else:
+                frontera.insertarLista(listaNodos)
     if solucion:
         return crearSolucion(NodoArbolActual)
         
@@ -48,6 +51,7 @@ def crearListaNodosArbol(listaSucesores,NodoArbolActual,profMax,estrategia):
     listaNodosArbol = []
     for sucesor in listaSucesores:
         nuevoNodoArbol = NodoArbol(NodoArbolActual, sucesor[1], NodoArbolActual.profundidad + 1, NodoArbolActual.coste + sucesor[2], 0)
+        nuevoNodoArbol.accion = sucesor[0]
         if estrategia == "anchura":
             nuevoNodoArbol.f = nuevoNodoArbol.profundidad
         elif estrategia == "profundidad" or estrategia == "profundidad_iterativa":
