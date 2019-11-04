@@ -25,6 +25,12 @@ class NodoArbol:
     def calcularHeuristica(self):
         pass
     
+    
+    def __lt__(self, otro_nodo):
+        '''Metodo _comparable_ de python para que el nodo arbol pueda
+        meterse sin problemas en la priority queue.'''
+        return self.f < otro_nodo.f
+
     def __str__(self):
         return ('\nID: ' + str(self.cubo.idHash) + '\nF: ' + str(self.f) + '\n')
 

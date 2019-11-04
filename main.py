@@ -13,7 +13,7 @@ class CubeShell(cmd.Cmd):
     
     def do_resolver(self, arg):
 
-        json = utils.jsonRead('res/json_files/problema.json')
+        json = utils.jsonRead('res/json_files/cuboProf2.json')
         
         # problema = Problema(json)
         # print(str(problema))
@@ -21,7 +21,7 @@ class CubeShell(cmd.Cmd):
         # utils.mostrarSolucion(listaSolucion)
 
         problema = Problema(json)
-        listaSolucion = utils.busquedaAcotada(problema, "profundidad",6,8)
+        listaSolucion = utils.busquedaAcotada(problema, "profundidad",6,4)
         utils.mostrarSolucion(listaSolucion)
         
         # problema = Problema(json)

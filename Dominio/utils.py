@@ -30,18 +30,21 @@ def busquedaAcotada(Problema, estrategia, profActual, profMax):
     frontera.insertarNodo(NodoArbol(None, Problema.estadoInicial,0,0,0))
     solucion = False
     esp_estados = EspacioEstados(None)
+    num_nodos = 1
+    t_inicial = time.time()
     '''Si no hay solución y la frontera está vacía se detiene
     si hay solución y la frontera sigue llena se para la ejecución'''
     while (not solucion) and (not frontera.isEmpty()):
         NodoArbolActual = frontera.delete()
         if Problema.esObjetivo(NodoArbolActual):
             solucion = True
-            print('ENCOINADFAISDGFAHJSDFG OAVSUDYFGAKSDF')
+            print('ENCre    OINADFAISDGFAHJSDFG OAVSUDYFGAKSDF')
         else:
             listaSucesores = esp_estados.sucesores(NodoArbolActual)
             listaNodos = crearListaNodosArbol(listaSucesores,NodoArbolActual,profMax,estrategia)
             frontera.insertarLista(listaNodos)
-        print(f'Longitud frontera: {len(frontera.frontera)}')
+            num_nodos += len(listaSucesores)
+        customPrint(len(frontera),num_nodos, t_inicial, 5)
     if solucion:
         return crearSolucion(NodoArbolActual)
         
@@ -217,6 +220,18 @@ def emptyFolder(name):
         except Exception as e:
             print(e)
 
+
+def customPrint(long_frontera, num_nodos, tiempo_inicial, periodo):
+    cadena = f'''------------------
+Longitud frontera: {long_frontera}
+Numero de nodos creados: {num_nodos}
+Tiempo transcurrido: {time.time() - tiempo_inicial}
+          '''
+    datatiempo = datetime.datetime.now()
+    second = int(datatiempo.strftime("%S"))
+    mili = int(datatiempo.strftime("%f")[:-3])
+    if (second % periodo == 0) and (0 < mili < 50):
+        print(cadena)
 
 
 # --------------- Utils de los archivos JSON ------------------

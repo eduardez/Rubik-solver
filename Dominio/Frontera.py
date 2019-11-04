@@ -1,30 +1,29 @@
 import numpy as np, hashlib
 import Dominio.NodoArbol as NodoArbol
+from queue import PriorityQueue
 
 class Frontera:
     def __init__(self):
         #self.frontera = np.array(dtype=NodoArbol)
-        self.frontera = []
+        self.frontera = PriorityQueue()
 
     def insertarNodo(self, nodo):
-        self.frontera.insert(0,nodo)
+        self.frontera.put(nodo)
 
     def insertarLista(self, listaNodos):
-        i = 0
         for nodoArbol in listaNodos:
-            self.frontera.insert(i, nodoArbol)
-        i=i+1
+            self.insertarNodo(nodoArbol)
         # if hoja.estado.identificador == NodoArbol.estado.identificador :
         #     self.frontera.pop(i)
 
     def delete(self):
         if not self.isEmpty():
-            return self.frontera.pop(0)
+            return self.frontera.get()
         else:
             return 0
 
     def isEmpty(self):
-        if(not self.frontera):
-            return True
-        else:
-            return False
+        return self.frontera.empty()
+        
+    def __len__(self):
+        return len(self.frontera.queue)
