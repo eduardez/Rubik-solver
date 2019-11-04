@@ -16,14 +16,13 @@ class Frontera:
                 if  nodoArbol.f <= hoja.f:
                     print("Añado" + nodoArbol.accion)
                     self.frontera.insert(i, nodoArbol)
-                    #break
+                    break
                 i=i+1
         # if hoja.estado.identificador == NodoArbol.estado.identificador :
         #     self.frontera.pop(i)
 
     def delete(self):
         if not self.isEmpty():
-            print("Devuelve el principal")
             return self.frontera.pop(0)
         else:
             return 0

@@ -19,7 +19,7 @@ class NodoArbol:
             self.cubo = Cubo
             self.profundidad=profundidad
             self.coste = coste
-            self.accion = "     "+nodoPadre.cubo.nodoActual + "->" + self.cubo.nodoActual + " | " +" f:"+ str(self.f) + " p: " + str(profundidad) +" |"
+            #self.accion = "     "+str(nodoPadre.cubo.idHash) + "->" + str(self.cubo.idHash) + " | " +" f:"+ str(self.f) + " p: " + str(profundidad) +" |"
             self.f = f
             
     def calcularHeuristica(self):

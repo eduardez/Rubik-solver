@@ -12,6 +12,7 @@ class CubeShell(cmd.Cmd):
     prompt = '(Cubo)> '
     
     def do_resolver(self, arg):
+
         json = utils.jsonRead('res/json_files/problema.json')
         
         problema = Problema(json)
