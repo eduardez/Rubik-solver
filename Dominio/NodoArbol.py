@@ -32,7 +32,12 @@ class NodoArbol:
         return self.f < otro_nodo.f
 
     def __str__(self):
-        return ('\nID: ' + str(self.cubo.idHash) + '\nF: ' + str(self.f) + '\n')
+        return ('\nAcción: ' + self.accion +
+                '\nID: ' + str(self.cubo.idHash) + 
+                '\nF: ' + str(self.f) +
+                '\nProfundidad: ' + str(self.profundidad) +
+                '\nCosto Accion: ' + str(self.coste) +
+                '\n'+ str(self.cubo) +'\n')
 
 
  

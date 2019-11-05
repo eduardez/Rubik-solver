@@ -73,14 +73,13 @@ def crearSolucion(NodoArbolActual):
     listaSolucion.append(NodoArbolActual)
     while NodoArbolActual.nodoPadre is not None:
         NodoArbolActual = NodoArbolActual.nodoPadre
-        listaSolucion.append(NodoArbolActual)
+        listaSolucion.insert(0,NodoArbolActual)
     return listaSolucion
 
 def mostrarSolucion(listaSolucion):
     for i in listaSolucion:
-        print(i.accion)
-
-
+        print(str(i))
+        
 # --------------- Utils cubos -----------------
 def generarCubo(tam):
     pass

@@ -159,8 +159,8 @@ class Cubo:
       
       def __str__(self):
             tam = len(self.back)
-            stringCubo = '\nCubo de {0}x{0}x{0}'
-            stringCubo = stringCubo.format(tam) + '\n      [BACK]\n[LEFT][DOWN][RIGHT][UP]\n      [FRONT]\n\n'
+            #stringCubo = '\nCubo de {0}x{0}x{0}'
+            #stringCubo = stringCubo.format(tam) + '\n      [BACK]\n[LEFT][DOWN][RIGHT][UP]\n      [FRONT]\n\n'
             #Como la representacion sera vertical y maximo hay 3 
             #caras, pues el tamaño del cubo por el numero de caras
             espacios = '  ' * tam + ' '
@@ -171,9 +171,9 @@ class Cubo:
                    cubo_str += (str(self.left[i]) + str(self.down[i]) + str(self.right[i]) + str(self.up[i]) + '\n')
             for i in range(0, tam):
                    cubo_str += (espacios + str(self.front[i]) + '\n')
-            stringCubo += str(cubo_str)
+            stringCubo = str(cubo_str)
             stringCubo += '\nMD5: ' + self.idHash
-            stringCubo += '\nID: ' + self.cuboToStr()
+            #stringCubo += '\nID: ' + self.cuboToStr()
             return stringCubo
         
       def getCuboSize(self):
