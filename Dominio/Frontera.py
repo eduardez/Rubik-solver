@@ -16,7 +16,7 @@ class Frontera:
         # if hoja.estado.identificador == NodoArbol.estado.identificador :
         #     self.frontera.pop(i)
 
-    def delete(self):
+    def pop(self):
         if not self.isEmpty():
             return self.frontera.get()
         else:
