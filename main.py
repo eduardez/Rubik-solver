@@ -24,14 +24,14 @@ class CubeShell(cmd.Cmd):
         if estrategia == "prof_incremental":
             print("¿Incremento de la profundidad?")
             profInc = int(input())
-            listaSolucion = utils.busquedaIncremental(problema, estrategia, profMax, profInc)
+            listaSolucion = busquedas.busquedaIncremental(problema, estrategia, profMax, profInc)
         else:
-            listaSolucion = utils.busquedaAcotada(problema, estrategia, profMax)
+            listaSolucion = busquedas.busquedaAcotada(problema, estrategia, profMax)
         
         if listaSolucion == None:
             print("El algoritmo de busqueda no ha llegado a una solución posible")
         else:
-            utils.mostrarSolucion(listaSolucion)
+            busquedas.mostrarSolucion(listaSolucion)
 
     def do_ver_cubo(self, arg):
         '''Imprimir el objeto cubo actual'''

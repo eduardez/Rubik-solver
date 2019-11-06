@@ -17,7 +17,7 @@ def busquedaIncremental(Problema, estrategia, profMax, profInc):
         profActual = profActual + profInc
     return solucion 
 
-def busquedaAcotada(Problema, estrategia, profActual, profMax):
+def busquedaAcotada(Problema, estrategia, profMax):
     listaNodos = []
     frontera = Frontera()
     frontera.insertarNodo(NodoArbol(None, Problema.estadoInicial,0,0,0))
