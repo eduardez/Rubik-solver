@@ -23,7 +23,7 @@ class Frontera:
             else:
                 self.insertarNodo(nodoArbol)
 
-    def delete(self):
+    def pop(self):
         if not self.isEmpty():
             return self.frontera.get()
         else:

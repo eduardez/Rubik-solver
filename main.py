@@ -1,5 +1,5 @@
 
-import Dominio.utils as utils, cmd, sys
+import Dominio.utils as utils, cmd, sys, Dominio.busquedas as busquedas
 import Presentacion.VIEW_rubiks as Gui
 from Dominio.Cubo import Cubo as Objeto_Cubo
 from Dominio.Problema import Problema
@@ -11,8 +11,8 @@ class CubeShell(cmd.Cmd):
     intro = 'Shell del cubo de Rubik. ? o Help para ayuda\n'
     prompt = '(Cubo)> '
     
-    def do_resolver(self, arg):
-        json = utils.jsonRead('res/json_files/problema.json')
+    def do_resolver(self,args):
+        json = utils.jsonRead('res/json_files/cuboProf2.json')
         listaSolucion = []
         problema = Problema(json)
 
