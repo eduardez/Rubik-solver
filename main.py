@@ -12,27 +12,30 @@ class CubeShell(cmd.Cmd):
     prompt = '(Cubo)> '
     
     def do_resolver(self, arg):
-
         json = utils.jsonRead('res/json_files/problema.json')
         listaSolucion = []
-        # problema = Problema(json)
-        # print(str(problema))
-        # listaSolucion = utils.busquedaAcotada(problema, "anchura",6,0)
-        # utils.mostrarSolucion(listaSolucion)
-
         problema = Problema(json)
-        listaSolucion = utils.busquedaAcotada(problema, "profundidad",6,4)
-        utils.mostrarSolucion(listaSolucion)
-        
-        # problema = Problema(json)
-        # listaSolucion = utils.busquedaAcotada(problema, "costo",6,0)
-        # utils.mostrarSolucion(listaSolucion)
 
+        print("¿Cómo quieres resolver el cubo:\n profundidad, anchura, costo o prof_incremental")
+        estrategia = str(input())
+        print("¿Máxima profundidad?")
+        profMax = int(input())
+
+        if estrategia == "prof_incremental":
+            print("¿Incremento de la profundidad?")
+            profInc = int(input())
+            listaSolucion = utils.busquedaIncremental(problema, estrategia, profMax, profInc)
+        else:
+            listaSolucion = utils.busquedaAcotada(problema, estrategia, profMax)
+        
+        if listaSolucion == None:
+            print("El algoritmo de busqueda no ha llegado a una solución posible")
+        else:
+            utils.mostrarSolucion(listaSolucion)
 
     def do_ver_cubo(self, arg):
         '''Imprimir el objeto cubo actual'''
         print(str(cubo_actual))
-    
     
     def do_prueba_rendimiento(self, args):
         '''Pruebas de rendimiento con diferentes estructuras de datos.
@@ -52,6 +55,8 @@ class CubeShell(cmd.Cmd):
     def do_mezclar_prueba(self, arg):
         '''Prueba del cubo 10x10 con los movimientos que nos proporcionan en el JSON'''
         cubo_actual = Objeto_Cubo(utils.jsonRead('res/json_files/cubo10x10.json'))
+        cubo_actual.updateEstado()
+        print(str(cubo_actual) + '\nOriginal')
         utils.moverCubo(cubo_actual, 'l', 3)
         print(str(cubo_actual) + '\nl3')
         utils.moverCubo(cubo_actual, 'D', 1)

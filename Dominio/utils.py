@@ -18,13 +18,13 @@ generar_imagenes = False
 # --------------- Busquedas Incremental ------------------
 def busquedaIncremental(Problema, estrategia, profMax, profInc):
     profActual = profInc
-    solucion = []
-    while solucion == []  and profActual<=profMax:
-        solucion = busquedaAcotada(Problema,estrategia,profActual, profMax)
+    solucion = None
+    while solucion == None and profActual<=profMax:
+        solucion = busquedaAcotada(Problema,"profundidad", profActual)
         profActual = profActual + profInc
     return solucion 
 
-def busquedaAcotada(Problema, estrategia, profActual, profMax):
+def busquedaAcotada(Problema, estrategia, profMax):
     listaNodos = []
     frontera = Frontera()
     frontera.insertarNodo(NodoArbol(None, Problema.estadoInicial,0,0,0))
@@ -36,15 +36,18 @@ def busquedaAcotada(Problema, estrategia, profActual, profMax):
     si hay solución y la frontera sigue llena se para la ejecución'''
     while (not solucion) and (not frontera.isEmpty()):
         NodoArbolActual = frontera.delete()
+        if NodoArbolActual.cubo.idHash== 'f90464bdc55bd5e8111dc2b52eaea794':
+            print("Penultimo nodo raiz")
         if Problema.esObjetivo(NodoArbolActual):
             solucion = True
-            print('ENCre    OINADFAISDGFAHJSDFG OAVSUDYFGAKSDF')
+            print('Fin de la Busqueda Acotada [SOLUCION]:\n')
+            
         else:
             listaSucesores = esp_estados.sucesores(NodoArbolActual)
             listaNodos = crearListaNodosArbol(listaSucesores,NodoArbolActual,profMax,estrategia)
             frontera.insertarLista(listaNodos)
-            num_nodos += len(listaSucesores)
-        rendimientoPrint(len(frontera),num_nodos, t_inicial, 5)
+            num_nodos += len(listaNodos)
+            #print("\nFrontera: "+ str(len(frontera)) +"\nNodos Generados: "+ str(num_nodos))
     if solucion:
         return crearSolucion(NodoArbolActual)
         
@@ -55,15 +58,17 @@ def crearListaNodosArbol(listaSucesores,NodoArbolActual,profMax,estrategia):
         nuevoNodoArbol.accion = sucesor[0]
         if estrategia == "anchura":
             nuevoNodoArbol.f = nuevoNodoArbol.profundidad
-        elif estrategia == "profundidad" or estrategia == "profundidad_iterativa":
-            nuevoNodoArbol.f = 1/nuevoNodoArbol.profundidad
+        elif estrategia == "profundidad":
+            nuevoNodoArbol.f = -(nuevoNodoArbol.profundidad)
         elif estrategia == "costo":
             nuevoNodoArbol.f = nuevoNodoArbol.coste
 
         if estrategia == "profundidad" and nuevoNodoArbol.profundidad >= profMax:
             pass
-        else:    
+        elif estrategia == "anchura" or estrategia =="costo" or estrategia =="profundidad":
             listaNodosArbol.append(nuevoNodoArbol)
+        else:    
+            pass
 
     return listaNodosArbol
 
@@ -79,6 +84,7 @@ def crearSolucion(NodoArbolActual):
 def mostrarSolucion(listaSolucion):
     for i in listaSolucion:
         print(str(i))
+
         
 # --------------- Utils cubos -----------------
 def generarCubo(tam):
