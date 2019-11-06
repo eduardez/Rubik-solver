@@ -44,7 +44,7 @@ def busquedaAcotada(Problema, estrategia, profActual, profMax):
             listaNodos = crearListaNodosArbol(listaSucesores,NodoArbolActual,profMax,estrategia)
             frontera.insertarLista(listaNodos)
             num_nodos += len(listaSucesores)
-        customPrint(len(frontera),num_nodos, t_inicial, 5)
+        rendimientoPrint(len(frontera),num_nodos, t_inicial, 5)
     if solucion:
         return crearSolucion(NodoArbolActual)
         
@@ -106,21 +106,21 @@ def moverCubo(cubo, movimiento, fila):
     
 # --------------- Utils petar memoria ------------
 
-# def hacerTest(cubo):
-#     import psutil, time
-#     arbolada = []
-#     # maxThreads = 50
-#     # for x in range(0, maxThreads):
-#     #     thread_petar = threading.Thread(target=petar, args=(arbolada, cubo)).start()
-#     thread_petar = threading.Thread(target=petar, args=(arbolada, cubo)).start()
-#     #mem = psutil.memory_info().rss
-#     while 1:    
-#         print(f'''------------------------------
-#         Numero de nodos: {len(arbolada)} 
-#         + Memoria Virtual > {'null'}
-#         + CPU >  Carga: {'s'}, Frec: {psutil.cpu_freq()}, Uso: {psutil.cpu_percent()}
-#         ''')
-#         time.sleep(2.0)
+def hacerTest(cubo):
+    import psutil, time
+    arbolada = []
+    # maxThreads = 50
+    # for x in range(0, maxThreads):
+    #     thread_petar = threading.Thread(target=petar, args=(arbolada, cubo)).start()
+    thread_petar = threading.Thread(target=petar, args=(arbolada, cubo)).start()
+    #mem = psutil.memory_info().rss
+    while 1:    
+        print(f'''------------------------------
+        Numero de nodos: {len(arbolada)} 
+        + Memoria Virtual > {'null'}
+        + CPU >  Carga: {'s'}, Frec: {psutil.cpu_freq()}, Uso: {psutil.cpu_percent()}
+        ''')
+        time.sleep(2.0)
         
 def petar(arbolada, cubo):
     while 1:
@@ -220,7 +220,7 @@ def emptyFolder(name):
             print(e)
 
 
-def customPrint(long_frontera, num_nodos, tiempo_inicial, periodo):
+def rendimientoPrint(long_frontera, num_nodos, tiempo_inicial, periodo):
     cadena = f'''------------------
 Longitud frontera: {long_frontera}
 Numero de nodos creados: {num_nodos}
