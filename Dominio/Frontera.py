@@ -17,7 +17,7 @@ class Frontera:
                 if not(nodoArbol.cubo.idHash in self.visitados): 
                     self.insertarNodo(nodoArbol)
                     self.visitados.update({str(nodoArbol.cubo.idHash):str(nodoArbol.f)})
-                elif nodoArbol.cubo.idHash in self.visitados and abs(nodoArbol.f) < abs(float(self.visitados.get(nodoArbol.cubo.idHash))):
+                elif abs(nodoArbol.f) < abs(float(self.visitados.get(nodoArbol.cubo.idHash))):
                     self.insertarNodo(nodoArbol)
                     self.visitados.update({str(nodoArbol.cubo.idHash):str(nodoArbol.f)})
             else:
