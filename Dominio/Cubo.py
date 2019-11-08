@@ -113,10 +113,10 @@ class Cubo:
             self.setColumna(self.right,fila,arr2)
             self.front[fila] = arr3[::-1]
             if fila==0:
-                  self.down = np.rot90(self.down,1)
+                  self.down = np.rot90(self.down,3)
             #extremo drcho
             elif fila == len(self.back) -1:
-                  self.up = np.rot90(self.up,1)
+                  self.up = np.rot90(self.up,3)
             #centros
             else:
                   pass
@@ -134,10 +134,10 @@ class Cubo:
             self.setColumnaInversa(self.right,fila,arr4)
             self.front[fila] = arr1
             if fila==0:
-                  self.down = np.rot90(self.down,3)
+                  self.down = np.rot90(self.down,1)
             #extremo drcho
             elif fila == len(self.back) -1:
-                  self.up = np.rot90(self.up,3)
+                  self.up = np.rot90(self.up,1)
             #centros
             else:
                   pass

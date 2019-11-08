@@ -73,7 +73,26 @@ class CubeShell(cmd.Cmd):
         print(str(cubo_actual)+'\nl2')
         utils.moverCubo(cubo_actual, 'd', 1)
         print(str(cubo_actual)+'\nd1')
-    
+
+    def do_resolver_profesores(self, arg):
+        cubo_actual = Objeto_Cubo(utils.jsonRead('res/json_files/problema.json'))
+        cubo_actual.updateEstado()
+        print('Original\n'+str(cubo_actual) + '\n')
+
+        utils.moverCubo(cubo_actual, 'b', 0)
+        print("b0\n" + str(cubo_actual) + '\n')
+
+        utils.moverCubo(cubo_actual, 'D', 0)
+        print("D0\n"+str(cubo_actual) + '\n')
+
+        utils.moverCubo(cubo_actual, 'd', 1)
+        print("d1\n"+str(cubo_actual) + '\n')
+
+        utils.moverCubo(cubo_actual, 'B', 0)
+        print("B0\n"+str(cubo_actual) + '\n')
+
+        utils.moverCubo(cubo_actual, 'B', 0)
+        print("B0\n"+str(cubo_actual) + '\n')
     
     def do_mezclar(self, arg):
         '''Mezclar el objeto cubo actual'''
