@@ -20,13 +20,13 @@ class Problema:
         cubo_objetivo = copy.deepcopy(cubo_original)
         longitud = cubo_objetivo.getCuboSize() 
         for i in range(0, longitud):
-            for j in range(0, longitud):
-                cubo_objetivo.back[i][j] = 3
-                cubo_objetivo.down[i][j] = 1
-                cubo_objetivo.front[i][j] = 2
-                cubo_objetivo.left[i][j] = 4
-                cubo_objetivo.right[i][j] = 5
-                cubo_objetivo.up[i][j] = 0
+            for j in range(0, longitud):    #Original #Profesores
+                cubo_objetivo.back[i][j] = 2 #3 #2
+                cubo_objetivo.down[i][j] = 5 #1 #5
+                cubo_objetivo.front[i][j] = 3 #2 #3
+                cubo_objetivo.left[i][j] = 1 #4 #1
+                cubo_objetivo.right[i][j] = 0 #5 #0
+                cubo_objetivo.up[i][j] = 4 #0 #4
         cubo_objetivo.updateEstado()
         return cubo_objetivo.idHash
     
