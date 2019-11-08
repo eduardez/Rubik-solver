@@ -48,7 +48,7 @@ def crearListaNodosArbol(listaSucesores,NodoArbolActual,profMax,estrategia):
         if estrategia == "anchura":
             nuevoNodoArbol.f = nuevoNodoArbol.profundidad
         elif estrategia == "profundidad" or estrategia == "profundidad_iterativa":
-            nuevoNodoArbol.f = 1/nuevoNodoArbol.profundidad
+            nuevoNodoArbol.f = -(nuevoNodoArbol.profundidad)
         elif estrategia == "costo":
             nuevoNodoArbol.f = nuevoNodoArbol.coste
 
