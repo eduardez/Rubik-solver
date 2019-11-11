@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 # -*- coding: utf-8 -*-
 import copy
-import Dominio.utils as utils, cmd, sys
+import cmd, sys
 from Dominio.Cubo import Cubo
 
 class EspacioEstados:

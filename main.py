@@ -5,14 +5,14 @@ from Dominio.Cubo import Cubo as Objeto_Cubo
 from Dominio.Problema import Problema
 
 
-cubo_actual = Objeto_Cubo(utils.jsonRead('res/json_files/cuboSolucionado.json'))
+cubo_actual = Objeto_Cubo(utils.jsonRead('res/json_files/cubo2x2Sol.json'))
 problema = None
 class CubeShell(cmd.Cmd):
     intro = 'Shell del cubo de Rubik. ? o Help para ayuda\n'
     prompt = '(Cubo)> '
     
     def do_resolver(self,args):
-        json = utils.jsonRead('res/json_files/problema.json')
+        json = utils.jsonRead('res/json_files/problema2.json')
         listaSolucion = []
         problema = Problema(json)
 
@@ -132,6 +132,11 @@ class CubeShell(cmd.Cmd):
         print('Adioooooooooooooooooooooooooooooooooos........')
         sys.exit(0)
 
+
+
+def parse(arg):
+    'Convert a series of zero or more numbers to an argument tuple'
+    return tuple(map(int, arg.split()))
 
 def initResources():
     utils.createFolder(utils.PATHS.get('image_folder'))
