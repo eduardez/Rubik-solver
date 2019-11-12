@@ -33,7 +33,7 @@ class Cubo:
                   self.back = np.rot90(self.back, 3)
 
             elif fila == len(self.back) -1 :   
-                  self.front = np.rot90(self.front, 1)
+                  self.front = np.rot90(self.front, 3)
             #centros
             else: 
                   pass
@@ -72,7 +72,7 @@ class Cubo:
             self.setColumna(self.down,fila, arr2)
             self.setColumna(self.back,fila, arr3)
             if fila==0:
-                  self.left = np.rot90(self.left,1)
+                  self.left = np.rot90(self.left,3)
             #extremo drcho
             elif fila == len(self.back) -1: 
                   self.right = np.rot90(self.right,3)
@@ -113,10 +113,10 @@ class Cubo:
             self.setColumna(self.right,fila,arr2)
             self.front[fila] = arr3[::-1]
             if fila==0:
-                  self.down = np.rot90(self.down,1)
+                  self.down = np.rot90(self.down,3)
             #extremo drcho
             elif fila == len(self.back) -1:
-                  self.up = np.rot90(self.up,1)
+                  self.up = np.rot90(self.up,3)
             #centros
             else:
                   pass
@@ -137,7 +137,7 @@ class Cubo:
                   self.down = np.rot90(self.down,1)
             #extremo drcho
             elif fila == len(self.back) -1:
-                  self.up = np.rot90(self.up,3)
+                  self.up = np.rot90(self.up,1)
             #centros
             else:
                   pass

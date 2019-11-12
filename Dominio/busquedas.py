@@ -36,7 +36,7 @@ def busquedaAcotada(Problema, estrategia, profMax):
             listaNodos = crearListaNodosArbol(listaSucesores,NodoArbolActual,profMax,estrategia)
             frontera.insertarLista(listaNodos)
             num_nodos += len(listaSucesores)
-        rendimientoPrint(len(frontera),num_nodos, t_inicial, 5)
+            #rendimientoPrint(len(frontera),num_nodos, t_inicial, 5)
     if solucion:
         return crearSolucion(NodoArbolActual)
         
@@ -48,11 +48,11 @@ def crearListaNodosArbol(listaSucesores,NodoArbolActual,profMax,estrategia):
         if estrategia == "anchura":
             nuevoNodoArbol.f = nuevoNodoArbol.profundidad
         elif estrategia == "profundidad" or estrategia == "profundidad_iterativa":
-            nuevoNodoArbol.f = 1/nuevoNodoArbol.profundidad
+            nuevoNodoArbol.f = -(nuevoNodoArbol.profundidad)
         elif estrategia == "costo":
             nuevoNodoArbol.f = nuevoNodoArbol.coste
 
-        if estrategia == "profundidad" and nuevoNodoArbol.profundidad >= profMax:
+        if nuevoNodoArbol.profundidad > profMax:
             pass
         else:    
             listaNodosArbol.append(nuevoNodoArbol)
