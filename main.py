@@ -16,7 +16,17 @@ class CubeShell(cmd.Cmd):
         listaSolucion = []
         problema = Problema(json)
 
-        print("¿Cómo quieres resolver el cubo:\n profundidad, anchura, costo o prof_incremental")
+        print("¿Cómo quieres resolver el cubo:\n 1.Profundidad, 2.Anchura, 3.Costo o 4.Prof_incremental")
+        if (input() == '1'): 
+            estrategia = 'profundidad'
+        elif (input() == '2'):
+            estrategia = 'anchura'
+        elif (input() == '3'):
+            estrategia = 'costo'
+        elif (input() == '4'):
+            estrategia = 'prof_incremental'
+        else:
+            print("No ha introducido un elemento válido")
         estrategia = str(input())
         print("¿Máxima profundidad?")
         profMax = int(input())
@@ -146,7 +156,7 @@ def initResources():
 if __name__ == "__main__":
     print('''
 --------------------------------          
-    Rubik Resolver v.0.0.1.
+    Rubik Resolver v.0.39.7.
 --------------------------------    
     ''')
     initResources()

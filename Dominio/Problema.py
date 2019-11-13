@@ -9,7 +9,6 @@ class Problema:
         self.estadoInicial.updateEstado()
 
     def esObjetivo(self, NodoArbolActual):
-        colorCaraActual = 0
         cuboActual = [NodoArbolActual.cubo.back, NodoArbolActual.cubo.down, 
                       NodoArbolActual.cubo.front, NodoArbolActual.cubo.left, 
                       NodoArbolActual.cubo.right, NodoArbolActual.cubo.up]

@@ -39,6 +39,9 @@ def busquedaAcotada(Problema, estrategia, profMax):
             rendimientoPrint(len(frontera),num_nodos, t_inicial, 5)
     if solucion:
         return crearSolucion(NodoArbolActual)
+
+
+
         
 def crearListaNodosArbol(listaSucesores,NodoArbolActual,profMax,estrategia):
     listaNodosArbol = []
