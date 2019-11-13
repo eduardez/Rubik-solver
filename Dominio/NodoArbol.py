@@ -29,7 +29,7 @@ class NodoArbol:
     def __lt__(self, otro_nodo):
         '''Metodo _comparable_ de python para que el nodo arbol pueda
         meterse sin problemas en la priority queue.'''
-        return self.f < otro_nodo.f
+        return self.f
 
     def __str__(self):
         return ('\nAcción: ' + self.accion +
