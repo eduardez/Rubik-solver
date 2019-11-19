@@ -5,7 +5,7 @@ from Dominio.Cubo import Cubo as Objeto_Cubo
 from Dominio.Problema import Problema
 
 
-cubo_actual = Objeto_Cubo(utils.jsonRead('res/json_files/cubo2x2Sol.json'))
+cubo_actual = Objeto_Cubo(utils.jsonRead('res/json_files/problema.json'))
 problema = None
 class CubeShell(cmd.Cmd):
     intro = 'Shell del cubo de Rubik. ? o Help para ayuda\n'
@@ -16,18 +16,17 @@ class CubeShell(cmd.Cmd):
         listaSolucion = []
         problema = Problema(json)
 
-        print("¿Cómo quieres resolver el cubo:\n 1.Profundidad, 2.Anchura, 3.Costo o 4.Prof_incremental")
-        if (input() == '1'): 
+        var = input("¿Cómo quieres resolver el cubo:\n 1.Profundidad\n 2.Anchura\n 3.Costo\n 4.Prof_incremental\n")
+        if (var == '1'): 
             estrategia = 'profundidad'
-        elif (input() == '2'):
+        elif (var == '2'):
             estrategia = 'anchura'
-        elif (input() == '3'):
+        elif (var == '3'):
             estrategia = 'costo'
-        elif (input() == '4'):
+        elif (var == '4'):
             estrategia = 'prof_incremental'
         else:
             print("No ha introducido un elemento válido")
-        estrategia = str(input())
         print("¿Máxima profundidad?")
         profMax = int(input())
 

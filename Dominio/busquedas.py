@@ -13,7 +13,7 @@ def busquedaIncremental(Problema, estrategia, profMax, profInc):
     profActual = profInc
     solucion = []
     while solucion == []  and profActual<=profMax:
-        solucion = busquedaAcotada(Problema,estrategia,profActual, profMax)
+        solucion = busquedaAcotada(Problema,estrategia,profActual)
         profActual = profActual + profInc
     return solucion 
 
@@ -25,8 +25,8 @@ def busquedaAcotada(Problema, estrategia, profMax):
     esp_estados = EspacioEstados(None)
     num_nodos = 1
     t_inicial = time.time()
-    '''Si no hay solución y la frontera está vacía se detiene
-    si hay solución y la frontera sigue llena se para la ejecución'''
+    # Si no hay solución y la frontera está vacía se detiene
+    # si hay solución y la frontera sigue llena se para la ejecución
     while (not solucion) and (not frontera.isEmpty()):
         NodoArbolActual = frontera.pop()
         if Problema.esObjetivo(NodoArbolActual):
