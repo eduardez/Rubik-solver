@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 # -*- coding: utf-8 -*-
 
-import os, json, datetime, random, threading, copy, time
+import os, json, datetime, random, threading, copy, time, Dominio.busquedas as busquedas
 from Dominio.NodoArbol import NodoArbol
 from Dominio.construirImagen import createImage
 from Dominio.Frontera import Frontera
@@ -18,9 +18,6 @@ generar_imagenes = False
 
 
 # --------------- Utils cubos -----------------
-def generarCubo(tam):
-    pass
-
 
 def mezclar_aleatorio(num_movimientos, cubo):
     tipoMov = ['B','b','L','l','D','d']
@@ -29,6 +26,7 @@ def mezclar_aleatorio(num_movimientos, cubo):
         fila = random.randrange(cubo.getCuboSize())
         #print('\nMovimiento: ' + str(cara) + str(fila))
         moverCubo(cubo, cara, fila)
+
 
 def moverCubo(cubo, movimiento, fila):
     if movimiento == 'B' : cubo.desplazamientoB(fila)
@@ -41,89 +39,34 @@ def moverCubo(cubo, movimiento, fila):
     if generar_imagenes:
         createImage(cubo)
     
-# --------------- Utils petar memoria ------------
-
-def hacerTest(cubo):
-    import psutil, time
-    arbolada = []
-    # maxThreads = 50
-    # for x in range(0, maxThreads):
-    #     thread_petar = threading.Thread(target=petar, args=(arbolada, cubo)).start()
-    thread_petar = threading.Thread(target=petar, args=(arbolada, cubo)).start()
-    #mem = psutil.memory_info().rss
-    while 1:    
-        print(f'''------------------------------
-        Numero de nodos: {len(arbolada)} 
-        + Memoria Virtual > {'null'}
-        + CPU >  Carga: {'s'}, Frec: {psutil.cpu_freq()}, Uso: {psutil.cpu_percent()}
-        ''')
-        time.sleep(2.0)
+def mezclarCuboTupla(movimientos, cubo):
+    """Mezclar el cubo con movimientos definidos en un array de tuplas."""
+    for mov in movimientos:
+        moverCubo(cubo, mov[0], mov[1])
+        print(str(mov) + "\n" + str(cubo) + '\n')
         
-def petar(arbolada, cubo):
-    while 1:
-        new_cubo = copy.deepcopy(cubo)  
-        nodo = NodoArbol.nodoArbol(new_cubo)
-        #print(str(len(arbolada)) + '\n')
-        mezclar_aleatorio(1, new_cubo)
-        arbolada.append(new_cubo)
-        for x in range(0, cubo.getCuboSize()):
-            moverCubo(cubo, 'B', x)
-            moverCubo(cubo, 'b', x)
-            moverCubo(cubo, 'D', x)
-            moverCubo(cubo, 'd', x)
-            moverCubo(cubo, 'L', x)
-            moverCubo(cubo, 'l', x)
-   
-def pruebaRendimiento(num_nodos, cubo):
-    tiempos = []
-    t_ini = time.time()
-    pila = []
-    for x in range(num_nodos):
-        new_cubo = copy.deepcopy(cubo)  
-        mezclar_aleatorio(random.randint(0,cubo.getCuboSize()), new_cubo)
-        pila.append(new_cubo)
-    t_total = time.time() - t_ini
-    tiempos.append(('Pila',t_total))
-    #--------------------------- 
-    t_ini = time.time()
-    lista = []
-    for x in range(num_nodos):
-        new_cubo = copy.deepcopy(cubo)  
-        mezclar_aleatorio(random.randint(0,cubo.getCuboSize()), new_cubo)
-        lista.insert(x, new_cubo)
-    t_total = time.time() - t_ini
-    tiempos.append(('Lista',t_total))
-    #--------------------------- 
-    t_ini = time.time()
-    import numpy as np
-    numpyarray = np.asarray([])
-    if not num_nodos >= 1000000:
-        for x in range(num_nodos):
-            new_cubo = copy.deepcopy(cubo)  
-            mezclar_aleatorio(random.randint(0,cubo.getCuboSize()), new_cubo)
-            numpyarray = np.append(numpyarray, new_cubo)
-        t_total = time.time() - t_ini
+
+def resolverCubo(problema):
+    listaSolucion = []
+    optEstrategias = dict({1:"profundidad", 2:"anchura", 3:"costo", 4:"prof_incremental"})
+    opt = int(input("¿Cómo quieres resolver el cubo:\n 1.Profundidad\n 2.Anchura\n 3.Costo\n 4.Prof_incremental\n0.Cancelar\n"))
+    estrategia = optEstrategias.get(opt)
+    if estrategia is not None:
+        print("¿Máxima profundidad?")
+        profMax = int(input())
+        if estrategia == "prof_incremental":
+            print("¿Incremento de la profundidad?")
+            profInc = int(input())
+            listaSolucion = busquedas.busquedaIncremental(problema, estrategia, profMax, profInc)
+        else:
+            listaSolucion = busquedas.busquedaAcotada(problema, estrategia, profMax)
+        if listaSolucion == None:
+            print("El algoritmo de busqueda no ha llegado a una solución posible")
+        else:
+            busquedas.mostrarSolucion(listaSolucion)
     else:
-         t_total = 999999.0
-    tiempos.append(('NumPy Array',t_total))
-    printTestResult(tiempos, num_nodos)
-    printBest(tiempos)
-
-
-def printTestResult(tiempos, num_nodos):
-    for estructura in tiempos:
-        print(f'     +Tipo de estructura: {estructura[0]}, tiempo de insercion: {estructura[1]}s') 
-
-
-def printBest(tiempos):
-    mejor = 999999999999
-    indice = 12
-    for index in range(0, len(tiempos) -1):
-        if tiempos[index][1] < mejor:
-            mejor = tiempos[index][1]
-            indice = index
-    print('\nMejor resultado: ' + tiempos[indice][0] + ', %.5fs' % (tiempos[indice][1]))
-
+        print('Opcion no encontrada')        
+            
 # --------------- Utils generales ------------------
 def getTimestampedName(name):
     td = datetime.datetime.now().strftime("[%H-%M-%S.%f")[:-2]

@@ -3,9 +3,9 @@ from Dominio.Cubo import Cubo
 import math, copy
 
 class Problema:
-    def __init__(self, json):
-        self.espacioEstados = EspacioEstados(json)
-        self.estadoInicial = Cubo(json)
+    def __init__(self, cubo):
+        self.espacioEstados = EspacioEstados()
+        self.estadoInicial = cubo
         self.estadoInicial.updateEstado()
 
     def esObjetivo(self, NodoArbolActual):

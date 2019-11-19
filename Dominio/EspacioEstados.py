@@ -5,10 +5,6 @@ import cmd, sys
 from Dominio.Cubo import Cubo
 
 class EspacioEstados:
-    def __init__(self, json):
-        # self.cubo = Cubo(json)
-        pass
-    
     '''Este método genera tripetas (Acción realizada, New_Objeto_Cubo, CosteAcción = 1)
     que son añadidas a la lista de sucesores, total de tripletas generadas es igual a
     el número de movimientos (estático) multiplicado por el numero de filas del cubo,

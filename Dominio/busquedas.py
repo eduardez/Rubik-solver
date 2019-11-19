@@ -22,7 +22,7 @@ def busquedaAcotada(Problema, estrategia, profMax):
     frontera = Frontera()
     frontera.insertarNodo(NodoArbol(None, Problema.estadoInicial,0,0,0))
     solucion = False
-    esp_estados = EspacioEstados(None)
+    esp_estados = EspacioEstados()
     num_nodos = 1
     t_inicial = time.time()
     '''Si no hay solución y la frontera está vacía se detiene
