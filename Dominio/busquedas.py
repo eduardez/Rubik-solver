@@ -8,7 +8,6 @@ from Dominio.EspacioEstados import EspacioEstados
 import time, datetime
 
 
-
 def busquedaIncremental(Problema, estrategia, profMax, profInc):
     profActual = profInc
     solucion = []
@@ -16,6 +15,7 @@ def busquedaIncremental(Problema, estrategia, profMax, profInc):
         solucion = busquedaAcotada(Problema,estrategia,profActual, profMax)
         profActual = profActual + profInc
     return solucion 
+
 
 def busquedaAcotada(Problema, estrategia, profMax):
     listaNodos = []
@@ -27,6 +27,7 @@ def busquedaAcotada(Problema, estrategia, profMax):
     t_inicial = time.time()
     '''Si no hay solución y la frontera está vacía se detiene
     si hay solución y la frontera sigue llena se para la ejecución'''
+    #TODO comprobar aqui si estaa en visitados
     while (not solucion) and (not frontera.isEmpty()):
         NodoArbolActual = frontera.pop()
         if Problema.esObjetivo(NodoArbolActual):
@@ -39,8 +40,6 @@ def busquedaAcotada(Problema, estrategia, profMax):
             rendimientoPrint(len(frontera),num_nodos, t_inicial, 5)
     if solucion:
         return crearSolucion(NodoArbolActual)
-
-
 
         
 def crearListaNodosArbol(listaSucesores,NodoArbolActual,profMax,estrategia):
@@ -59,8 +58,8 @@ def crearListaNodosArbol(listaSucesores,NodoArbolActual,profMax,estrategia):
             pass
         else:    
             listaNodosArbol.append(nuevoNodoArbol)
-
     return listaNodosArbol
+
 
 def crearSolucion(NodoArbolActual):
     listaSolucion = []
@@ -71,11 +70,10 @@ def crearSolucion(NodoArbolActual):
         listaSolucion.insert(0,NodoArbolActual)
     return listaSolucion
 
+
 def mostrarSolucion(listaSolucion):
     for i in listaSolucion:
         print(str(i))
-        
-        
         
         
 # ----------------- METODOS QUE NO BUSCAN ---------------------

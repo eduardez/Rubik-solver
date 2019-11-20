@@ -62,8 +62,10 @@ def resolverCubo(problema):
             listaSolucion = busquedas.busquedaAcotada(problema, estrategia, profMax)
         if listaSolucion == None:
             print("El algoritmo de busqueda no ha llegado a una solución posible")
+            return None
         else:
             busquedas.mostrarSolucion(listaSolucion)
+            return listaSolucion[len(listaSolucion)-1].cubo
     else:
         print('Opcion no encontrada')        
             
