@@ -171,8 +171,6 @@ class Cubo:
             for i in range(0, tam):
                    cubo_str += (espacios + str(self.front[i]) + '\n')
             stringCubo = str(cubo_str)
-            stringCubo += '\nMD5: ' + self.idHash
-            #stringCubo += '\nID: ' + self.cuboToStr()
             return stringCubo
         
       def getCuboSize(self):

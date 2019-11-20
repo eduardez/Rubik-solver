@@ -5,11 +5,13 @@ import cmd, sys
 from Dominio.Cubo import Cubo
 
 class EspacioEstados:
-    '''Este método genera tripetas (Acción realizada, New_Objeto_Cubo, CosteAcción = 1)
-    que son añadidas a la lista de sucesores, total de tripletas generadas es igual a
-    el número de movimientos (estático) multiplicado por el numero de filas del cubo,
-    es decir todas las acciones posibles'''
+   
     def sucesores(self, NodoArbolActual):
+        '''Este método genera tripetas (Acción realizada, New_Objeto_Cubo, CosteAcción = 1)
+        que son añadidas a la lista de sucesores, total de tripletas generadas es igual a
+        el número de movimientos (estático) multiplicado por el numero de filas del cubo,
+        es decir todas las acciones posibles'''
+        
         listaSucesores = []
         for x in range(0, NodoArbolActual.cubo.getCuboSize()):
             new_cubo = copy.deepcopy(NodoArbolActual.cubo)

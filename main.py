@@ -5,7 +5,7 @@ import Presentacion.VIEW_rubiks as Gui
 from Dominio.Cubo import Cubo as Objeto_Cubo
 from Dominio.Problema import Problema
 
-cubo_actual = Objeto_Cubo(utils.jsonRead('res/json_files/cubo2x2Sol.json'))
+cubo_actual = Objeto_Cubo(utils.jsonRead('res/json_files/problema.json'))
 problema = None
 
 
@@ -17,10 +17,11 @@ class CubeShell(cmd.Cmd):
         '''Menu guiado donde se resolvera el cubo por medio de los metodos vistos en clase.'''
         global cubo_actual
         problema = Problema(cubo_actual)
-        cubo_resuelto = utils.resolverCubo(problema)
-        if cubo_resuelto is not None:
-            cubo_actual = cubo_resuelto
-
+        # cubo_resuelto = utils.resolverCubo(problema)
+        # if cubo_resuelto is not None:
+        #     cubo_actual = cubo_resuelto
+        utils.resolverCubo(problema)
+        
     def do_ver_cubo(self, arg):
         '''Imprimir el objeto cubo actual'''
         print(str(cubo_actual))
@@ -59,12 +60,10 @@ class CubeShell(cmd.Cmd):
         # except NameError:
         #     print('Error en los argumentos.')
         pass
-        
-        
+       
     def do_iniciar_gui(self, arg):
         '''Iniciar entorno grafico (En construccion)'''
         Gui.start()    
-
 
     def do_exit(self, arg):
         print('Adioooooooooooooooooooooooooooooooooos........')
@@ -90,5 +89,3 @@ if __name__ == "__main__":
     ''')
     initResources()
     CubeShell().cmdloop()
-
-    

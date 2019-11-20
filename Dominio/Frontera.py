@@ -6,20 +6,23 @@ class Frontera:
     def __init__(self):
         self.frontera = PriorityQueue()
         self.visitados = dict({"id":0})
+        self.idUltimoNodo = 0
 
     def insertarNodo(self, nodo):
-        self.frontera.put(nodo)
+        nodo.id = self.idUltimoNodo
+        self.idUltimoNodo += 1
+        self.frontera.put(nodo, nodo.f)
 
     def insertarLista(self, listaNodos):
         optimizacion = True
         for nodoArbol in listaNodos:
             if optimizacion:
-                if not(nodoArbol.cubo.idHash in self.visitados): 
+                if not self.isVisitado(nodoArbol): 
                     self.insertarNodo(nodoArbol)
-                    self.visitados.update({str(nodoArbol.cubo.idHash):nodoArbol.f})
-                elif abs(nodoArbol.f) < abs(self.visitados.get(nodoArbol.cubo.idHash)):
-                    self.insertarNodo(nodoArbol)
-                    self.visitados.update({str(nodoArbol.cubo.idHash):nodoArbol.f})
+                # elif self.isVisitado(nodoArbol) and (nodoArbol.f < self.visitados[nodoArbol.cubo.idHash]):
+                #     self.insertarNodo(nodoArbol)
+                #     del self.visitados[nodoArbol.cubo.idHash]
+
             else:
                 self.insertarNodo(nodoArbol)
 
@@ -28,7 +31,10 @@ class Frontera:
             return self.frontera.get()
         else:
             return 0
-
+        
+    def isVisitado(self, nodo):
+        return nodo.cubo.idHash in self.visitados
+    
     def isEmpty(self):
         return self.frontera.empty()
         
