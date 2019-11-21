@@ -84,3 +84,4 @@ Tiempo transcurrido: {time.time() - tiempo_inicial}
     mili = int(datatiempo.strftime("%f")[:-3])
     if (second % periodo == 0) and (0 < mili < 50):
         print(cadena)
+        

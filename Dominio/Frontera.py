@@ -1,17 +1,21 @@
-import numpy as np, hashlib
+#!/usr/bin/python3
+# -*- coding: utf-8 -*-
+
+import numpy as np, hashlib, heapq
 import Dominio.NodoArbol as NodoArbol
 from queue import PriorityQueue
 
+
 class Frontera:
     def __init__(self):
-        self.frontera = PriorityQueue()
+        self.frontera = []
         self.visitados = dict({"id":0})
         self.idUltimoNodo = 0
 
     def insertarNodo(self, nodo):
         nodo.id = self.idUltimoNodo
         self.idUltimoNodo += 1
-        self.frontera.put(nodo, nodo.f)
+        heapq.heappush(self.frontera, nodo)
 
     def insertarLista(self, listaNodos):
         optimizacion = True
@@ -28,7 +32,7 @@ class Frontera:
 
     def pop(self):
         if not self.isEmpty():
-            return self.frontera.get()
+            return heapq.heappop(self.frontera)
         else:
             return 0
         
@@ -36,7 +40,7 @@ class Frontera:
         return nodo.cubo.idHash in self.visitados
     
     def isEmpty(self):
-        return self.frontera.empty()
+        return len(self.frontera) < 1 
         
     def __len__(self):
-        return len(self.frontera.queue)
+        return len(self.frontera)
