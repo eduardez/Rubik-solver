@@ -20,8 +20,4 @@ class Problema:
         return True          
 
         
-    def __str__(self):
-        cadena = f'Estado inicial: {str(self.estadoInicial.idHash)}\nEstado objetivo: {str(self.estadoObjetivo)}'
-        return cadena
-                
             

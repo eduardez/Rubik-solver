@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 # -*- coding: utf-8 -*-
 
-import random
+import random, math
 import Dominio.Cubo
 
 class NodoArbol:
@@ -10,38 +10,39 @@ class NodoArbol:
         self.cubo = Cubo
         self.f = f
         self.id = identidad
-        if nodoPadre == None:
-            self.nodoPadre = None
-            self.profundidad = 0
-            self.coste = 0
-            self.accion = 'Cubo Inicial'
-        else:
-            self.nodoPadre=nodoPadre
-            self.profundidad=profundidad
-            self.coste = coste
-            self.accion = None
+        self.heuristica = 0
+        self.nodoPadre=nodoPadre
+        self.profundidad=profundidad
+        self.coste = coste
+        self.accion = None
             
     def calcularHeuristica(self):
-        pass
-    
+        cuboActual = [self.cubo.back, self.cubo.down, self.cubo.front, self.cubo.left, 
+                    self.cubo.right, self.cubo.up]
+        heur = 0.0
+        N = self.cubo.getCuboSize()
+        for cara in cuboActual:
+            colors = [0.0,0.0,0.0,0.0,0.0,0.0]
+            # Contar los colores de la cara
+            for row in cara:
+                for tile in row:
+                    colors[tile] += 1.0
+            # Calcular la entropia de la cara
+            entropía = 0.0
+            for c in colors:
+                if c > 0.0:
+                    entropía = entropía + c/(N*N) * math.log(c/(N*N),6)
+            # Sumar la entropia de todas las caras
+            heur += (-entropía)
+        self.heuristica = heur
     
     def __lt__(self, otro_nodo):
         '''Metodo _comparable_ de python para que el nodo arbol pueda
         meterse sin problemas en la priority queue.'''
-        # if self.f < otro_nodo.f:
-        #     return self
-        # elif self.f > otro_nodo.f:
-        #     return otro_nodo
-        # elif self.f == otro_nodo.f:
-        #     if self.id < otro_nodo.id:
-        #         return self
-        #     else:
-        #         return otro_nodo
         if not self.f == otro_nodo.f:
             return self.f < otro_nodo.f
         else:
             return self.id < otro_nodo.id
-
 
 
     def __str__(self):

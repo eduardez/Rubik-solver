@@ -39,6 +39,7 @@ def moverCubo(cubo, movimiento, fila):
     if generar_imagenes:
         createImage(cubo)
     
+    
 def mezclarCuboTupla(movimientos, cubo):
     """Mezclar el cubo con movimientos definidos en un array de tuplas."""
     for mov in movimientos:
@@ -47,19 +48,18 @@ def mezclarCuboTupla(movimientos, cubo):
         
 
 def resolverCubo(problema):
+    '''Menu de eleccion de tipo de busquedas.'''
     listaSolucion = []
-    optEstrategias = dict({1:"profundidad", 2:"anchura", 3:"costo", 4:"prof_incremental"})
-    opt = int(input("¿Cómo quieres resolver el cubo:\n 1.Profundidad\n 2.Anchura\n 3.Costo\n 4.Prof_incremental\n0.Cancelar\n"))
+    optEstrategias = dict({1:"profundidad", 2:"anchura", 3:"costo", 4:"Aestrella", 5:"voraz"})
+    opt = int(input("¿Cómo quieres resolver el cubo:\n 1.Profundidad\n 2.Anchura\n 3.Costo\n 4.A*\n 5.Voraz\n0.Cancelar\n"))
     estrategia = optEstrategias.get(opt)
     if estrategia is not None:
         print("¿Máxima profundidad?")
         profMax = int(input())
-        if estrategia == "prof_incremental":
-            print("¿Incremento de la profundidad?")
-            profInc = int(input())
-            listaSolucion = busquedas.busquedaIncremental(problema, estrategia, profMax, profInc)
-        else:
-            listaSolucion = busquedas.busquedaAcotada(problema, estrategia, profMax)
+        if 1 <= opt <= 5: # Si opt esta entre 1 y 3 la busqueda sera no informada
+            t_inicial = time.time()
+            listaSolucion = busquedas.busquedaAcotada(problema, estrategia, profMax, opti=True)
+            print(f'Tiempo transcurrido: {time.time() - t_inicial}')
         if listaSolucion == None:
             print("El algoritmo de busqueda no ha llegado a una solución posible")
             return None
@@ -67,7 +67,31 @@ def resolverCubo(problema):
             busquedas.mostrarSolucion(listaSolucion)
             return listaSolucion[len(listaSolucion)-1].cubo
     else:
-        print('Opcion no encontrada')        
+        print('Opcion no encontrada')
+        
+def resolverAll(problema):
+    optEstrategias =["profundidad", "anchura", "costo", "Aestrella", "voraz"]
+    optimizacion = True
+    try:
+        profMax = int(input('Profundidad maxima: '))
+        opt = int(input('¿Activar optimizacion?(def = Si/0= no)'))
+        if opt == 0:
+            optimizacion = False
+    except Exception:
+        print('MAL INTRODUCIDO')
+        return 0
+
+    for estrategia in optEstrategias:
+        print('\n-----------------------------------------------\nEjecutando busqueda en ' + estrategia)
+        t_inicial = time.time()
+        listaSolucion = busquedas.busquedaAcotada(problema, estrategia, profMax, opti=optimizacion)
+        print(f'Tiempo transcurrido: {time.time() - t_inicial}')
+        if listaSolucion == None:
+            print("El algoritmo de busqueda no ha llegado a una solución posible")
+        else:
+            busquedas.mostrarSolucionCorta(listaSolucion)
+
+
             
 # --------------- Utils generales ------------------
 def getTimestampedName(name):

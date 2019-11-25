@@ -17,8 +17,7 @@ class Frontera:
         self.idUltimoNodo += 1
         heapq.heappush(self.frontera, nodo)
 
-    def insertarLista(self, listaNodos):
-        optimizacion = True
+    def insertarLista(self, listaNodos, optimizacion=True):
         for nodoArbol in listaNodos:
             if optimizacion:
                 if not self.isVisitado(nodoArbol): 

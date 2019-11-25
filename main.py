@@ -21,7 +21,13 @@ class CubeShell(cmd.Cmd):
         # if cubo_resuelto is not None:
         #     cubo_actual = cubo_resuelto
         utils.resolverCubo(problema)
-        
+    
+    def do_resolver_all(self, args):
+        '''Probar todos los algoritmos de busqueda implementados hasta ahora, sin 
+        imprimir la solucion como tal pero si el tiempo'''
+        problema = Problema(cubo_actual)
+        utils.resolverAll(problema)
+    
     def do_ver_cubo(self, arg):
         '''Imprimir el objeto cubo actual'''
         print(str(cubo_actual))
