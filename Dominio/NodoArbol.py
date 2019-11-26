@@ -43,9 +43,11 @@ class NodoArbol:
             return self.f < otro_nodo.f
         else:
             return self.id < otro_nodo.id
+        
 
     def __repr__(self):
-            return (f'[{self.id}]([{str(self.accion)[-2:]}]{self.cubo.idHash}, c={self.coste}, p={self.profundidad}, h={self.heuristica}, f={self.f})')
+        return (f'[{self.id}]([{str(self.accion)}]{self.cubo.idHash}, c={self.coste}, '
+                +f'p={self.profundidad}, h={round(self.heuristica, 2)}, f={round(self.f, 2)})')
 
     def __str__(self):
         return ('\nAcción: ' + self.accion +

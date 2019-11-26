@@ -5,7 +5,7 @@ import Presentacion.VIEW_rubiks as Gui
 from Dominio.Cubo import Cubo as Objeto_Cubo
 from Dominio.Problema import Problema
 
-cubo_actual = Objeto_Cubo(utils.jsonRead('res/json_files/problema2.json'))
+cubo_actual = Objeto_Cubo(utils.jsonRead('res/json_files/problema.json'))
 problema = None
 
 

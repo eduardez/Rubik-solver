@@ -9,7 +9,7 @@ from queue import PriorityQueue
 class Frontera:
     def __init__(self):
         self.frontera = []
-        self.visitados = dict({"id":0})
+        self.visitados = dict({})# Formato -> {'id':0}
         self.idUltimoNodo = 0
 
     def insertarNodo(self, nodo):
@@ -22,9 +22,10 @@ class Frontera:
             if optimizacion:
                 if not self.isVisitado(nodoArbol): 
                     self.insertarNodo(nodoArbol)
-                # elif self.isVisitado(nodoArbol) and (nodoArbol.f < self.visitados[nodoArbol.cubo.idHash]):
-                #     self.insertarNodo(nodoArbol)
-                #     del self.visitados[nodoArbol.cubo.idHash]
+                elif self.isVisitado(nodoArbol) and (nodoArbol.f < self.visitados[nodoArbol.cubo.idHash]):
+                    del self.visitados[nodoArbol.cubo.idHash]
+                    self.visitados.update({nodoArbol.cubo.idHash:nodoArbol.f})
+                    self.insertarNodo(nodoArbol)
 
             else:
                 self.insertarNodo(nodoArbol)

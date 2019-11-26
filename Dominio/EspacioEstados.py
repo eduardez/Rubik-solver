@@ -16,32 +16,32 @@ class EspacioEstados:
         for x in range(0, NodoArbolActual.cubo.getCuboSize()):
             new_cubo = copy.deepcopy(NodoArbolActual.cubo)
             new_cubo.desplazamientoB(x)
-            listaSucesores.append(("Desplazamiento B" + str(x), new_cubo, 1))
+            listaSucesores.append(("B" + str(x), new_cubo, 1))
 
         for x in range(0, NodoArbolActual.cubo.getCuboSize()):
             new_cubo = copy.deepcopy(NodoArbolActual.cubo)
             new_cubo.desplazamientob(x)
-            listaSucesores.append(("Desplazamiento b" + str(x), new_cubo, 1))
+            listaSucesores.append(("b" + str(x), new_cubo, 1))
 
         for x in range(0, NodoArbolActual.cubo.getCuboSize()):
             new_cubo = copy.deepcopy(NodoArbolActual.cubo)
             new_cubo.desplazamientoD(x)
-            listaSucesores.append(("Desplazamiento D" + str(x), new_cubo, 1))
+            listaSucesores.append(("D" + str(x), new_cubo, 1))
 
         for x in range(0, NodoArbolActual.cubo.getCuboSize()):
             new_cubo = copy.deepcopy(NodoArbolActual.cubo)
             new_cubo.desplazamientod(x)
-            listaSucesores.append(("Desplazamiento d" + str(x), new_cubo, 1))
+            listaSucesores.append(("d" + str(x), new_cubo, 1))
 
         for x in range(0, NodoArbolActual.cubo.getCuboSize()):
             new_cubo = copy.deepcopy(NodoArbolActual.cubo)
             new_cubo.desplazamientoL(x)
-            listaSucesores.append(("Desplazamiento L" + str(x), new_cubo, 1))
+            listaSucesores.append(("L" + str(x), new_cubo, 1))
 
         for x in range(0, NodoArbolActual.cubo.getCuboSize()):
             new_cubo = copy.deepcopy(NodoArbolActual.cubo)
             new_cubo.desplazamientol(x)
-            listaSucesores.append(("Desplazamiento l" + str(x), new_cubo, 1))
+            listaSucesores.append(("l" + str(x), new_cubo, 1))
 
 
         return listaSucesores

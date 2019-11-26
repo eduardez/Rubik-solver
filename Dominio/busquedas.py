@@ -13,7 +13,7 @@ def busquedaAcotada(problema, estrategia, profMax, opti):
     frontera = Frontera()
     # Crear nodo padre e insertarlo en la frontera
     nodo_padre = NodoArbol(None, problema.estadoInicial, 0, 0, 0, 0)
-    nodo_padre.accion = 'Cubo Inicial'
+    nodo_padre.accion = 'None'
     if estrategia == "Aestrella":
         nodo_padre.calcularHeuristica()
         nodo_padre.f = nodo_padre.coste + nodo_padre.heuristica
