@@ -76,14 +76,22 @@ def crearSolucion(NodoArbolActual):
     return listaSolucion
 
 
-def mostrarSolucionCorta(listaSolucion):
-    for nodo in listaSolucion:
-        print(f'[{nodo.id}]([{str(nodo.accion)[-2:]}]{nodo.cubo.idHash}, c={nodo.coste}, p={nodo.profundidad}, h={nodo.heuristica}, f={nodo.f})')
-        
+def mostrarSolucion(listaSolucion, tipo=0):
+    """Muestra la solucion a un problema 
+    dada una lista de nodos que forman el 
+    camino solucion.
 
-def mostrarSolucion(listaSolucion):
+    Argumentos:
+        listaSolucion: camino solucion
+        tipo: Tipo de representacion 0->str, 1->repr
+    Returns:
+        Nothing   
+    """
     for i in listaSolucion:
-        print(str(i))
+        if tipo==0:
+            print(str(i))
+        else:
+            print(repr(i))
         
         
 # ----------------- METODOS QUE NO BUSCAN ---------------------

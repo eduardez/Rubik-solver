@@ -64,7 +64,7 @@ def resolverCubo(problema):
             print("El algoritmo de busqueda no ha llegado a una solución posible")
             return None
         else:
-            busquedas.mostrarSolucion(listaSolucion)
+            busquedas.mostrarSolucion(listaSolucion, 1)
             return listaSolucion[len(listaSolucion)-1].cubo
     else:
         print('Opcion no encontrada')
@@ -89,7 +89,7 @@ def resolverAll(problema):
         if listaSolucion == None:
             print("El algoritmo de busqueda no ha llegado a una solución posible")
         else:
-            busquedas.mostrarSolucionCorta(listaSolucion)
+            busquedas.mostrarSolucion(listaSolucion, 1)
 
 
             
