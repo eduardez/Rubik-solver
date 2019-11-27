@@ -43,50 +43,58 @@ import time, datetime
 
 def busquedaAcotada(problema, estrategia, profMax, opti):
     esp_estados = EspacioEstados()
-
     visitados = dict({})
-
     frontera = Frontera()
-    frontera.insertarNodo(NodoArbol(None, problema.estadoInicial,0,0,0,0))
+    frontera.insertarNodo(crearNodoPadre(estrategia, problema))
     #t_inicial = time.time()   
     while(1):
         if (frontera.isEmpty()):
             return None
         nodo_actual = frontera.pop()
+        if len(visitados) < 11:
+            print(f'IdNodo: {nodo_actual.id}, Accion {nodo_actual.accion}')
         if (problema.esObjetivo(nodo_actual)):
             return crearSolucion(nodo_actual)
-        if(nodo_actual.cubo.idHash in visitados):
-            if(visitados[nodo_actual.cubo.idHash] > nodo_actual.f):
+        if (nodo_actual.cubo.idHash in visitados) and opti:
+            if(abs(visitados[nodo_actual.cubo.idHash]) > abs(nodo_actual.f)):
                 visitados.update({nodo_actual.cubo.idHash:nodo_actual.f})
+                listaSucesores = esp_estados.sucesores(nodo_actual)
+                listaNodos = crearListaNodosArbol(listaSucesores,nodo_actual,profMax,estrategia)
+                frontera.insertarLista(listaNodos)
         else:
             visitados.update({nodo_actual.cubo.idHash:nodo_actual.f})
             listaSucesores = esp_estados.sucesores(nodo_actual)
             listaNodos = crearListaNodosArbol(listaSucesores,nodo_actual,profMax,estrategia)
-            frontera.insertarLista(listaNodos, optimizacion=opti)
-               
+            frontera.insertarLista(listaNodos)
 
+def crearNodoPadre(estrategia, problema):
+    nodo = NodoArbol(None, problema.estadoInicial,0,0,0,0)
+    if estrategia == "Aestrella":
+        nodo.calcularHeuristica()
+        nodo.f = nodo.coste + nodo.heuristica
+    elif estrategia == "voraz":
+        nodo.calcularHeuristica()
+        nodo.f = nodo.heuristica
+    return nodo
         
 def crearListaNodosArbol(listaSucesores,NodoArbolActual,profMax,estrategia):
     listaNodosArbol = []
-    for sucesor in listaSucesores:
-        nuevoNodoArbol = NodoArbol(NodoArbolActual, sucesor[1], NodoArbolActual.profundidad + 1, NodoArbolActual.coste + sucesor[2], 0, 0)
-        nuevoNodoArbol.accion = sucesor[0]
-        if estrategia == "anchura":
-            nuevoNodoArbol.f = nuevoNodoArbol.profundidad
-        elif estrategia == "profundidad":
-            nuevoNodoArbol.f = -(nuevoNodoArbol.profundidad)
-        elif estrategia == "costo":
-            nuevoNodoArbol.f = nuevoNodoArbol.coste
-        elif estrategia == "Aestrella":
-            nuevoNodoArbol.calcularHeuristica()
-            nuevoNodoArbol.f = nuevoNodoArbol.coste + nuevoNodoArbol.heuristica
-        elif estrategia == "voraz":
-            nuevoNodoArbol.calcularHeuristica()
-            nuevoNodoArbol.f = nuevoNodoArbol.heuristica
-
-
-
-        if not nuevoNodoArbol.profundidad > profMax: 
+    if not NodoArbolActual.profundidad >= profMax: 
+        for sucesor in listaSucesores:
+            nuevoNodoArbol = NodoArbol(NodoArbolActual, sucesor[1], NodoArbolActual.profundidad + 1, NodoArbolActual.coste + sucesor[2], 0, 0)
+            nuevoNodoArbol.accion = sucesor[0]
+            if estrategia == "anchura":
+                nuevoNodoArbol.f = nuevoNodoArbol.profundidad
+            elif estrategia == "profundidad":
+                nuevoNodoArbol.f = -(nuevoNodoArbol.profundidad)
+            elif estrategia == "costo":
+                nuevoNodoArbol.f = nuevoNodoArbol.coste
+            elif estrategia == "Aestrella":
+                nuevoNodoArbol.calcularHeuristica()
+                nuevoNodoArbol.f = nuevoNodoArbol.coste + nuevoNodoArbol.heuristica
+            elif estrategia == "voraz":
+                nuevoNodoArbol.calcularHeuristica()
+                nuevoNodoArbol.f = nuevoNodoArbol.heuristica
             listaNodosArbol.append(nuevoNodoArbol)
     return listaNodosArbol
 

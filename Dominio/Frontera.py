@@ -17,18 +17,10 @@ class Frontera:
         self.idUltimoNodo += 1
         heapq.heappush(self.frontera, nodo)
 
-    def insertarLista(self, listaNodos, optimizacion=True):
-        for nodoArbol in listaNodos:
-            # if optimizacion:
-            #     if not self.isVisitado(nodoArbol): 
-            #         self.insertarNodo(nodoArbol)
-            #     elif self.isVisitado(nodoArbol) and (nodoArbol.f < self.visitados[nodoArbol.cubo.idHash]):
-            #         del self.visitados[nodoArbol.cubo.idHash]
-            #         self.visitados.update({nodoArbol.cubo.idHash:nodoArbol.f})
-            #         self.insertarNodo(nodoArbol)
-
-            # else:
-                self.insertarNodo(nodoArbol)
+    def insertarLista(self, listaNodos):
+        if not listaNodos is None:
+            for nodoArbol in listaNodos:
+                    self.insertarNodo(nodoArbol)
 
     def pop(self):
         if not self.isEmpty():
