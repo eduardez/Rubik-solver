@@ -60,7 +60,7 @@ def resolverCubo(problema):
             t_inicial = time.time()
             listaSolucion = busquedas.busquedaAcotada(problema, estrategia, profMax, opti=True)
             print(f'Tiempo transcurrido: {time.time() - t_inicial}')
-        if listaSolucion == None:
+        if listaSolucion is None:
             print("El algoritmo de busqueda no ha llegado a una solución posible")
             return None
         else:
