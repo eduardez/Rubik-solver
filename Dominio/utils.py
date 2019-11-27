@@ -56,11 +56,17 @@ def resolverCubo(problema):
     if estrategia is not None:
         print("¿Máxima profundidad?")
         profMax = int(input())
+        opt = True
+        try:
+            if 0 == int(input('¿Activar optimizacion?(def = Si/0= no)')):
+                opt = False
+        except Exception:
+            pass # Si se ha introducido otra cosa nque no sea un 0, se deja optimizacion a true
         if 1 <= opt <= 5: # Si opt esta entre 1 y 3 la busqueda sera no informada
             t_inicial = time.time()
-            listaSolucion = busquedas.busquedaAcotada(problema, estrategia, profMax, opti=True)
+            listaSolucion = busquedas.busquedaAcotada(problema, estrategia, profMax, opti=opt)
             print(f'Tiempo transcurrido: {time.time() - t_inicial}')
-        if listaSolucion == None:
+        if listaSolucion is None:
             print("El algoritmo de busqueda no ha llegado a una solución posible")
             return None
         else:
@@ -68,6 +74,7 @@ def resolverCubo(problema):
             return listaSolucion[len(listaSolucion)-1].cubo
     else:
         print('Opcion no encontrada')
+        
         
 def resolverAll(problema):
     optEstrategias =["profundidad", "anchura", "costo", "Aestrella", "voraz"]

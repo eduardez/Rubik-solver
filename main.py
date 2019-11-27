@@ -20,6 +20,7 @@ class CubeShell(cmd.Cmd):
         # cubo_resuelto = utils.resolverCubo(problema)
         # if cubo_resuelto is not None:
         #     cubo_actual = cubo_resuelto
+        
         utils.resolverCubo(problema)
     
     def do_resolver_all(self, args):
