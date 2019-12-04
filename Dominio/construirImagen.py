@@ -7,7 +7,7 @@ from PIL import Image
 from Dominio.Cubo import Cubo
 import Dominio.utils
 
-dimension = 3 #Dimension del cubo NxN
+dimension = 2 #Dimension del cubo NxN
 padding = 20 #Tamaño de 'baldosa' y de separación
 
 #Abrir imagenes para formar el cubo
@@ -21,8 +21,8 @@ img_red = Image.open('./res/FormarCubo/red.png')
 
 
 def crearFondo(dimension, padding):
-    ancho = padding * dimension * 5 +50
-    largo = padding * dimension * 4+50
+    ancho = padding * dimension * 2 +50
+    largo = padding * dimension * 2+50
     img=Image.new('RGBA', (ancho,largo), (0,0,0,0))
     img.save('./res/FormarCubo/background.png')
 

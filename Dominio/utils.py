@@ -45,6 +45,7 @@ def mezclarCuboTupla(tupla, cubo):
     moverCubo(cubo, tupla[0], tupla[1])
     print(str(tupla) + "\n" + str(cubo) + '\n')
 
+
 def resolverCubo(problema):
     '''Menu de eleccion de tipo de busquedas.'''
     listaSolucion = []

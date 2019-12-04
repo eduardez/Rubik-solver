@@ -4,6 +4,7 @@ import Dominio.utils as utils, cmd, sys
 import Presentacion.VIEW_rubiks as Gui
 from Dominio.Cubo import Cubo as Objeto_Cubo
 from Dominio.Problema import Problema
+from Dominio.construirImagen import createImage
 
 ruta_json = 'res/json_files/problema2.json'
 cubo_actual = Objeto_Cubo(utils.jsonRead(ruta_json))
@@ -48,6 +49,24 @@ class CubeShell(cmd.Cmd):
         for tupla in movimientos:
             utils.mezclarCuboTupla(tupla, cubo_actual)
             
+    def do_mover_especifico(self, args):
+        mov = str(input('Tipo de movimiento: '))
+        fila = None
+        cubo_actual = Objeto_Cubo(utils.jsonRead(ruta_json))
+
+        try:
+            if not isinstance(mov, str):
+                raise ArithmeticError
+            fila  = int(input('Fila/columna en la que hacerlo: '))
+            if not isinstance(fila, int):
+                raise ArithmeticError
+        except ArithmeticError:
+            print('Datatype missmatch')
+        utils.moverCubo(cubo_actual, mov, fila)
+        createImage(cubo=cubo_actual)
+        
+            
+        
     def do_mezclar_todos(self, args):
         '''Realiza todos los movimientos posibles dado un cubo NxN'''
         movimientos = ['B','b','D','d','L','l',]
