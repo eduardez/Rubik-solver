@@ -39,8 +39,6 @@ class Cubo:
             self.updateEstado()
           
       def desplazamientob(self, fila):
-            #'''Moveremos la cara del cubo 90º, generando un cubo nuevo tras la modificación'''
-            #extremo izq
             arr1 = copy.copy(self.left[fila])
             arr2 = copy.copy(self.down[fila])
             arr3 = copy.copy(self.right[fila])
@@ -60,7 +58,6 @@ class Cubo:
            
       def desplazamientoL(self, fila):
             fila_prima = len(self.up) - fila - 1#Indice de la cara UP ya que el posicionamiento va a la inversa del resto de las caras
-            #Moveremos la cara del cubo -90º, generando un cubo nuevo tras la modificación'''
             arr1 = self.getColumna(self.up, fila_prima)
             arr2 = self.getColumna(self.front,fila)
             arr3 = self.getColumna(self.down,fila)
@@ -80,7 +77,6 @@ class Cubo:
             self.updateEstado()
 
       def desplazamientol(self, fila):
-               #Moveremos la cara del cubo -90º, generando un cubo nuevo tras la modificación'''
             fila_prima = len(self.up) - fila - 1#Indice de la cara UP ya que el posicionamiento va a la inversa del resto de las caras
             arr1 = self.getColumna(self.up, fila_prima)
             arr2 = self.getColumna(self.front,fila)
@@ -102,7 +98,6 @@ class Cubo:
 
       def desplazamientoD(self, fila):
             fila_prima = len(self.up) - fila - 1#Indice de la cara UP ya que el posicionamiento va a la inversa del resto de las caras
-                  #Moveremos la cara del cubo -90º, generando un cubo nuevo tras la modificación'''
             arr1 = self.getColumna(self.left, fila_prima)
             arr2 = copy.copy(self.back[fila_prima])
             arr3 = self.getColumna(self.right, fila)
@@ -122,7 +117,6 @@ class Cubo:
             self.updateEstado()
 
       def desplazamientod(self, fila):
-            #Moveremos la cara del cubo -90º, generando un cubo nuevo tras la modificación'''
             fila_prima = len(self.up) - fila -1
             arr1 = self.getColumna(self.left, fila_prima)
             arr2 = copy.copy(self.back[fila_prima])

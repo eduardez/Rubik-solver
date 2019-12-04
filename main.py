@@ -5,7 +5,8 @@ import Presentacion.VIEW_rubiks as Gui
 from Dominio.Cubo import Cubo as Objeto_Cubo
 from Dominio.Problema import Problema
 
-cubo_actual = Objeto_Cubo(utils.jsonRead('res/json_files/problema.json'))
+ruta_json = 'res/json_files/problema2.json'
+cubo_actual = Objeto_Cubo(utils.jsonRead(ruta_json))
 problema = None
 
 
@@ -20,7 +21,6 @@ class CubeShell(cmd.Cmd):
         # cubo_resuelto = utils.resolverCubo(problema)
         # if cubo_resuelto is not None:
         #     cubo_actual = cubo_resuelto
-        
         utils.resolverCubo(problema)
     
     def do_resolver_all(self, args):
@@ -38,14 +38,27 @@ class CubeShell(cmd.Cmd):
         cubo_actual = Objeto_Cubo(utils.jsonRead('res/json_files/cubo10x10.json'))
         cubo_actual.updateEstado()
         movimientos = [('l',3),('D',1),('l',1),('d',0),('b',0),('B',0),('b',0),('l',2),('d',1)]
-        utils.mezclarCuboTupla(movimientos, cubo_actual)
+        for tupla in movimientos:
+            utils.mezclarCuboTupla(tupla, cubo_actual)
 
     def do_resolver_profesores(self, arg):
         cubo_actual = Objeto_Cubo(utils.jsonRead('res/json_files/problema.json'))
         cubo_actual.updateEstado()
         movimientos = [('b',0),('D',0),('d',1),('B',0),('B',0)]
-        utils.mezclarCuboTupla(movimientos, cubo_actual)
-
+        for tupla in movimientos:
+            utils.mezclarCuboTupla(tupla, cubo_actual)
+            
+    def do_mezclar_todos(self, args):
+        '''Realiza todos los movimientos posibles dado un cubo NxN'''
+        movimientos = ['B','b','D','d','L','l',]
+        cubo_actual = Objeto_Cubo(utils.jsonRead(ruta_json))
+        for tipo in movimientos:
+            for x in range(0,cubo_actual.getCuboSize()):
+                cubo_actual = Objeto_Cubo(utils.jsonRead(ruta_json))
+                movim = (tipo, x)
+                utils.mezclarCuboTupla(movim, cubo_actual)
+            
+            
     def do_mezclar(self, arg):
         '''Mezclar el objeto cubo actual'''
         utils.mezclar_aleatorio(1, cubo_actual)
@@ -77,12 +90,9 @@ class CubeShell(cmd.Cmd):
         sys.exit(0)
 
 
-def parse(arg):
-    'Convert a series of zero or more numbers to an argument tuple'
-    return tuple(map(int, arg.split()))
-
-
 def initResources():
+    '''Inicializar las carpetas de imagenes y JSONs,
+    actualizar estado actual del cubo'''
     utils.createFolder(utils.PATHS.get('image_folder'))
     utils.createFolder(utils.PATHS.get('json_folder'))
     cubo_actual.updateEstado()

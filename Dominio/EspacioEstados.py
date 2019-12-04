@@ -43,6 +43,5 @@ class EspacioEstados:
             new_cubo.desplazamientol(x)
             listaSucesores.append(("l" + str(x), new_cubo, 1))
 
-
         return listaSucesores
 

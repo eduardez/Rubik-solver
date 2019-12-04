@@ -40,12 +40,10 @@ def moverCubo(cubo, movimiento, fila):
         createImage(cubo)
     
     
-def mezclarCuboTupla(movimientos, cubo):
+def mezclarCuboTupla(tupla, cubo):
     """Mezclar el cubo con movimientos definidos en un array de tuplas."""
-    for mov in movimientos:
-        moverCubo(cubo, mov[0], mov[1])
-        print(str(mov) + "\n" + str(cubo) + '\n')
-        
+    moverCubo(cubo, tupla[0], tupla[1])
+    print(str(tupla) + "\n" + str(cubo) + '\n')
 
 def resolverCubo(problema):
     '''Menu de eleccion de tipo de busquedas.'''

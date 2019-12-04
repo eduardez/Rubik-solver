@@ -11,9 +11,11 @@ class Frontera:
         self.frontera = []
         # self.visitados = dict({})# Formato -> {'id':0}
         self.idUltimoNodo = 0
+        self.num_total = 0
 
     def insertarNodo(self, nodo):
         nodo.id = self.idUltimoNodo
+        self.num_total += 1
         self.idUltimoNodo += 1
         heapq.heappush(self.frontera, nodo)
 
