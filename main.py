@@ -43,6 +43,7 @@ class CubeShell(cmd.Cmd):
             utils.mezclarCuboTupla(tupla, cubo_actual)
 
     def do_resolver_profesores(self, arg):
+        '''Método que resuelve el cubo de 2x2 dado por los profesores'''
         cubo_actual = Objeto_Cubo(utils.jsonRead('res/json_files/problema.json'))
         cubo_actual.updateEstado()
         movimientos = [('b',0),('D',0),('d',1),('B',0),('B',0)]
@@ -105,7 +106,8 @@ class CubeShell(cmd.Cmd):
         Gui.start()    
 
     def do_exit(self, arg):
-        print('Adioooooooooooooooooooooooooooooooooos........')
+        '''Método para salir del programa'''
+        print('El programa ha finalizado')
         sys.exit(0)
 
 
