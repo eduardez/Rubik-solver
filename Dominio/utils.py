@@ -83,8 +83,7 @@ def resolverCubo(problema):
             pass  # Si se ha introducido otra cosa nque no sea un 0, se deja optimizacion a true
         if 1 <= opt <= 5:  # Si opt esta entre 1 y 3 la busqueda sera no informada
             t_inicial = time.time()
-            listaSolucion = busquedas.busquedaAcotada(
-                problema, estrategia, profMax, opti=opt)
+            listaSolucion = busquedas.busquedaAcotada(problema, estrategia, profMax, opti=opt)
             print(f'Tiempo transcurrido: {time.time() - t_inicial}')
         if listaSolucion is None:
             print("El algoritmo de busqueda no ha llegado a una solución posible")

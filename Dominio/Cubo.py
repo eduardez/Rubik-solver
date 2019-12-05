@@ -202,5 +202,4 @@ class Cubo:
             for i in range(0, self.getCuboSize()):
                 for j in range(0, self.getCuboSize()):
                     string += str(face[i][j])
-                    # me estoy dando cuenta de que este metodo no es demasiado eficiente
         return string

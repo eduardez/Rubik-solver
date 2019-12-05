@@ -94,7 +94,7 @@ def initResources():
 if __name__ == "__main__":
     print('''
 --------------------------------          
-    Rubik Resolver v.0.39.7.
+    Rubik Resolver v.1.0.0
 --------------------------------    
     ''')
     initResources()

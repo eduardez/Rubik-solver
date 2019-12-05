@@ -15,12 +15,18 @@ class Ui_frm_principal(object):
  
     def setupUi(self, frm_principal):
         frm_principal.setObjectName("frm_principal")
-        frm_principal.resize(1110, 785)
+        frm_principal.resize(1110, 836)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(frm_principal.sizePolicy().hasHeightForWidth())
+        frm_principal.setSizePolicy(sizePolicy)
         frm_principal.setTabShape(QtWidgets.QTabWidget.Rounded)
         self.pnl_central = QtWidgets.QWidget(frm_principal)
         self.pnl_central.setObjectName("pnl_central")
         self.frm_cubo = QtWidgets.QFrame(self.pnl_central)
         self.frm_cubo.setGeometry(QtCore.QRect(270, 0, 600, 500))
+        self.frm_cubo.setStyleSheet("background-color: rgb(20, 22, 50);")
         self.frm_cubo.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.frm_cubo.setFrameShadow(QtWidgets.QFrame.Raised)
         self.frm_cubo.setObjectName("frm_cubo")
@@ -29,7 +35,7 @@ class Ui_frm_principal(object):
         self.pic_cubo.setText("")
         self.pic_cubo.setObjectName("pic_cubo")
         self.lbl_realizar_giro_2 = QtWidgets.QLabel(self.pnl_central)
-        self.lbl_realizar_giro_2.setGeometry(QtCore.QRect(10, 490, 141, 31))
+        self.lbl_realizar_giro_2.setGeometry(QtCore.QRect(0, 520, 141, 31))
         font = QtGui.QFont()
         font.setPointSize(12)
         font.setBold(True)
@@ -39,7 +45,7 @@ class Ui_frm_principal(object):
         self.lbl_realizar_giro_2.setScaledContents(False)
         self.lbl_realizar_giro_2.setObjectName("lbl_realizar_giro_2")
         self.frame_2 = QtWidgets.QFrame(self.pnl_central)
-        self.frame_2.setGeometry(QtCore.QRect(0, 220, 271, 231))
+        self.frame_2.setGeometry(QtCore.QRect(0, 250, 271, 251))
         self.frame_2.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.frame_2.setFrameShadow(QtWidgets.QFrame.Raised)
         self.frame_2.setObjectName("frame_2")
@@ -76,7 +82,7 @@ class Ui_frm_principal(object):
         self.radioButton_l.setGeometry(QtCore.QRect(70, 120, 31, 22))
         self.radioButton_l.setObjectName("radioButton_l")
         self.btn_ejecutar_movimiento = QtWidgets.QPushButton(self.frame_2)
-        self.btn_ejecutar_movimiento.setGeometry(QtCore.QRect(70, 170, 121, 41))
+        self.btn_ejecutar_movimiento.setGeometry(QtCore.QRect(70, 190, 121, 41))
         self.btn_ejecutar_movimiento.setDefault(False)
         self.btn_ejecutar_movimiento.setFlat(False)
         self.btn_ejecutar_movimiento.setObjectName("btn_ejecutar_movimiento")
@@ -91,19 +97,20 @@ class Ui_frm_principal(object):
         self.lbl_realizar_giro.setScaledContents(False)
         self.lbl_realizar_giro.setObjectName("lbl_realizar_giro")
         self.frame = QtWidgets.QFrame(self.pnl_central)
-        self.frame.setGeometry(QtCore.QRect(0, 0, 271, 221))
+        self.frame.setEnabled(True)
+        self.frame.setGeometry(QtCore.QRect(0, 0, 271, 251))
         self.frame.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.frame.setFrameShadow(QtWidgets.QFrame.Raised)
         self.frame.setObjectName("frame")
         self.spinner_profundidad = QtWidgets.QSpinBox(self.frame)
-        self.spinner_profundidad.setGeometry(QtCore.QRect(20, 130, 81, 21))
+        self.spinner_profundidad.setGeometry(QtCore.QRect(20, 130, 81, 41))
         self.spinner_profundidad.setObjectName("spinner_profundidad")
         self.checkBox = QtWidgets.QCheckBox(self.frame)
-        self.checkBox.setGeometry(QtCore.QRect(150, 110, 111, 20))
+        self.checkBox.setGeometry(QtCore.QRect(150, 110, 111, 61))
         self.checkBox.setChecked(True)
         self.checkBox.setObjectName("checkBox")
         self.btn_ejecutar_busqueda = QtWidgets.QPushButton(self.frame)
-        self.btn_ejecutar_busqueda.setGeometry(QtCore.QRect(70, 160, 121, 41))
+        self.btn_ejecutar_busqueda.setGeometry(QtCore.QRect(70, 190, 121, 41))
         self.btn_ejecutar_busqueda.setDefault(False)
         self.btn_ejecutar_busqueda.setFlat(False)
         self.btn_ejecutar_busqueda.setObjectName("btn_ejecutar_busqueda")
@@ -141,7 +148,7 @@ class Ui_frm_principal(object):
         self.lbl_busquedas.setObjectName("lbl_busquedas")
         self.debug_area = QtWidgets.QTextBrowser(self.pnl_central)
         self.debug_area.setEnabled(True)
-        self.debug_area.setGeometry(QtCore.QRect(700, 530, 411, 201))
+        self.debug_area.setGeometry(QtCore.QRect(700, 550, 411, 231))
         self.debug_area.setReadOnly(True)
         self.debug_area.setObjectName("debug_area")
         self.lbl_cubo_cargado = QtWidgets.QLabel(self.pnl_central)
@@ -160,7 +167,7 @@ class Ui_frm_principal(object):
         self.lbl_size_cubo_cargado.setAlignment(QtCore.Qt.AlignCenter)
         self.lbl_size_cubo_cargado.setObjectName("lbl_size_cubo_cargado")
         self.table_nodo_actual = QtWidgets.QTableWidget(self.pnl_central)
-        self.table_nodo_actual.setGeometry(QtCore.QRect(0, 530, 411, 201))
+        self.table_nodo_actual.setGeometry(QtCore.QRect(0, 550, 411, 231))
         self.table_nodo_actual.setEditTriggers(QtWidgets.QAbstractItemView.NoEditTriggers)
         self.table_nodo_actual.setAlternatingRowColors(True)
         self.table_nodo_actual.setObjectName("table_nodo_actual")
@@ -169,7 +176,7 @@ class Ui_frm_principal(object):
         self.table_nodo_actual.horizontalHeader().setVisible(False)
         self.table_nodo_actual.verticalHeader().setVisible(False)
         self.lbl_realizar_giro_3 = QtWidgets.QLabel(self.pnl_central)
-        self.lbl_realizar_giro_3.setGeometry(QtCore.QRect(1020, 490, 81, 31))
+        self.lbl_realizar_giro_3.setGeometry(QtCore.QRect(1020, 520, 81, 31))
         font = QtGui.QFont()
         font.setPointSize(12)
         font.setBold(True)
@@ -181,7 +188,7 @@ class Ui_frm_principal(object):
         self.lbl_realizar_giro_3.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
         self.lbl_realizar_giro_3.setObjectName("lbl_realizar_giro_3")
         self.frame_3 = QtWidgets.QFrame(self.pnl_central)
-        self.frame_3.setGeometry(QtCore.QRect(870, 0, 241, 451))
+        self.frame_3.setGeometry(QtCore.QRect(870, 0, 241, 501))
         self.frame_3.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.frame_3.setFrameShadow(QtWidgets.QFrame.Raised)
         self.frame_3.setObjectName("frame_3")
@@ -222,8 +229,6 @@ class Ui_frm_principal(object):
         self.menubar.setObjectName("menubar")
         self.menuCargar_cubo = QtWidgets.QMenu(self.menubar)
         self.menuCargar_cubo.setObjectName("menuCargar_cubo")
-        self.menuExportar = QtWidgets.QMenu(self.menubar)
-        self.menuExportar.setObjectName("menuExportar")
         frm_principal.setMenuBar(self.menubar)
         self.statusbar = QtWidgets.QStatusBar(frm_principal)
         self.statusbar.setObjectName("statusbar")
@@ -244,11 +249,9 @@ class Ui_frm_principal(object):
         self.menuCargar_cubo.addAction(self.actionCargar_Cubo)
         self.menuCargar_cubo.addSeparator()
         self.menuCargar_cubo.addAction(self.actionBorrar_imagenes)
+        self.menuCargar_cubo.addAction(self.actionExportar_movimientos_realizados)
         self.menuCargar_cubo.addAction(self.actionPreferencias)
-        self.menuExportar.addAction(self.actionExportar_imagen)
-        self.menuExportar.addAction(self.actionExportar_movimientos_realizados)
         self.menubar.addAction(self.menuCargar_cubo.menuAction())
-        self.menubar.addAction(self.menuExportar.menuAction())
 
         self.retranslateUi(frm_principal)
         QtCore.QMetaObject.connectSlotsByName(frm_principal)
@@ -278,13 +281,12 @@ class Ui_frm_principal(object):
         self.btn_reset_cubo.setText(_translate("frm_principal", "Reiniciar"))
         self.btn_cargar_json.setText(_translate("frm_principal", "Cargar JSON"))
         self.menuCargar_cubo.setTitle(_translate("frm_principal", "Opciones"))
-        self.menuExportar.setTitle(_translate("frm_principal", "Exportar"))
         self.actionGuardar_Cubo.setText(_translate("frm_principal", "Guardar Cubo"))
         self.actionCargar_Cubo.setText(_translate("frm_principal", "Cargar Cubo"))
         self.actionPreferencias.setText(_translate("frm_principal", "Preferencias..."))
         self.actionExportar_imagen.setText(_translate("frm_principal", "Imagen"))
-        self.actionExportar_movimientos_realizados.setText(_translate("frm_principal", "Movimientos realizados"))
-        self.actionBorrar_imagenes.setText(_translate("frm_principal", "Borrar imagenes"))
+        self.actionExportar_movimientos_realizados.setText(_translate("frm_principal", "Exportar movimientos realizados"))
+        self.actionBorrar_imagenes.setText(_translate("frm_principal", "Borrar carpeta de imagenes"))
 
 
 
@@ -328,6 +330,7 @@ class Ui_frm_principal(object):
         lista_paneles.append(self.frame)
         lista_paneles.append(self.frame_2)
         lista_paneles.append(self.frame_3)
+        self.controller.paneles_a_manejar = lista_paneles
         self.controller.activarPaneles(False)
 
     def setActions(self):
@@ -339,7 +342,7 @@ class Ui_frm_principal(object):
         self.btn_reset_cubo.clicked.connect(lambda: self.controller.rebootCubo())
         self.btn_cargar_json.clicked.connect(lambda: self.openFileNameDialog())
         self.btn_ejecutar_busqueda.clicked.connect(lambda: self.controller.resolver(self.checkBox.isChecked(), self.spinner_profundidad.value(), self.cb_busquedas.currentText()))
-
+        self.actionExportar_movimientos_realizados.triggered.connect(self.controller.exportarMovimientos)
     
     def openFileNameDialog(self):
         options = QFileDialog.Options()
@@ -366,7 +369,6 @@ class Ui_frm_principal(object):
         self.controller.node_table = self.table_nodo_actual
         
 
-    
 def start():
     import sys
     app = QtWidgets.QApplication(sys.argv)
@@ -378,6 +380,5 @@ def start():
     ui.initController()
     ui.setActions()
     ui.setValues()
-
     frm_principal.show()
     sys.exit(app.exec_())

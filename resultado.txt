@@ -1,8 +1,0 @@
-
---------------------------------          
-    Rubik Resolver v.0.39.7.
---------------------------------    
-    
-Shell del cubo de Rubik. ? o Help para ayuda
-
-(Cubo)> 

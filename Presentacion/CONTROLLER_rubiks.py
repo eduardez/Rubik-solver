@@ -139,3 +139,26 @@ class Controller:
     def activarPaneles(self, enabled):
         for pnl in self.paneles_a_manejar:
             pnl.setEnabled(enabled)
+            
+    def exportarMovimientos(self):
+        self.debugPrint('Guardar movimientos cancelado.')
+        str_movimientos = []
+        for nodo in self.historial_nodos:
+            str_movimientos.append(repr(nodo))
+        ruta = self.saveFileDialog()
+        if ruta:
+            self.debugPrint('Guardando en: ' + ruta)
+            with open(ruta, 'w') as file:
+                for strin in str_movimientos:
+                    file.write(strin + '\n')
+        else:
+            self.debugPrint('Guardar movimientos cancelado.')
+
+    def saveFileDialog(self):
+        options = QFileDialog.Options()
+        options |= QFileDialog.DontUseNativeDialog
+        fileName, _ = QFileDialog.getSaveFileName(None,"QFileDialog.getSaveFileName()","","All Files (*);;Text Files (*.txt)", options=options)
+        if fileName:
+            return (fileName + '.txt')
+        else:
+            return None
