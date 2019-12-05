@@ -10,6 +10,11 @@ class Cubo:
     """Objeto cubo a partir de un objeto JSON (add doc)"""
 
     def __init__(self, json_data):
+        '''
+        El constructor de esta clase tomará como argumentos
+        un archivo JSON, el cual se procesará para obtener 
+        las distintas caras del cubo (Back, left, down...)
+        '''
         self.back = np.array(json_data['BACK'], np.uint8)
         self.left = np.array(json_data['LEFT'], np.uint8)
         self.down = np.array(json_data['DOWN'], np.uint8)
@@ -19,6 +24,9 @@ class Cubo:
         self.idHash = self.updateEstado()  # Id del cubo (Hash)
 
     def updateEstado(self):
+        '''
+        Calcula el hash del cubo en su estado actual
+        '''
         h = hashlib.md5(self.cuboToStr().encode('utf-8'))
         self.idHash = h.hexdigest()
 

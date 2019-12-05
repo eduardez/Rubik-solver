@@ -73,19 +73,6 @@ class CubeShell(cmd.Cmd):
         utils.emptyFolder(utils.PATHS.get('image_folder'))
         # utils.emptyFolder(utils.PATHS.get('json_folder'))
 
-    def do_generar_imagenes(self, arg):
-        '''[EN DESARROLLO]\nGenerar imagenes de cada accion hecha con el cubo 
-        Syntax: (Cubo)> generar_imagenes <true/false>
-        '''
-        # print('Valor actual: ' + str(generar_imagenes) + '\n')
-        # try:
-        #     opt = eval(arg)
-        #     if isinstance(opt, bool):
-        #         generar_imagenes = opt
-        # except NameError:
-        #     print('Error en los argumentos.')
-        pass
-
     def do_iniciar_gui(self, arg):
         '''Iniciar entorno grafico (En construccion)'''
         Gui.start()

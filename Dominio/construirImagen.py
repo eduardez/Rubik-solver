@@ -4,7 +4,7 @@
 # pip install pillow
 # pip install python-resize-image
 
-from PIL import Image
+from PIL import Image, ImageOps
 
 import Dominio.utils
 from Dominio.Cubo import Cubo
@@ -103,8 +103,31 @@ def createImage(cubo):
     id = cubo.cuboToStr()
     padding = 20
     crearFondo(dimension, padding)
+    crearPiezas()
     img = Image.open('./res/FormarCubo/background.png')
     construirCubo(dimension, padding, id, img, cubo)
+
+def crearPiezas():
+    '''Crea las imagenes de las piezas en un tamaño 19x19 y de un color específico'''
+
+    img = Image.new('RGBA', (19, 19), "red")
+    img.save('./res/FormarCubo/red1.png')
+
+    img = Image.new('RGBA', (19, 19), "blue") 
+    img.save('./res/FormarCubo/blue.png')
+
+    img = Image.new('RGBA', (19, 19), "white") 
+    img.save('./res/FormarCubo/white.png')
+
+    img = Image.new('RGBA', (19, 19), "green") 
+    img.save('./res/FormarCubo/green.png')
+
+    img = Image.new('RGBA', (19, 19), "orange") 
+    img.save('./res/FormarCubo/orange.png')
+
+    img = Image.new('RGBA', (19, 19), "yellow")
+     
+    img.save('./res/FormarCubo/yellow.png')
 
 
 def switch_caracter(caracter, posX, posY, img):

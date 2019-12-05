@@ -57,7 +57,7 @@ class Controller:
     def moverCubo(self):
         #copiamos  el cubo actual al historial
         mov = self.getMovement()
-        self.debugPrint(f'Realizando movimient {mov}')
+        self.debugPrint(f'Realizando movimiento {mov}')
         utils.mezclarCuboTupla(mov, self.nodo_actual.cubo)
         self.nodo_actual = NodoArbol(self.nodo_actual, self.nodo_actual.cubo, self.nodo_actual.profundidad + 1, self.nodo_actual.coste + 1, 0, self.nodo_actual.id +1)
         self.nodo_actual.accion = str(mov)
