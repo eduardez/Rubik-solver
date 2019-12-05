@@ -16,8 +16,8 @@ class NodoArbol:
         self.profundidad=profundidad
         self.coste = coste
         self.accion = None
-            
-   
+
+
     def __lt__(self, otro_nodo):
         '''Metodo _comparable_ de python para que el nodo arbol pueda
         meterse sin problemas en la lista.'''

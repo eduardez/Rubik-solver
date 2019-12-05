@@ -37,7 +37,11 @@ def mezclar_aleatorio(num_movimientos, cubo):
         fila = random.randrange(cubo.getCuboSize())
         moverCubo(cubo, cara, fila)
 
-
+def mezclarCuboTupla(tupla, cubo):
+    """Mezclar el cubo con movimientos definidos en un array de tuplas."""
+    moverCubo(cubo, tupla[0], tupla[1])
+    print(str(tupla) + "\n" + str(cubo) + '\n')
+        
 def moverCubo(cubo, movimiento, fila):
     '''
     Realiza un movimiento especifico del cubo.

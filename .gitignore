@@ -6,3 +6,5 @@ __pycache__/cubo.cpython-37.pyc
 *.pyc
 
 .vscode/
+
+res/img_cubes/

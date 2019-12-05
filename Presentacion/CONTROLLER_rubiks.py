@@ -3,9 +3,11 @@
 from Dominio.Cubo import Cubo as Objeto_Cubo
 from Dominio.Problema import Problema
 from Dominio.construirImagen import createImage
-import Dominio.utils as utils, cmd, sys, copy
+from Dominio.busquedas import busquedaAcotada
+import Dominio.utils as utils, cmd, sys, copy, PyQt5.QtGui as QtGui, time
 from Dominio.NodoArbol import NodoArbol
 from PyQt5.QtWidgets import QTableWidget,QTableWidgetItem,QFileDialog
+
 
 
 class Controller:
@@ -19,28 +21,30 @@ class Controller:
         self.gui_historial_nodos = None
         self.radio_btn_array = None
         self.spinner_fila = None
+        self.pic_container = None
+        self.paneles_a_manejar = []
         # --- Persist ---
         self.nodo_actual = None #nodo visualizado
         self.last_node = None
         self.historial_nodos = []
+        self.lista_solucion = []
 
-        
-    def printPrueba(self, string):
-        print(str(string))
-    
+
     def debugPrint(self, cadena):
-        self.debug_area.append('\n' + cadena)
+        self.debug_area.append(utils.getTimestampedName(' ' + cadena))
     
     def cambiarCubo(self, json):
         self.clearHistorial()
         self.json = json
         self.cubo_actual = Objeto_Cubo(utils.jsonRead(self.json))
         self.cubo_actual.updateEstado()
-
-        self.debugPrint(f'Creado objeto cubo: \n{str(self.cubo_actual)}')
         self.max_column = self.cubo_actual.getCuboSize() - 1
         nodo = NodoArbol(None, self.cubo_actual ,0,0,0,0)
+        nodo.accion = 'Nodo padre'
         self.updateNode(nodo)
+        self.updateHistorial(self.nodo_actual)
+        self.activarPaneles(True)
+
         
     def getMovement(self):
         movimiento = None
@@ -59,11 +63,19 @@ class Controller:
         self.nodo_actual.accion = str(mov)
         self.updateHistorial(self.nodo_actual)
         self.updateNodeTable(self.historial_nodos[len(self.historial_nodos)-1])
+        self.updateCubePic()
+
+    def updateCubePic(self):
+        createImage(self.nodo_actual.cubo)
+        self.pic_container.setPixmap(QtGui.QPixmap(f'res/img_cubes/{self.nodo_actual.cubo.idHash}.png'))
+        self.pic_container.show() # You were missing this.
+
 
     def updateNode(self, nodo):
         self.nodo_actual = nodo
         self.updateNodeTable(self.nodo_actual)
-        self.updateHistorial(self.nodo_actual)
+        self.updateCubePic()
+
                 
     def updateNodeTable(self, nodo):
         self.node_table.setItem(0,1, QTableWidgetItem(str(nodo.id)))
@@ -88,11 +100,42 @@ class Controller:
     def historialClicado(self):
         index = [x.row() for x in self.gui_historial_nodos.selectedIndexes()]
         index = index[0]
-        self.updateNodeTable(self.historial_nodos[index])
+        self.updateNode(self.historial_nodos[index])
     
     def clearHistorial(self):
         self.historial_nodos = []
         self.gui_historial_nodos.clear()
     
-    def resolver(self):
-        pass
+    def rebootCubo(self):
+        self.cambiarCubo(self.json)
+        self.debugPrint('Cubo reseteado')
+    
+    def limpiarImagenes(self):
+        utils.emptyFolder(utils.PATHS.get('image_folder'))
+
+        
+    def resolver(self, optimizacion, profundidad, estrategia):
+        self.debugPrint(f'Realizando busqueda "{estrategia}"(Optimizacion: {str(optimizacion)} | max. prof: {str(profundidad)})')
+        self.activarPaneles(False)
+        problema = Problema(self.cubo_actual)
+        opt_estrategias = dict({"Profundidad": "profundidad", "Anchura": "anchura", 
+                               "Costo uniforme": "costo", "A Estrella": "Aestrella", 
+                               "Voraz": "voraz"})
+        lista_solucion = None
+        t_inicial = time.time()
+        lista_solucion = busquedaAcotada(problema, opt_estrategias.get(estrategia), profundidad, optimizacion)
+        self.debugPrint(f'Tiempo transcurrido: {time.time() - t_inicial}')
+        if lista_solucion is None:
+            pass
+        else:
+            self.clearHistorial()
+            for nodo in lista_solucion:
+                self.nodo_actual = copy.deepcopy(nodo)
+                self.updateHistorial(self.nodo_actual)
+                self.updateNodeTable(self.historial_nodos[len(self.historial_nodos)-1])
+                self.updateCubePic()
+                self.activarPaneles(True)
+                
+    def activarPaneles(self, enabled):
+        for pnl in self.paneles_a_manejar:
+            pnl.setEnabled(enabled)
