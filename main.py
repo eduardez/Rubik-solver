@@ -124,4 +124,8 @@ if __name__ == "__main__":
 --------------------------------    
     ''')
     initResources()
-    CubeShell().cmdloop()
+    if sys.argv[len(sys.argv)-1] == 'gui':
+        Gui.start()    
+    else:
+        CubeShell().cmdloop()
+    

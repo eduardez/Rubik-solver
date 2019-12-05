@@ -26,7 +26,7 @@ class EspacioEstados:
         for x in range(0, NodoArbolActual.cubo.getCuboSize()):
             new_cubo = copy.deepcopy(NodoArbolActual.cubo)
             new_cubo.desplazamientoD(x)
-            listaSucesores.append(("D" + str(x), new_cubo, 50))
+            listaSucesores.append(("D" + str(x), new_cubo, 1))
 
         for x in range(0, NodoArbolActual.cubo.getCuboSize()):
             new_cubo = copy.deepcopy(NodoArbolActual.cubo)
