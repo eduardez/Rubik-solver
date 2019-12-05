@@ -1,12 +1,16 @@
 #!/usr/bin/python3
 # -*- coding: utf-8 -*-
-import Dominio.utils as utils, cmd, sys
+import cmd
+import sys
+
+import Dominio.utils as utils
 import Presentacion.VIEW_rubiks as Gui
+from Dominio.construirImagen import createImage
 from Dominio.Cubo import Cubo as Objeto_Cubo
 from Dominio.Problema import Problema
-from Dominio.construirImagen import createImage
 
-ruta_json = 'res/json_files/problema2.json'
+# Ruta del archivo JSON que contenga el cubo a resolver
+ruta_json = 'res/json_files/ejemplo6x6.json'
 cubo_actual = Objeto_Cubo(utils.jsonRead(ruta_json))
 problema = None
 
@@ -23,33 +27,19 @@ class CubeShell(cmd.Cmd):
         # if cubo_resuelto is not None:
         #     cubo_actual = cubo_resuelto
         utils.resolverCubo(problema)
-    
+
     def do_resolver_all(self, args):
-        '''Probar todos los algoritmos de busqueda implementados hasta ahora, sin 
+        '''Ejecuta todos los algoritmos de busqueda implementados hasta ahora, sin 
         imprimir la solucion como tal pero si el tiempo'''
         problema = Problema(cubo_actual)
         utils.resolverAll(problema)
-    
+
     def do_ver_cubo(self, arg):
-        '''Imprimir el objeto cubo actual'''
+        '''Imprimir el objeto cubo actual por consola'''
         print(str(cubo_actual))
 
-    def do_mezclar_prueba(self, arg):
-        '''Prueba del cubo 10x10 con los movimientos que nos proporcionan en el JSON'''
-        cubo_actual = Objeto_Cubo(utils.jsonRead('res/json_files/cubo10x10.json'))
-        cubo_actual.updateEstado()
-        movimientos = [('l',3),('D',1),('l',1),('d',0),('b',0),('B',0),('b',0),('l',2),('d',1)]
-        for tupla in movimientos:
-            utils.mezclarCuboTupla(tupla, cubo_actual)
-
-    def do_resolver_profesores(self, arg):
-        cubo_actual = Objeto_Cubo(utils.jsonRead('res/json_files/problema.json'))
-        cubo_actual.updateEstado()
-        movimientos = [('b',0),('D',0),('d',1),('B',0),('B',0)]
-        for tupla in movimientos:
-            utils.mezclarCuboTupla(tupla, cubo_actual)
-            
     def do_mover_especifico(self, args):
+        '''Realiza el movimiento que le indiques al cubo actual'''
         mov = str(input('Tipo de movimiento: '))
         fila = None
         cubo_actual = Objeto_Cubo(utils.jsonRead(ruta_json))
@@ -57,33 +47,29 @@ class CubeShell(cmd.Cmd):
         try:
             if not isinstance(mov, str):
                 raise ArithmeticError
-            fila  = int(input('Fila/columna en la que hacerlo: '))
+            fila = int(input('Fila/columna en la que hacerlo: '))
             if not isinstance(fila, int):
                 raise ArithmeticError
         except ArithmeticError:
             print('Datatype missmatch')
         utils.moverCubo(cubo_actual, mov, fila)
-        createImage(cubo=cubo_actual)
-        
-            
-        
+
     def do_mezclar_todos(self, args):
         '''Realiza todos los movimientos posibles dado un cubo NxN'''
-        movimientos = ['B','b','D','d','L','l',]
+        movimientos = ['B', 'b', 'D', 'd', 'L', 'l', ]
         cubo_actual = Objeto_Cubo(utils.jsonRead(ruta_json))
         for tipo in movimientos:
-            for x in range(0,cubo_actual.getCuboSize()):
+            for x in range(0, cubo_actual.getCuboSize()):
                 cubo_actual = Objeto_Cubo(utils.jsonRead(ruta_json))
                 movim = (tipo, x)
                 utils.mezclarCuboTupla(movim, cubo_actual)
-            
-            
+
     def do_mezclar(self, arg):
-        '''Mezclar el objeto cubo actual'''
+        '''Mezclar el objeto cubo actual de forma aleatoria'''
         utils.mezclar_aleatorio(1, cubo_actual)
 
-    def do_borrar_res(self, arg):   
-        '''Vaciar las carpetas de recursos (./res)'''    
+    def do_borrar_res(self, arg):
+        '''Vaciar las carpetas de recursos (./res)'''
         utils.emptyFolder(utils.PATHS.get('image_folder'))
         # utils.emptyFolder(utils.PATHS.get('json_folder'))
 
@@ -99,13 +85,14 @@ class CubeShell(cmd.Cmd):
         # except NameError:
         #     print('Error en los argumentos.')
         pass
-       
+
     def do_iniciar_gui(self, arg):
         '''Iniciar entorno grafico (En construccion)'''
-        Gui.start()    
+        Gui.start()
 
     def do_exit(self, arg):
-        print('Adioooooooooooooooooooooooooooooooooos........')
+        '''Método para salir del programa'''
+        print('El programa ha finalizado')
         sys.exit(0)
 
 
