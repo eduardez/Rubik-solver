@@ -10,7 +10,7 @@ class EspacioEstados:
         '''Este método genera tripetas (Acción realizada, New_Objeto_Cubo, CosteAcción = 1)
         que son añadidas a la lista de sucesores, total de tripletas generadas es igual a
         el número de movimientos (estático) multiplicado por el numero de filas del cubo,
-        es decir todas las acciones posibles'''
+        es decir, todas las acciones posibles'''
         
         listaSucesores = []
         for x in range(0, NodoArbolActual.cubo.getCuboSize()):
@@ -26,7 +26,7 @@ class EspacioEstados:
         for x in range(0, NodoArbolActual.cubo.getCuboSize()):
             new_cubo = copy.deepcopy(NodoArbolActual.cubo)
             new_cubo.desplazamientoD(x)
-            listaSucesores.append(("D" + str(x), new_cubo, 50))
+            listaSucesores.append(("D" + str(x), new_cubo, 1))
 
         for x in range(0, NodoArbolActual.cubo.getCuboSize()):
             new_cubo = copy.deepcopy(NodoArbolActual.cubo)

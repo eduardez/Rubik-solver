@@ -9,6 +9,10 @@ class Problema:
         self.estadoInicial.updateEstado()
 
     def esObjetivo(self, NodoArbolActual):
+        '''
+        Este método comprueba si el nodo en el que estamos es el objetivo. La forma de comprobarlo es
+        ver si todas las piezas de la cara tienen el mismo color que la primera pieza de dicha cara.
+        '''
         cuboActual = [NodoArbolActual.cubo.back, NodoArbolActual.cubo.down, 
                       NodoArbolActual.cubo.front, NodoArbolActual.cubo.left, 
                       NodoArbolActual.cubo.right, NodoArbolActual.cubo.up]
