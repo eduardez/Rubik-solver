@@ -1,0 +1,11 @@
+[build-system]
+requires = ["flit_core >=2,<3"]
+build-backend = "flit_core.buildapi"
+
+[tool.flit.metadata]
+module = "main"
+author = "eduardez, luciaagarcia, fenriruiz"
+author-email = "eduardez96@gmail.com"
+home-page = "https://github.com/eduardez/Rubik-resolver"
+classifiers = ["License :: OSI Approved :: Apache Software License"]
+

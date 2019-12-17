@@ -1,5 +1,7 @@
 #!/usr/bin/python3
 # -*- coding: utf-8 -*-
+"""Soluciona tus cubos, pero no tus problemas"""
+
 import cmd
 import sys
 
@@ -90,6 +92,9 @@ def initResources():
     utils.createFolder(utils.PATHS.get('json_folder'))
     cubo_actual.updateEstado()
 
+
+#------------------------------------------------------
+__version__ = '1.0.0'
 
 if __name__ == "__main__":
     print('''
