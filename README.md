@@ -29,8 +29,6 @@ _o_
 main.py terminal
 ```
 
-_Finaliza con un ejemplo de cómo obtener datos del sistema o como usarlos para una pequeña demo_
-
 ## Despliegue 📦
 
 En el caso de que quieras utilizar la interfaz gráfica, tienes que ejecutar el comando sin argumentos. Para ver el programa por terminal, deberías pasarle cualquier argumento y después, seguir las instrucciones que te muestra el programa.
