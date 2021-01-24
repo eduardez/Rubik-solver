@@ -10,8 +10,6 @@ Proyecto para resolver un cubo de Rubick utilizando diferentes algoritmos. El fo
 ### Instalación 🔧
 <img align='right' src='Presentacion/Rubick.png' width='350"'>
 
-_Una serie de ejemplos paso a paso que te dice lo que debes ejecutar para tener un entorno de desarrollo ejecutandose_
-
 _Se instalaría Python y la librería flit-core_
 
 ```
